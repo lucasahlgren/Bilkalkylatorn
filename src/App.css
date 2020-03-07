@@ -1,38 +1,106 @@
+@font-face {
+	font-family: "Concert One";
+	src: url("./Assets/Fonts/Concert_One/ConcertOne-Regular.ttf");
+}
+
+@font-face {
+	font-family: "Space Mono";
+	src: url("./Assets/Fonts/Space_Mono/SpaceMono-BoldItalic.ttf");
+}
+
 .App {
-  text-align: center;
+	font-family: "Concert One" !important;
+	position: relative;
+	height: 100vh;
+	min-height: 700px;
+	background: url(./Assets/Images/bg.jpg) no-repeat center center fixed;
+	background-size: cover;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+	color: white !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title {
+	color: white !important;
+}
+
+.vh-75 {
+	height: 80vh;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 5vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.adsbox {
+	display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* CSS Transition group */
+
+.fade-enter {
+	opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+	opacity: 1;
+	-webkit-transition: 300ms ease-in;
+	transition: 300ms ease-in;
+}
+
+.fade-exit {
+	opacity: 1;
+	-webkit-transition: 300ms ease-in;
+	transition: 300ms ease-in;
+}
+
+.fade-exit.fade-exit-active {
+	opacity: 0.01;
+	-webkit-transition: 300ms ease-in;
+	transition: 300ms ease-in;
+}
+
+div.transition-group {
+	position: relative;
+}
+section.route-section {
+	position: absolute;
+	width: 100%;
+	-webkit-transform: translate(0, 0);
+	transform: translate(0, 0);
+}
+
+.main-container {
+	opacity: 0;
+
+	-webkit-animation: fade 1s normal forwards;
+	animation: fade 1s normal forwards;
+}
+
+/* Slide animation */
+
+@-webkit-keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
