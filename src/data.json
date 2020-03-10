@@ -1,0 +1,134 @@
+{
+	"cars": [
+		{
+			"brand": "Tesla",
+            "model": "Model 3",
+            "id": 1,
+            "image": "tesla_model_3.jpg",
+			"variants": [
+				{
+					"variant": "S30",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+                },
+                {
+					"variant": "S20",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+				}
+			]
+        },
+        {
+			"brand": "Volvo",
+            "model": "XC40",
+            "id": 2,
+            "image": "volvo_xc40.jpg",
+			"variants": [
+				{
+					"variant": "Mildhybrid",
+					"price": {"value": 125000, "unit":"kr"},
+					"type": { "eng": "Gas", "swe": "Bensin" },
+					"transmission": { "eng": "Manual", "swe": "Manuell" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 8.8, "unit": "l" },
+					"emissions": { "value": 190, "unit": "g/km" }
+                },
+                {
+					"variant": "S20",
+					"price": {"value": 200000, "unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+				}
+			]
+        },
+        {
+			"brand": "Volvo",
+            "model": "V90",
+            "id": 3,
+            "image": "volvo_v90.jpg",
+			"variants": [
+				{
+					"variant": "D3 automat",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+                },
+                {
+					"variant": "D3 manuell",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+				}
+			]
+        },
+        {
+			"brand": "Hyundai",
+            "model": "i30",
+            "id": 4,
+            "image": "hyundai_i30.jpg",
+			"variants": [
+				{
+					"variant": "D3 automat",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+                },
+                {
+					"variant": "D3 manuell",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+				}
+			]
+        },
+        {
+			"brand": "Tesla",
+            "model": "Model S",
+            "id": 5,
+            "image": "tesla_model_s.jpg",
+			"variants": [
+				{
+					"variant": "S30",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+                },
+                {
+					"variant": "S20",
+					"price": {"value": 200000,"unit":"kr"},
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 2.0, "unit": "KWh" },
+					"emissions": { "value": 190, "unit": "g/km" }
+				}
+			]
+        }
+	]
+}

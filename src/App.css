@@ -1,45 +1,70 @@
 @font-face {
 	font-family: "Concert One";
-	src: url("./Assets/Fonts/Concert_One/ConcertOne-Regular.ttf");
+	src: url("./assets/fonts/Concert_One/ConcertOne-Regular.ttf");
 }
 
 @font-face {
 	font-family: "Space Mono";
-	src: url("./Assets/Fonts/Space_Mono/SpaceMono-BoldItalic.ttf");
+	src: url("./assets/fonts/Space_Mono/SpaceMono-BoldItalic.ttf");
+}
+
+
+html{
+	max-width:100% !important;
 }
 
 .App {
 	font-family: "Concert One" !important;
 	position: relative;
-	height: 100vh;
-	min-height: 700px;
-	background: url(./Assets/Images/bg.jpg) no-repeat center center fixed;
+	min-height: 100vh;
+	background: url(./assets/images/bg.jpg) no-repeat center center;
 	background-size: cover;
 }
 
+
+
 .title {
 	color: white !important;
 }
 
-.title {
-	color: white !important;
+.title strong{
+	font-weight: bolder !important;
 }
 
 .vh-75 {
 	height: 80vh;
 }
 
-.App-header {
-	background-color: #282c34;
-	min-height: 5vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
+.padding-section {
+	padding-top: 10vh;
 }
 
+.Header {
+	position: absolute !important;
+	z-index: 10;
+}
+.search-header {
+	position: absolute;
+	top: 0;
+	height: 85vh;
+	width: 100vw;
+	background: url(./assets/images/bg.jpg);
+	background-repeat: no-repeat;
+
+	background-position: bottom;
+	background-size: cover;
+}
+
+.search-body {
+	background: rgb(245, 245, 245);
+	position: absolute;
+	width: 100vw;
+	min-height: 100vh;
+}
+
+.search-section {
+	padding-top: 25vh;
+}
 .adsbox {
 	display: none;
 }
@@ -83,6 +108,33 @@ section.route-section {
 
 	-webkit-animation: fade 1s normal forwards;
 	animation: fade 1s normal forwards;
+}
+
+.link-style {
+	text-decoration: none !important;
+	color: inherit;
+}
+
+.link-style:hover {
+	text-decoration: none !important;
+	color: inherit;
+}
+
+/* Search */
+
+.car-header {
+	padding: 0.2rem;
+}
+.car-header span {
+	font-size: 0.65rem;
+	font-family: "Concert One";
+	color: black;
+}
+.car-header p {
+	color: rgb(88, 88, 88);
+}
+
+.car-body {
 }
 
 /* Slide animation */

@@ -43,7 +43,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <Navbar type="dark" expand="lg">
+      <Navbar type="dark" expand="lg" className="Header">
         <Link to="/" className="navbar-brand">
         TCO-kalkylatorn
         </Link>

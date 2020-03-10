@@ -10,7 +10,7 @@ class Home extends Component {
 
 	render() {
 		return (
-			<Container className="home-container">
+			<Container className="home-container padding-section">
 				<Row className="vh-75 d-flex justify-content-center mx-auto align-items-center">
 					<Col>
 						<Row>
