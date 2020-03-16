@@ -43,18 +43,8 @@ class Compare extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	console.log(state.compareList);
-	console.log(state.calculationsList);
-	return {
-		compareList: state.compareList,
-		calculationsList: state.calculationsList
-	};
-};
 
-const mapDispatchToProps = dispatch => ({
-	updateCompareList: list =>
-		dispatch({ type: "UPDATE_COMPARELIST", payload: list })
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Compare);
+
+
+export default Compare;

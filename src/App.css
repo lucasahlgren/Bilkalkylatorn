@@ -9,14 +9,13 @@
 }
 
 
-html{
-	max-width:100% !important;
-}
+
 
 .App {
 	font-family: "Concert One" !important;
 	position: relative;
 	min-height: 100vh;
+
 	background: url(./assets/images/bg.jpg) no-repeat center center;
 	background-size: cover;
 }
@@ -41,13 +40,13 @@ html{
 
 .Header {
 	position: absolute !important;
-	z-index: 10;
+	z-index: 1;
 }
 .search-header {
 	position: absolute;
 	top: 0;
 	height: 85vh;
-	width: 100vw;
+	width: 100%;
 	background: url(./assets/images/bg.jpg);
 	background-repeat: no-repeat;
 
@@ -58,7 +57,7 @@ html{
 .search-body {
 	background: rgb(245, 245, 245);
 	position: absolute;
-	width: 100vw;
+	width: 100%;
 	min-height: 100vh;
 }
 
@@ -67,6 +66,18 @@ html{
 }
 .adsbox {
 	display: none;
+}
+
+/* CarDetails */
+
+.detail-img{
+	border-top-left-radius: .625rem;
+}
+
+/* CalculationItem */
+
+.calculation-item[data-selected = "true"]{
+	background-color: lightgreen;
 }
 
 /* CSS Transition group */
@@ -134,8 +145,6 @@ section.route-section {
 	color: rgb(88, 88, 88);
 }
 
-.car-body {
-}
 
 /* Slide animation */
 
@@ -156,3 +165,10 @@ section.route-section {
 		opacity: 1;
 	}
 }
+
+@media (max-width: 767px) { 
+	.detail-img{
+		border-top-left-radius:  .625rem;
+		border-top-right-radius:  .625rem;
+	}
+ }

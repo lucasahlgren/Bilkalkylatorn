@@ -1,45 +1,69 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 /* Scroll bar */
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
 
+import { motion, AnimatePresence } from "framer-motion"
+
 import { Container, Row, Col, Card, Button } from "shards-react";
 import CSV from "./CSV";
+import CalculationItem from "./CalculationItem"
 
 class CalculationsList extends Component {
-	constructor(props) {
-		super(props);
-	}
+	select = (e) => {
+		var selected = e.target.getAttribute("data-selected");
+		var newSelected = false;
+		console.log(selected);
+		if(selected === true){
+			newSelected = true;
+
+		} else{
+			newSelected = false;
+		}
+		e.target.setAttribute("data-selected", newSelected);
+	};
 
 	render() {
+		console.log(this.props);
+		const { calculationsList } = this.props;
+		const list =
+			calculationsList.length > 0 ? (
+				calculationsList.map(calculation => {
+					return (
+						
+						<CalculationItem key={calculation.name} calculation={calculation} />
+					);
+				})
+			) : (
+				<p className="text-center">Inga sparade kalkyler</p>
+			);
 		return (
-			<SimpleBar
-				className="px-3"
-				autoHide={false}
-				forceVisible="y"
-				style={{ height: "80vh" }}
-			>
+			<div>
 				<h4 className="text-center">Kalkyler</h4>
-				<Card className="m-2">
-					<p className="d-flex align-items-center justify-content-center">
-						Kalkyl 1
-					</p>
-				</Card>
-				<Card className="m-2">
-					<p className="d-flex align-items-center justify-content-center">
-						Kalkyl 2
-					</p>
-				</Card>
-				<Card className="m-2">
-					<p className="d-flex align-items-center justify-content-center">
-						Kalkyl 3
-					</p>
-				</Card>
-				<CSV />
-			</SimpleBar>
+				<SimpleBar
+					className="px-3"
+					autoHide={false}
+					forceVisible="y"
+					style={{ height: "66vh" }}
+				>
+					{list}
+				</SimpleBar>
+				<div className="pt-3 text-center">
+					<CSV calculationsList={this.props.calculationsList} />
+				</div>
+			</div>
 		);
 	}
 }
 
-export default CalculationsList;
+const mapStateToProps = state => {
+	console.log(state);
+	return {
+		calculationsList: state.tco.calculationsList
+	};
+};
+
+
+export default connect(mapStateToProps, null)(CalculationsList);

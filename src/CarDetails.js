@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, Button, CardImg } from "shards-react";
+import { connect } from "react-redux";
+import Toast from "./Toast";
 import data from "./data.json";
 
 class CarDetails extends Component {
@@ -7,9 +9,10 @@ class CarDetails extends Component {
 		super(props);
 		this.state = {
 			dataLoading: true,
+			calculationName: "Test",
 			car: null,
 			years: 3,
-			mile: 1500,
+			miles: 1500,
 			cash: 0.1,
 			interest: 0.06,
 			deprecation: 0.5
@@ -34,8 +37,26 @@ class CarDetails extends Component {
 		console.log(car);
 		console.log("ID" + carId);
 		var variant = car.variants[0];
-		this.setState({ dataLoading: false, car: car, variant: variant });
+		var name = `${car.brand} ${car.model}`
+		this.setState({ dataLoading: false, car: car, variant: variant, calculationName: name });
 	};
+
+	saveCalculation = () => {
+		const { calculationName, car, years, miles, cash} = this.state;
+		var calculation = {}
+		calculation.name = calculationName
+		calculation.car = car
+		calculation.years = years
+		calculation.miles = miles
+		calculation.cash = cash
+		calculation.selected = false
+		console.log(calculation)
+		this.props.addCalculation(calculation)
+	}
+
+	handleNameChange = (e) => {
+		this.setState({calculationName:e.target.value})
+	}
 
 	render() {
 		const { car, variant } = this.state;
@@ -52,12 +73,14 @@ class CarDetails extends Component {
 									<Row>
 										<Col md="6" className="pr-md-0">
 											<CardImg
-												top={true}
-												className="img-fluid"
+												className="img-fluid detail-img"
 												src={require("./assets/images/cars/" + car.image)}
 											/>
 										</Col>
 										<Col md="6 fill">
+											<Row className="h-100">
+												<div className="d-flex align-items-center justify-content-center w-100">
+													<Col md="12">
 											<Row>
 												<Col md="12" className="text-center">
 													<h2>
@@ -67,161 +90,175 @@ class CarDetails extends Component {
 											</Row>
 											<Row>
 												<Col md="6">
+													<h6>TCO/Inköpspris</h6>
+													<p>
+														{variant.price.value} 
+													</p>
+												</Col>
+												<Col md="6">
 													<h6>Total ägandekostnad</h6>
 													<p>
 														{variant.price.value} {variant.price.unit}
 													</p>
 												</Col>
+												</Row>
+											</Col>
+											</div>
 											</Row>
 										</Col>
 									</Row>
 									<Container>
 										<Row className="p-4">
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Inköpspris</span>
 												<p className="p-0">
 													{variant.price.value} {variant.price.unit}
 												</p>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Motoreffekt</span>
 												<p className="p-0">
 													{variant.engine.hk} hk ({variant.engine.kw} kw)
 												</p>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Drivmedel</span>
 												<p className="p-0">{variant.type.swe}</p>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Bränslekonsumtion</span>
 												<p className="p-0">
 													{variant.fuel.value} {variant.fuel.unit}/100 km
 												</p>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Växellåda</span>
 												<p className="p-0">{variant.transmission.swe}</p>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>CO2-utsläpp</span>
 												<p className="p-0">
 													{variant.emissions.value} {variant.emissions.unit}
 												</p>
 											</Col>
 
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>År</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Mil/år</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Kontantinsats</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Ränta</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Drivmedelspris</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
 
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Värdeminskning</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
 
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Värdeminskning</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Värdeminskning</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Värdeminskning</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
-											<Col md="2" sm="6" className="mx-auto">
+											<Col md="2" xs="6" className="mx-auto">
 												<span>Värdeminskning</span>
-												<div class="slidecontainer">
+												<div className="slidecontainer">
 													<input
 														type="range"
 														min="1"
 														max="100"
-														class="slider"
+														className="slider"
 													/>
 												</div>
 											</Col>
+										</Row>
+										<Row>
+											
+											<input type="text" value={this.state.calculationName} onChange={this.handleNameChange} />
+											<Button pill onClick={this.saveCalculation} theme="light" size="md">Spara kalkyl</Button>
 										</Row>
 									</Container>
 								</Col>
@@ -236,4 +273,9 @@ class CarDetails extends Component {
 	}
 }
 
-export default CarDetails;
+const mapDispatchToProps = dispatch => ({
+	addCalculation: calculation =>
+		dispatch({ type: "ADD_CALCULATION", payload: calculation })
+});
+
+export default connect(null,mapDispatchToProps)(CarDetails);

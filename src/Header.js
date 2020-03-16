@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Toast from "./Toast";
 
 import {
   Navbar,
@@ -80,6 +81,7 @@ export default class Header extends Component {
             
           </Nav>
         </Collapse>
+        <Toast />
       </Navbar>
     );
   }

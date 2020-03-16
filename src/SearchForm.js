@@ -69,16 +69,6 @@ class SearchForm extends Component {
 											</select>
 										</div>
 
-										<div className="input-select flex-grow-1">
-											<select data-trigger="" className="advanced-filter">
-												<option placeholder="" value="">
-													Modell
-												</option>
-												<option>XC40</option>
-												<option>Model 3</option>
-												<option>Model S</option>
-											</select>
-										</div>
 
 										<div className="input-select flex-grow-1">
 											<select data-trigger="" className="advanced-filter">

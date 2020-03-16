@@ -21,7 +21,7 @@ class App extends Component {
 	}
 	render() {
 		return (
-			<Container fluid className="App p-0 m-0 vh-100 vw-100">
+			<Container fluid className="App p-0 m-0">
 				<Container>
 					<Header />
 				</Container>

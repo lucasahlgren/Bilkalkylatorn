@@ -22,6 +22,10 @@ class BarChart extends Component {
 					data: [3000, 2300, 2000, 800, 1300, 2000]
 				},
 				{
+					name: "Försäkring",
+					data: [1300, 2300, 2000, 800, 1003, 1500]
+				},
+				{
 					name: "Underhåll",
 					data: [1300, 2300, 2000, 800, 1003, 1500]
 				},
@@ -31,7 +35,7 @@ class BarChart extends Component {
 				},
 				{
 					name: "Subventioner",
-					data: [2100, 700, 2500, 1300, -2200, 1500]
+					data: [0, 0, -6000, -6000, 0, 0]
 				}
 			],
 
@@ -53,7 +57,7 @@ class BarChart extends Component {
 					"#2ECC40",
 					"#FF851B",
 					"#FF4136",
-					"#FF4136"
+					"#40E0D0"
 				],
 
 				chart: {
