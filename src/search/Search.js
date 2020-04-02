@@ -1,23 +1,8 @@
-import data from "./data.json";
+import data from "../data/data.json";
+import {numFormatter} from "../data/tco";
 
 import React, { Component } from "react";
-import {
-	Container,
-	Row,
-	Col,
-	Card,
-	CardBody,
-	CardHeader,
-	CardImg,
-	CardFooter,
-	CardColumns,
-	CardTitle,
-	Button,
-	FormGroup,
-	FormInput,
-	Form,
-	FormSelect
-} from "shards-react";
+import { Container, Row, Col, Card, CardImg, CardTitle } from "shards-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SearchForm from "./SearchForm";
@@ -25,6 +10,9 @@ import SearchForm from "./SearchForm";
 class Search extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			list: data.cars
+		};
 	}
 
 	fuelTypes = variants => {
@@ -41,7 +29,7 @@ class Search extends Component {
 		let string = uniqueTypes[0];
 		for (var i = 1; i < uniqueTypes.length; i++) {
 			//console.log(uniqueTypes[i]);
-			string += "/";
+			string += " | ";
 			string += uniqueTypes[i];
 		}
 		//console.log(string);
@@ -50,9 +38,12 @@ class Search extends Component {
 	};
 
 	monthlyCost = tco => {
-		var monthlyCost = (tco / 36).toFixed(0);
-		var string = monthlyCost.toLocaleString();
-		return string;
+		var monthlyCost = (tco / 36);
+		return monthlyCost;
+	};
+
+	updateList = list => {
+		this.setState({ list: list });
 	};
 
 	render() {
@@ -80,7 +71,7 @@ class Search extends Component {
 		};
 
 		return (
-			<Container fluid className="p-0 m-0">
+			<Container fluid className="p-0 m-0 search">
 				<div className="search-body p-0 m-0 grey-bg">
 					<div className="search-header" />
 					<div className="search-section px-0">
@@ -89,22 +80,23 @@ class Search extends Component {
 								<h2 className="title text-center">
 									<strong>Bilsök</strong>
 								</h2>
-								<SearchForm />
+								<SearchForm updateList={this.updateList} />
 							</Col>
 						</Row>
 						<Container>
 							<motion.div
-								className="row py-3"
+								className="row py-3 justify-content-md-start justify-content-center"
 								variants={container}
 								initial="hidden"
 								animate="visible"
+								exit={{ opacity: 0 }}
 							>
-								{data.cars.map(car => {
+								{this.state.list.map(car => {
 									this.fuelTypes(car.variants);
 									return (
 										<motion.div
 											key={car.id}
-											className="col-lg-3 col-md-4 col-sm-6 col-12 my-md-3"
+											className="search-item col-lg-3 col-md-4 col-sm-6 col-11 my-md-3"
 											variants={item}
 										>
 											<Link
@@ -116,42 +108,25 @@ class Search extends Component {
 														""
 													)}/${car.model.toLowerCase().replace(/\s+/g, "")}`}
 											>
-												<motion.div
-													whileHover={{ scale: 1.03 }}
-													whileTap={{ scale: 0.97 }}
-												>
+												<motion.div whileHover={{ scale: 1.03 }}>
 													<Card className="m-md-0 my-3">
 														<CardImg
 															top={true}
 															className="img-fluid"
-															src={require("./assets/images/cars/" + car.image)}
+															src={require("../assets/images/cars/" +
+																car.image)}
 														/>
 
-														<Container className="px-4 py-3">
-															<CardTitle className="text-center m-0">
+														<Container className="px-4 pb-2 pt-3">
+															<CardTitle className="text-center m-0 p-md-0 p-2 car-title">
 																{car.brand} {car.model}
 															</CardTitle>
-															<Row>
+															<Row className="pt-1">
+														
 																<Col
-																	md="3"
+																	md="12"
 																	xs="6"
-																	className="p-2 m-0 car-header"
-																>
-																	<span className="m-0">Längd</span>
-																	<p className="m-0">3 år</p>
-																</Col>
-																<Col
-																	md="4"
-																	xs="6"
-																	className="p-2 m-0 car-header"
-																>
-																	<span className="m-0">Mil/år</span>
-																	<p className="m-0">1 500 mil</p>
-																</Col>
-																<Col
-																	md="5"
-																	xs="6"
-																	className="p-2 m-0 car-header"
+																	className="px-1 m-0 car-header"
 																>
 																	<span className="m-0">Drivmedel</span>
 																	<p className="m-0">
@@ -163,28 +138,26 @@ class Search extends Component {
 																<Col
 																	md="6"
 																	xs="6"
-																	className="p-2 m-0 car-header"
+																	className="px-1 m-0 car-header"
 																>
-																	<span className="m-0">
-																		Total ägandekostnad
-																	</span>
+																	<span className="m-0">Totalkostnad</span>
 																	<p className="m-0">
 																		{"Fr. "}
-																		{car.variants[0].price.value.toLocaleString()}{" "}
+																		{numFormatter(car.variants[0].price.value)}{" "}
 																		{car.variants[0].price.unit}
 																	</p>
 																</Col>
 																<Col
 																	md="6"
 																	xs="6"
-																	className="p-2 m-0 car-header"
+																	className="px-1 m-0 car-header"
 																>
 																	<span className="m-0">Månadskostnad</span>
 																	<p className="m-0">
 																		{"Fr. "}
-																		{this.monthlyCost(
+																		{numFormatter(this.monthlyCost(
 																			car.variants[0].price.value
-																		)}{" "}
+																		))}{" "}
 																		kr
 																	</p>
 																</Col>

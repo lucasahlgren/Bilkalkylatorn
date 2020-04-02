@@ -5,21 +5,21 @@ import { connect } from "react-redux";
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
 
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion";
 
 import { Container, Row, Col, Card, Button } from "shards-react";
 import CSV from "./CSV";
-import CalculationItem from "./CalculationItem"
+import Excel from "./Excel"
+import CalculationItem from "./CalculationItem";
 
 class CalculationsList extends Component {
-	select = (e) => {
+	select = e => {
 		var selected = e.target.getAttribute("data-selected");
 		var newSelected = false;
 		console.log(selected);
-		if(selected === true){
+		if (selected === true) {
 			newSelected = true;
-
-		} else{
+		} else {
 			newSelected = false;
 		}
 		e.target.setAttribute("data-selected", newSelected);
@@ -32,13 +32,23 @@ class CalculationsList extends Component {
 			calculationsList.length > 0 ? (
 				calculationsList.map(calculation => {
 					return (
-						
 						<CalculationItem key={calculation.name} calculation={calculation} />
 					);
 				})
 			) : (
 				<p className="text-center">Inga sparade kalkyler</p>
 			);
+
+			var selectedCalculations = calculationsList.filter(
+				calculation => calculation.selected === true
+			);
+
+		const excel =
+			selectedCalculations.length != 0 ? (
+				<div className="pt-3 text-center">
+					<Excel calculationsList={selectedCalculations} />
+				</div>
+			) : null;
 		return (
 			<div>
 				<h4 className="text-center">Kalkyler</h4>
@@ -50,9 +60,7 @@ class CalculationsList extends Component {
 				>
 					{list}
 				</SimpleBar>
-				<div className="pt-3 text-center">
-					<CSV calculationsList={this.props.calculationsList} />
-				</div>
+				{excel}
 			</div>
 		);
 	}
@@ -64,6 +72,5 @@ const mapStateToProps = state => {
 		calculationsList: state.tco.calculationsList
 	};
 };
-
 
 export default connect(mapStateToProps, null)(CalculationsList);

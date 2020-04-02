@@ -1,3 +1,4 @@
+import 'react-app-polyfill/ie9';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -9,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 import {createStore} from 'redux';
 import allReducers from './redux/reducers';
 import {Provider} from 'react-redux';
-import {loadState, saveState} from "./localStorage";
+import {loadState, saveState} from "./data/localStorage";
 
 const localStorageState = loadState()
 

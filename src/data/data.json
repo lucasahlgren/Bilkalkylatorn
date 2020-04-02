@@ -1,0 +1,185 @@
+{
+	"cars": [
+		{
+			"brand": "Hyundai",
+			"model": "i30",
+			"id": 1,
+			"size": {"eng": "Station wagon", "swe": "Kombi"},
+			"image": "hyundai_i30.jpg",
+			"variants": [
+				{
+					"variant": "1.0 T-GDi Life FWD",
+					"price": { "value": 174900, "unit": "kr" },
+					"type": { "eng": "Gas", "swe": "Bensin" },
+					"transmission": { "eng": "Manual", "swe": "Manuell" },
+					"engine": { "hk": 120, "kw": 90 },
+					"fuel": { "value": 5.8, "unit": "l" },
+					"emissions": { "value": 118, "unit": "g/km" }
+				},
+				{
+					"variant": "1.6 CRDi Trend FWD",
+					"price": { "value": 234900, "unit": "kr" },
+					"type": { "eng": "Diesel", "swe": "Diesel" },
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 136, "kw": 101 },
+					"fuel": { "value": 4.9, "unit": "l" },
+					"emissions": { "value": 111, "unit": "g/km" }
+				}
+			]
+		},
+		{
+			"brand": "Tesla",
+			"model": "Model 3",
+			"id": 2,
+			"size": {"eng": "Sedan", "swe": "Sedan"},
+			"image": "tesla_model_3.jpg",
+			"variants": [
+				{
+					"variant": "Standard Range Plus RWD",
+					"price": { "value": 549900, "unit": "kr" },
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 283, "kw": 211 },
+					"fuel": { "value": 15, "unit": "kWh" },
+					"emissions": { "value": 0, "unit": "g/km" }
+				},
+				{
+					"variant": "Long Range RWD",
+					"price": { "value": 659900, "unit": "kr" },
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 283, "kw": 211 },
+					"fuel": { "value": 16.3, "unit": "kWh" },
+					"emissions": { "value": 0, "unit": "g/km" }
+				}
+			]
+		},
+		{
+			"brand": "Tesla",
+			"model": "Model S",
+			"id": 3,
+			"size": {"eng": "Sedan", "swe": "Sedan"},
+			"image": "tesla_model_s.jpg",
+			"variants": [
+				{
+					"variant": "Long Range",
+					"price": { "value": 939900, "unit": "kr" },
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 275, "kw": 205 },
+					"fuel": { "value": 19, "unit": "kWh" },
+					"emissions": { "value": 0, "unit": "g/km" }
+				},
+				{
+					"variant": "Performance",
+					"price": { "value": 1108900, "unit": "kr" },
+					"type": { "eng": "Electric", "swe": "El" },
+					"transmission": { "eng": "Direct drive", "swe": "Direkt drift" },
+					"engine": { "hk": 275, "kw": 205 },
+					"fuel": { "value": 20, "unit": "kWh" },
+					"emissions": { "value": 0, "unit": "g/km" }
+				}
+			]
+		},
+		{
+			"brand": "Volvo",
+			"model": "XC40",
+			"id": 4,
+			"size": {"eng": "SUV", "swe": "SUV"},
+			"image": "volvo_xc40.jpg",
+			"variants": [
+				{
+					"variant": "B4 AWD",
+					"price": { "value": 431900, "unit": "kr" },
+					"type": { "eng": "Gas", "swe": "Bensin" },
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 8.2, "unit": "l" },
+					"emissions": { "value": 186, "unit": "g/km" }
+				},
+				{
+					"variant": "T2",
+					"price": { "value": 341900, "unit": "kr" },
+					"type": { "eng": "Gas", "swe": "Bensin" },
+					"transmission": { "eng": "Manual", "swe": "Manuell" },
+					"engine": { "hk": 129, "kw": 95 },
+					"fuel": { "value": 7.6, "unit": "l" },
+					"emissions": { "value": 173, "unit": "g/km" }
+				},
+				{
+					"variant": "D3",
+					"price": { "value": 382900, "unit": "kr" },
+					"type": { "eng": "Diesel", "swe": "Diesel" },
+					"transmission": { "eng": "Manual", "swe": "Manuell" },
+					"engine": { "hk": 150, "kw": 110 },
+					"fuel": { "value": 5.9, "unit": "l" },
+					"emissions": { "value": 154, "unit": "g/km" }
+				}
+			]
+		},
+		{
+			"brand": "Volvo",
+			"model": "V90",
+			"id": 5,
+			"size": {"eng": "Station wagon", "swe": "Kombi"},
+			"image": "volvo_v90.jpg",
+			"variants": [
+				{
+					"variant": "D3 AWD",
+					"price": { "value": 418800, "unit": "kr" },
+					"type": { "eng": "Diesel", "swe": "Diesel" },
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 150, "kw": 110 },
+					"fuel": { "value": 7.1, "unit": "l" },
+					"emissions": { "value": 185, "unit": "g/km" }
+				},
+				{
+					"variant": "D4 FWD",
+					"price": { "value": 408900, "unit": "kr" },
+					"type": { "eng": "Diesel", "swe": "Diesel" },
+					"transmission": { "eng": "Manual", "swe": "Manuell" },
+					"engine": { "hk": 190, "kw": 140 },
+					"fuel": { "value": 6.3, "unit": "l" },
+					"emissions": { "value": 159, "unit": "g/km" }
+				},
+				{
+					"variant": "T4 FWD",
+					"price": { "value": 389800, "unit": "kr" },
+					"type": { "eng": "Gas", "swe": "Bensin" },
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 190, "kw": 140 },
+					"fuel": { "value": 8.5, "unit": "l" },
+					"emissions": { "value": 192, "unit": "g/km" }
+				}
+				
+			]
+		},
+		{
+			"brand": "Volvo",
+			"model": "V60",
+			"id": 6,
+			"size": {"eng": "Station wagon", "swe": "Kombi"},
+			"image": "volvo_v60.jpg",
+			"variants": [
+				{
+					"variant": "B4 FWD",
+					"price": { "value": 389000, "unit": "kr" },
+					"type": { "eng": "Gas", "swe": "Bensin" },
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 197, "kw": 145 },
+					"fuel": { "value": 7.5, "unit": "l" },
+					"emissions": { "value": 170, "unit": "g/km" }
+				},
+				{
+					"variant": "D4 AWD",
+					"price": { "value": 409000, "unit": "kr" },
+					"type": { "eng": "Diesel", "swe": "Diesel" },
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 190, "kw": 140 },
+					"fuel": { "value": 6.5, "unit": "l" },
+					"emissions": { "value": 169, "unit": "g/km" }
+				}			
+			]
+		}
+	]
+}

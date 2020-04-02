@@ -10,26 +10,26 @@ class Home extends Component {
 
 	render() {
 		return (
-			<Container className="home-container padding-section">
-				<Row className="vh-75 d-flex justify-content-center mx-auto align-items-center">
+			<Container className="home padding-section">
+				<Row className="home-text d-flex justify-content-center mx-auto align-items-center">
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
-						transition={{ delay: 1 }}
+						transition={{ delay: 0.7 }}
 					>
 						<Col>
 							<Row>
-								<Col md="12" className="p-3">
+								<Col className="p-md-3">
 									<h2 className="title text-center">
-										<strong>Vad är bilens verkliga kostnad?</strong>
+										<strong>Vad är den verkliga nybilskostnaden?</strong>
 									</h2>
 								</Col>
 							</Row>
 							<Row>
-								<Col md="6" className="mx-auto p-3">
-									<h5 className="title">
-										I det här verktyget kan du ta reda på bilens total
-										ägandekostnad. Utforska verktyget genom att klicka på
+								<Col md="8" lg="7" className="mx-auto px-md-3 py-2">
+									<h5 className="subtitle text-center">
+										I det här verktyget kan du beräkna och jämföra den total
+										ägandekostnaden för nybilar. Utforska verktyget genom att klicka på
 										knappen nedan.
 									</h5>
 								</Col>

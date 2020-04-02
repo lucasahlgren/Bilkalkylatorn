@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, Button } from "shards-react";
-import SliderCustomRange from "./Slider";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faChargingStation,
-	faPercentage,
-	faGasPump,
-	faBurn
-} from "@fortawesome/free-solid-svg-icons";
+
 import { connect } from "react-redux";
 
 /* Components */
@@ -29,11 +22,9 @@ class Compare extends Component {
 			<Container className="padding-section">
 				<Card className="p-md-4 p-2">
 					<Row>
-						<Col md="9" xs="11" className="mx-auto vh-75 vw-100">
-							<BarChart />
-						</Col>
+						<BarChart calculationsList={this.props.calculationsList} />
 
-						<Col md="3" className="options">
+						<Col md="3" className="calculations-list">
 							<CalculationsList />
 						</Col>
 					</Row>
@@ -43,8 +34,11 @@ class Compare extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+	console.log(state);
+	return {
+		calculationsList: state.tco.calculationsList
+	};
+};
 
-
-
-
-export default Compare;
+export default connect(mapStateToProps, null)(Compare);

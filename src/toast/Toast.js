@@ -10,14 +10,16 @@ class Toast extends Component {
 
 	notifySuccessful = calculationName =>
 		toast.success(calculationName + "-kalkylen sparades", {
+			className: "toast-style",
 			position: "top-center",
-			autoClose: 3000
+			autoClose: 4000
 		});
 
 	notifyUnsuccessful = calculationName =>
 		toast.warn(calculationName + " finns redan, använd ett annat namn", {
+			className: "toast-style",
 			position: "top-center",
-			autoClose: 3000
+			autoClose: 4000
 		});
 
 	render() {
