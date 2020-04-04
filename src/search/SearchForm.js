@@ -183,19 +183,22 @@ class SearchForm extends Component {
 		var uniqueSizes = this.createOptionsObject(this.getUniqueSizes());
 
 		return (
-			<Container>
-				<Row>
-					<Col md="8" className="mx-auto">
-						<Form className="search-form py-4 pb-5">
+					<Card className="bg-light py-3">
+						<Form className="search-form  px-3">
+					
 							<Row>
-								<Col md="12" className="mx-auto pt-4">
+								<Col md="12">
+								<h4 className="text-black text-center"><strong>Filter</strong></h4>
+								</Col>
+								<Col md="12" className="mx-auto pt-3">
+
 									<div className="search-bar">
 										<input
 											className="search-field"
 											type="text"
 											placeholder="Sök bilmodell"
 										/>
-										<div className="icon">
+										<div className="search-icon">
 											<svg
 												version="1.1"
 												width="25"
@@ -210,9 +213,9 @@ class SearchForm extends Component {
 							</Row>
 
 							<div className="advanced-search">
-								<Row md="8">
-									<Col className="d-flex flex-column flex-md-row">
-										<div className="input-select input-brand mb-1 mb-md-0">
+								<Row>
+									<Col md="12" className="d-flex flex-column">
+										<div className="input-select flex-fill input-brand mb-1 mb-md-0">
 											<Select
 												blurInputOnSelect={true}
 												isMulti
@@ -266,9 +269,8 @@ class SearchForm extends Component {
 								</Row>
 							</div>
 						</Form>
-					</Col>
-				</Row>
-			</Container>
+						</Card>
+		
 		);
 	}
 }

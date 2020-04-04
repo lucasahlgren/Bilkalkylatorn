@@ -8,7 +8,7 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 
 function Excel(props) {
-	const { calculationsList } = props;
+	const { calculationsList, disabled } = props;
 
 	var dataList = calculationsList.map(calculation => {
 		return [
@@ -65,13 +65,17 @@ function Excel(props) {
 		}
 	];
 
+	var button = disabled === true ?  <Button disabled pill theme="light" size="md">
+	Ladda ner Excel-fil
+</Button>:<Button  pill theme="light" size="md">
+	Ladda ner Excel-fil
+</Button>;
+
 	return (
 		<ExcelFile
 			filename="TCO-kalkyler"
-			element={
-				<Button pill theme="light" size="md">
-					Ladda ner Excel-fil
-				</Button>
+			element={button
+				
 			}
 		>
 			<ExcelSheet dataSet={multiDataSet} name="TCO-kalkyler"></ExcelSheet>

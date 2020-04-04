@@ -27,14 +27,13 @@ class Home extends Component {
 							</Row>
 							<Row>
 								<Col md="8" lg="7" className="mx-auto px-md-3 py-2">
-									<h5 className="subtitle text-center">
+									<h5 className="subtitle">
 										I det här verktyget kan du beräkna och jämföra den total
-										ägandekostnaden för nybilar. Utforska verktyget genom att klicka på
-										knappen nedan.
+										ägandekostnaden för nybilar. Sök efter en bil och skapa egna kalkyler utifrån dina förutsättningar.
 									</h5>
 								</Col>
 							</Row>
-							<Row>
+							{/*<Row>
 								<Link to="/sok" className="mx-auto">
 									
 										<Button pill theme="light" size="lg">
@@ -42,7 +41,7 @@ class Home extends Component {
 										</Button>
 									
 								</Link>
-							</Row>
+							</Row>*/}
 						</Col>
 					</motion.div>
 				</Row>

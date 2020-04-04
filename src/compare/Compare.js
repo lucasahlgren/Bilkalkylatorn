@@ -19,7 +19,7 @@ class Compare extends Component {
 
 	render() {
 		return (
-			<Container className="padding-section">
+			<Container className="compare padding-section">
 				<Card className="p-md-4 p-2">
 					<Row>
 						<BarChart calculationsList={this.props.calculationsList} />

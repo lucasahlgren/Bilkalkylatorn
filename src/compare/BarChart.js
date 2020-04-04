@@ -46,149 +46,7 @@ class BarChart extends Component {
 					name: "Subventioner",
 					data: [0]
 				}
-			],
-
-			options: {
-				states: {
-					active: {
-						allowMultipleDataPointsSelection: false,
-						filter: {
-							type: "none",
-							value: 0
-						}
-					}
-				},
-
-				responsive: [
-					{
-						breakpoint: 991,
-						options: {
-							chart: {
-								width: "100%",
-								height: "100%"
-							},
-							legend: {
-								position: "bottom",
-								itemMargin: {
-									horizontal: 20,
-									vertical: 10
-								}
-							}
-						}
-					}
-				],
-
-				colors: [
-					"#0074D9",
-					"#111111",
-					"#85144b",
-					"#2ECC40",
-					"#FF851B",
-					"#FF4136",
-					"#40E0D0"
-				],
-
-				chart: {
-					type: "bar",
-					fontFamily: "Poppins, Arial, sans-serif",
-					fontWeight: "bold",
-					stacked: true,
-					toolbar: {
-						show: true
-					},
-					zoom: {
-						enabled: true
-					},
-
-					locales: [
-						{
-							name: "se",
-							options: {
-								toolbar: {
-									exportToSVG: "Ladda ner SVG",
-									exportToPNG: "Ladda ner PNG",
-									menu: "Meny",
-									exportToCSV: "Ladda ner CSV",
-									selection: "Markera",
-									selectionZoom: "Markera Zoom",
-									zoomIn: "Zooma In",
-									zoomOut: "Zooma Ut",
-									pan: "Panorera",
-									reset: "Återställ Zoom"
-								}
-							}
-						}
-					],
-					defaultLocale: "se"
-				},
-
-				tooltip: {
-					y: {
-						formatter: value => {
-							return numFormatter(value) + " kr";
-						}
-					},
-
-					style: {
-						fontSize: "0.7rem",
-						fontWeight: "bold"
-					},
-					intersect: true,
-					followCursor: true,
-
-					onDatasetHover: {
-						highlightDataSeries: true
-					}
-				},
-				dataLabels: {
-					enabled: false
-				},
-
-				plotOptions: {
-					bar: {
-						horizontal: false,
-
-						columnWidth: "55%",
-						dataLabels: {
-							position: "top" // top, center, bottom,
-						}
-					}
-				},
-				xaxis: {
-					tickPlacement: "between",
-					categories: ["Test"],
-					labels: {
-						style: {
-							fontSize: "0.7rem"
-						}
-					}
-				},
-				yaxis: {
-					title: {
-						text: "Total ägandekostnad (kr)",
-						offsetX: 0
-					}
-				},
-
-				legend: {
-					show: false,
-					fontFamily: "Concert One, Arial, sans-serif",
-					position: "bottom",
-					offsetX: -10,
-					offsetY: 0,
-
-					itemMargin: {
-						horizontal: 5,
-						vertical: 5
-					},
-					onItemHover: {
-						highlightDataSeries: false
-					}
-				},
-				fill: {
-					opacity: 1
-				}
-			}
+			]
 		};
 	}
 
@@ -207,10 +65,6 @@ class BarChart extends Component {
 		var selectedList = list.filter(
 			calculation => calculation.selected === true
 		);
-
-		var labels = selectedList.map(calculation => {
-			return calculation.name;
-		});
 
 		var depreciation = selectedList.map(calculation => {
 			return calculation.depreciation;
@@ -248,8 +102,6 @@ class BarChart extends Component {
 		console.log(tax);
 		console.log(subvention);
 
-		console.log(labels);
-
 		var series = [
 			{
 				name: "Värdeminskning",
@@ -281,41 +133,173 @@ class BarChart extends Component {
 			}
 		];
 
-
-		/* Legend bug fix */
 		this.setState({
-			options: {
-				...this.state.options,
-				xaxis: {
-					categories: labels
-				},
-				legend: {
-					show: true,
-					fontFamily: "Concert One, Arial, sans-serif",
-					position: "bottom",
-					offsetX: -10,
-					offsetY: 0,
-
-					itemMargin: {
-						horizontal: 5,
-						vertical: 10
-					},
-					onItemHover: {
-						highlightDataSeries: false
-					}
-				}
-			},
 			series: series
 		});
 	};
 
 	render() {
-		console.log("BAR CHART RENDERED")
+		console.log("Bar chart");
+		console.log(this.state);
 
 		const { calculationsList } = this.props;
 		var selectedCalculations = calculationsList.filter(
 			calculation => calculation.selected === true
 		);
+
+		var labels = selectedCalculations.map(calculation => {
+			return calculation.name;
+		});
+
+		var options = {
+			states: {
+				active: {
+					allowMultipleDataPointsSelection: false,
+					filter: {
+						type: "none",
+						value: 0
+					}
+				}
+			},
+
+			responsive: [
+				{
+					breakpoint: 991,
+					options: {
+						chart: {
+							width: "100%",
+							height: "100%"
+						},
+						legend: {
+							position: "bottom",
+							itemMargin: {
+								horizontal: 20,
+								vertical: 10
+							}
+						}
+					}
+				}
+			],
+
+			colors: [
+				"#0074D9",
+				"#111111",
+				"#85144b",
+				"#2ECC40",
+				"#FF851B",
+				"#FF4136",
+				"#40E0D0"
+			],
+
+			chart: {
+				type: "bar",
+				fontFamily: "Poppins, Arial, sans-serif",
+				fontWeight: "bold",
+				stacked: true,
+				toolbar: {
+					show: true
+				},
+				zoom: {
+					enabled: true
+				},
+
+				locales: [
+					{
+						name: "se",
+						options: {
+							toolbar: {
+								exportToSVG: "Ladda ner SVG",
+								exportToPNG: "Ladda ner PNG",
+								menu: "Meny",
+								exportToCSV: "Ladda ner CSV",
+								selection: "Markera",
+								selectionZoom: "Markera Zoom",
+								zoomIn: "Zooma In",
+								zoomOut: "Zooma Ut",
+								pan: "Panorera",
+								reset: "Återställ Zoom"
+							}
+						}
+					}
+				],
+				defaultLocale: "se"
+			},
+
+			tooltip: {
+				y: {
+					formatter: value => {
+						return numFormatter(value) + " kr";
+					}
+				},
+				style: {
+					fontSize: "0.7rem",
+					fontWeight: "bold"
+				},
+				intersect: true,
+				followCursor: false,
+
+				onDatasetHover: {
+					highlightDataSeries: true
+				},
+				
+			},
+
+
+			dataLabels: {
+				enabled: false
+			},
+
+			plotOptions: {
+				bar: {
+					horizontal: false,
+
+					columnWidth: "55%",
+					dataLabels: {
+						position: "top" // top, center, bottom,
+					}
+				}
+			},
+			xaxis: {
+				tickPlacement: "between",
+				categories: labels,
+				labels: {
+					style: {
+						fontSize: "0.7rem"
+					}
+				}
+			},
+			yaxis: {
+				title: {
+					text: "Totalkostnad (kr)",
+					offsetX: -10
+				},
+				labels: {
+					formatter: (value) => { return numFormatter(value) },
+					style:{
+						fontSize: "0.7rem"
+					},
+					minWidth: 80,
+					maxWidth: 250,
+				},
+			},
+
+			legend: {
+				show: true,
+				fontFamily: "Concert One, Arial, sans-serif",
+				position: "bottom",
+				offsetY: 0,
+				itemMargin: {
+					horizontal: 5,
+					vertical: 5
+				},
+				onItemHover: {
+					highlightDataSeries: false
+				}
+			},
+			fill: {
+				opacity: 1
+			}
+		};
 
 		var chart = null;
 		if (calculationsList.length > 0) {
@@ -331,7 +315,7 @@ class BarChart extends Component {
 				chart = (
 					<Chart
 						height={"100%"}
-						options={this.state.options}
+						options={options}
 						series={this.state.series}
 						type="bar"
 						className="bar-chart"

@@ -45,6 +45,9 @@ class Header extends Component {
 								TCO-kalkylatorn
 							</Link>
 						</div>
+						<div className="menu-trigger ml-auto" onClick={this.menuOpen}>
+						<span data-isclicked={open} className="menu-icon" />
+					</div>
 						<div className="desktop-nav pt-1">
 							<Nav>
 								{linkList.map(link => {
@@ -76,9 +79,6 @@ class Header extends Component {
 							})}
 						</ul>
 					</nav>
-					<div className="menu-trigger" onClick={this.menuOpen}>
-						<span data-isclicked={open} className="menu-icon" />
-					</div>
 				</Container>
 			</header>
 		);

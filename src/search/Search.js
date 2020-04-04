@@ -75,15 +75,28 @@ class Search extends Component {
 				<div className="search-body p-0 m-0 grey-bg">
 					<div className="search-header" />
 					<div className="search-section px-0">
-						<Row className="m-0">
+						<Container>
+							<Row>
 							<Col>
 								<h2 className="title text-center">
 									<strong>Bilsök</strong>
 								</h2>
+					
+							</Col>
+							</Row>
+						<Row>
+							<Col lg="3">
+						<Container>
+						<Row className="m-0">
+							<Col className="p-0">
+								
 								<SearchForm updateList={this.updateList} />
 							</Col>
 						</Row>
-						<Container>
+						</Container>
+						</Col>
+						<Col lg="9">
+							<Container>
 							<motion.div
 								className="row py-3 justify-content-md-start justify-content-center"
 								variants={container}
@@ -96,7 +109,7 @@ class Search extends Component {
 									return (
 										<motion.div
 											key={car.id}
-											className="search-item col-lg-3 col-md-4 col-sm-6 col-11 my-md-3"
+											className="search-item col-lg-4 col-md-4 col-sm-6 col-11 my-md-3"
 											variants={item}
 										>
 											<Link
@@ -170,6 +183,10 @@ class Search extends Component {
 									);
 								})}
 							</motion.div>
+						</Container>
+						</Col>
+
+						</Row>
 						</Container>
 					</div>
 				</div>

@@ -13,20 +13,17 @@
 	src: url("./assets/fonts/Work_Sans/WorkSans-Bold.ttf");
 }
 
-
-body{
+body {
 	background: url(./assets/images/bg.jpg) no-repeat center center;
 	background-size: cover;
 	background-attachment: fixed;
 	overflow-x: hidden;
 }
 
-
 .App {
 	font-family: "Poppins" !important;
 	min-height: 100vh;
 	height: 100%;
-
 }
 
 .title {
@@ -41,7 +38,6 @@ body{
 	font-weight: bolder !important;
 }
 
-
 .padding-section {
 	padding-top: 11vh;
 }
@@ -53,109 +49,110 @@ body{
 /* Apex Chart Style
 ==================================================*/
 
-.apexcharts-menu-item{
-    text-align: center;
+
+.bar-chart .apexcharts-menu-item {
+	text-align: center;
+}
+
+.bar-chart .apexcharts-tooltip-marker{
+	display:none;
+}
+
+.bar-chart .apexcharts-menu-item{
+	font-size: 0.7rem;
 }
 
 .bar-chart * {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .pie-chart * {
 	font-weight: 600;
 }
 
-.exportCSV{
+.exportCSV {
 	display: none;
 }
 
 /* Compare
 ==================================================*/
 
-.chart-container{
-	height: 80vh;
+.chart-container {
+	height: 79vh;
 }
 
 @media (min-width: 992px) {
-
-	.calculations-list{
-		border-left: 1px solid#e9ecef !important
+	.calculations-list {
+		border-left: 1px solid#e9ecef !important;
 	}
-	
 }
 @media (max-width: 991px) {
-	.chart-container{
+	.chart-container {
 		height: 100vh;
 	}
-
 }
-
 
 /* MyCalculations
 ==================================================*/
 
-.calculation-header{
+.calculation-header {
 	font-size: 0.9rem;
 }
 
-.calculation-tco{
+.calculation-tco {
 	font-size: 1.3rem;
-	margin:0;
+	margin: 0;
 }
 
-/* MyCalculations
-==================================================*/
-
-.my-calculation-costs h6{
-		font-size: 0.9rem;
-		font-weight: 700;
+.delete-calculation{
+	cursor: pointer; 
 }
 
-
-.my-calculation-costs p{
+.my-calculation-costs h6 {
 	font-size: 0.9rem;
-	
+	font-weight: 700;
 }
 
+.my-calculation-costs p {
+	font-size: 0.9rem;
+}
 
 /* CarDetails
 ==================================================*/
 
-.tooltip{
+.tooltip {
 	font-size: 0.8rem !important;
 	font-weight: 100;
 	padding: 5px 10px 5px 10px !important;
 	max-width: 200px !important;
 }
 
-
-.car-details-bonus{
+.car-details-bonus {
 	background-color: greenyellow !important;
 	font-weight: 700;
 	color: darkgreen;
 }
 
-.car-details-bonus h6{
+.car-details-bonus h6 {
 	font-weight: 700;
 }
 
-.car-details-cost{
+.car-details-cost {
 	font-size: 1.1rem;
 }
 
-
-.car-details-malus{
-	background-color: #FC3232 !important;
+.car-details-malus {
+	background-color: #fc3232 !important;
 	font-weight: 700;
 	color: rgb(243, 241, 237);
 }
 
-.car-details-malus h6{
+.car-details-malus h6 {
 	font-weight: 700;
-	color:white;
+	color: white;
 }
 
-.tco-variables{
+.tco-variables {
 	border-bottom-right-radius: 0.625rem;
 }
 
@@ -163,7 +160,7 @@ body{
 	border-top-left-radius: 0.625rem;
 }
 
-.bonus-icon{
+.bonus-icon {
 	width: 20%;
 	margin-left: 6px;
 }
@@ -178,11 +175,11 @@ body{
 	font-weight: 600;
 }
 
-.calculation-input{
+.calculation-input {
 	padding: 10px 10px 0px 10px !important;
 }
 
-.calculation-input h6{
+.calculation-input h6 {
 	font-size: 0.75rem;
 	padding-left: 2px;
 }
@@ -365,6 +362,10 @@ body{
 	-webkit-transition: all 475ms 495ms;
 	transition: all 475ms 495ms;
 }
+.mobile-nav li:nth-child(5) a {
+	-webkit-transition: all 475ms 575ms;
+	transition: all 475ms 575ms;
+}
 
 .mobile-nav ul,
 .mobile-nav li {
@@ -386,12 +387,10 @@ body{
 .menu-trigger {
 	background-color: #fff;
 	cursor: pointer;
-	width: 50px;
 }
 
 .menu-trigger .menu-icon {
 	display: inline-block;
-	position: absolute;
 	left: 50%;
 	top: 50%;
 	bottom: auto;
@@ -448,20 +447,15 @@ body{
 }
 
 .menu-trigger {
-	width: 100px;
+	width: 20px;
 	background-color: transparent;
 	height: 30px;
 	line-height: 30px;
 	right: 10px;
-	-webkit-transform: translate(0, -50%);
-	transform: translate(0, -50%);
 }
 
 .menu-trigger .menu-icon {
-	left: auto;
 	right: 1.5em;
-	-webkit-transform: translate(0, -50%);
-	transform: translate(0, -50%);
 }
 
 @media only screen and (min-width: 768px) {
@@ -476,9 +470,6 @@ body{
 @media only screen and (max-width: 767px) {
 	.desktop-nav {
 		display: none !important;
-	}
-	.menu-trigger {
-		display: inline;
 	}
 
 	.logo[data-isclicked="true"] {
@@ -544,7 +535,7 @@ section.route-section {
 /* Home
 ==================================================*/
 
-.home-text{
+.home-text {
 	height: 80vh;
 }
 
@@ -558,7 +549,6 @@ section.route-section {
 	width: 100%;
 	background: url(./assets/images/bg.jpg);
 	background-repeat: no-repeat;
-
 	background-position: bottom;
 	background-size: cover;
 }
@@ -574,7 +564,6 @@ section.route-section {
 	padding-top: 23vh;
 }
 
-
 .search-bar {
 	background: white;
 	margin-bottom: 10px;
@@ -585,11 +574,11 @@ section.route-section {
 	padding: 8px 8px;
 }
 
-.icon {
+.search-icon {
 	position: absolute;
-	top: 34px;
+	top: 27px;
 	right: 0;
-	width: 50px;
+	width: 47px;
 	z-index: 10;
 }
 
@@ -599,7 +588,7 @@ section.route-section {
 }
 
 .input-select {
-	margin: 1px;
+	padding: 5px 0px 5px 0px;
 }
 
 .filter-option__control {
@@ -663,21 +652,11 @@ section.route-section {
 	.car-header p {
 		font-size: 0.9rem;
 	}
-	.input-brand {
-		width: 40%;
-	}
-
-	.input-fuel {
-		width: 30%;
-	}
-
-	.input-size {
-		width: 30%;
-	}
+	
 }
 
 @media only screen and (max-width: 767px) {
-	.car-title{
+	.car-title {
 		font-size: 1.6rem;
 	}
 	.car-header span {
@@ -726,7 +705,7 @@ section.route-section {
 		border-top-right-radius: 0.625rem;
 	}
 
-	.tco-variables{
+	.tco-variables {
 		border-bottom-right-radius: 0rem;
 	}
 }

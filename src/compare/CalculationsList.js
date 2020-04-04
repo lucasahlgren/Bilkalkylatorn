@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Container, Row, Col, Card, Button } from "shards-react";
 import CSV from "./CSV";
-import Excel from "./Excel"
+import Excel from "./Excel";
 import CalculationItem from "./CalculationItem";
 
 class CalculationsList extends Component {
@@ -39,16 +39,32 @@ class CalculationsList extends Component {
 				<p className="text-center">Inga sparade kalkyler</p>
 			);
 
-			var selectedCalculations = calculationsList.filter(
-				calculation => calculation.selected === true
-			);
+		var selectedCalculations = calculationsList.filter(
+			calculation => calculation.selected === true
+		);
 
 		const excel =
 			selectedCalculations.length != 0 ? (
-				<div className="pt-3 text-center">
-					<Excel calculationsList={selectedCalculations} />
+				<div className="pt-2 text-center">
+					<div className="p-2">
+						Valda kalkyler:{" "}
+						<span className="px-2 text-white rounded bg-dark">
+							{selectedCalculations.length}
+						</span>
+					</div>
+					<Excel disabled={false} calculationsList={selectedCalculations} />
 				</div>
-			) : null;
+			) : (
+				<div className="pt-2 text-center">
+					<div className="p-2">
+						Valda kalkyler:{" "}
+						<span className="px-2 text-white rounded bg-dark">
+							{selectedCalculations.length}
+						</span>
+					</div>
+					<Excel disabled={true} calculationsList={selectedCalculations} />
+				</div>
+			);
 		return (
 			<div>
 				<h4 className="text-center">Kalkyler</h4>
@@ -56,7 +72,7 @@ class CalculationsList extends Component {
 					className="px-3"
 					autoHide={false}
 					forceVisible="y"
-					style={{ height: "66vh" }}
+					style={{ height: "60vh" }}
 				>
 					{list}
 				</SimpleBar>

@@ -135,9 +135,9 @@ class Calculation extends Component {
 														onClick={this.removeCalculation}
 														data-calculation={calculation.name}
 														icon={faTrashAlt}
-														className="ml-2 p-1"
+														className="ml-2 p-1 delete-calculation"
 														color="red"
-														title="Ta bort kalkyl"
+														title="Radera kalkyl"
 													/>
 												</h5>
 											</Col>
