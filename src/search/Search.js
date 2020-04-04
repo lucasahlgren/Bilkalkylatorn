@@ -1,5 +1,5 @@
 import data from "../data/data.json";
-import {numFormatter} from "../data/tco";
+import { numFormatter, tcoTotal } from "../data/tco";
 
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardImg, CardTitle } from "shards-react";
@@ -38,12 +38,70 @@ class Search extends Component {
 	};
 
 	monthlyCost = tco => {
-		var monthlyCost = (tco / 36);
+		var monthlyCost = tco / 36;
 		return monthlyCost;
 	};
 
+	componentDidMount = () => {
+		var carList = [...data.cars];
+		var resultslist = carList.map(car => {
+			var newCarObj = this.getLowestTCOObj(car);
+			return newCarObj;
+		});
+
+		var sortedList = resultslist.sort(function(a, b) {
+			return a.tco - b.tco;
+		});
+
+		this.setState({ list: sortedList });
+	};
+
+	calculateTCO = variant => {
+		var years = 3;
+		var miles = 1500;
+		var payment = 20;
+		var interestRate = 6;
+		var depreciationRate = 50;
+		return tcoTotal(
+			variant,
+			years,
+			miles,
+			payment,
+			interestRate,
+			depreciationRate
+		);
+	};
+
+	getLowestTCOObj = car => {
+		var newCarObj = { ...car };
+		console.log(car.brand + " " + car.model);
+		var tcoCalculations = car.variants.map(variant => {
+			var tco = this.calculateTCO(variant);
+			return tco;
+		});
+		console.log(tcoCalculations);
+		var sort = tcoCalculations.sort(function(a, b) {
+			return a - b;
+		});
+		console.log(sort);
+		newCarObj.tco = sort[0];
+		return newCarObj;
+	};
+
 	updateList = list => {
-		this.setState({ list: list });
+		if (list.length > 0) {
+			var resultslist = list.map(car => {
+				var newCarObj = this.getLowestTCOObj(car);
+				return newCarObj;
+			});
+			var sortedList = resultslist.sort(function(a, b) {
+				return a.tco - b.tco;
+			});
+
+			this.setState({ list: sortedList });
+		} else {
+			this.setState({ list: list });
+		}
 	};
 
 	render() {
@@ -76,27 +134,16 @@ class Search extends Component {
 					<div className="search-header" />
 					<div className="search-section px-0">
 						<Container>
-							<Row>
-							<Col>
-								<h2 className="title text-center">
-									<strong>Bilsök</strong>
-								</h2>
-					
-							</Col>
+							<Row className="m-0">
+								<Col>
+									<h2 className="title text-center">
+										<strong>Bilsök</strong>
+									</h2>
+									<SearchForm updateList={this.updateList} />
+								</Col>
 							</Row>
-						<Row>
-							<Col lg="3">
-						<Container>
-						<Row className="m-0">
-							<Col className="p-0">
-								
-								<SearchForm updateList={this.updateList} />
-							</Col>
-						</Row>
 						</Container>
-						</Col>
-						<Col lg="9">
-							<Container>
+						<Container>
 							<motion.div
 								className="row py-3 justify-content-md-start justify-content-center"
 								variants={container}
@@ -109,7 +156,7 @@ class Search extends Component {
 									return (
 										<motion.div
 											key={car.id}
-											className="search-item col-lg-4 col-md-4 col-sm-6 col-11 my-md-3"
+											className="search-item col-lg-3 col-md-4 col-sm-6 col-11 my-md-3"
 											variants={item}
 										>
 											<Link
@@ -135,7 +182,6 @@ class Search extends Component {
 																{car.brand} {car.model}
 															</CardTitle>
 															<Row className="pt-1">
-														
 																<Col
 																	md="12"
 																	xs="6"
@@ -156,8 +202,8 @@ class Search extends Component {
 																	<span className="m-0">Totalkostnad</span>
 																	<p className="m-0">
 																		{"Fr. "}
-																		{numFormatter(car.variants[0].price.value)}{" "}
-																		{car.variants[0].price.unit}
+																		{numFormatter(car.tco)}
+																		{" kr"}
 																	</p>
 																</Col>
 																<Col
@@ -168,10 +214,7 @@ class Search extends Component {
 																	<span className="m-0">Månadskostnad</span>
 																	<p className="m-0">
 																		{"Fr. "}
-																		{numFormatter(this.monthlyCost(
-																			car.variants[0].price.value
-																		))}{" "}
-																		kr
+																		{numFormatter(this.monthlyCost(car.tco))} kr
 																	</p>
 																</Col>
 															</Row>
@@ -183,10 +226,6 @@ class Search extends Component {
 									);
 								})}
 							</motion.div>
-						</Container>
-						</Col>
-
-						</Row>
 						</Container>
 					</div>
 				</div>

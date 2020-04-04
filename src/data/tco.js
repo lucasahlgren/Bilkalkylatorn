@@ -1,24 +1,50 @@
-export function tcodepreciation(variant, depreciationRate) {
-	console.log("depreciation_____________________________________");
+var debug = false;
+
+export function tcoTotal(variant, years, miles, payment, interestRate, depreciationRate){
+	var fuelCost = tcoFuelCost(variant.type.swe);
+
+	var fuel = tcoFuel(variant, fuelCost, years, miles);
+	var interest = tcoInterest(variant, interestRate, payment, years);
+	var depreciation = tcoDepreciation(variant, depreciationRate);
+	var insurance = tcoInsuranceTotal(variant, years);
+	var maintenance = tcoMaintenanceTotal(variant, years);
+	var tax = tcoTaxTotal(variant, years);
+	var subventions = tcoSubventions(variant);
+	
+	var tco = fuel + interest + depreciation + insurance + maintenance + tax - subventions;
+
+	return tco;
+	
+}
+
+export function tcoDepreciation(variant, depreciationRate) {
 	const price = variant.price.value;
 	var cost = (price * depreciationRate) / 100;
+
+	if(debug){
+		console.log("Depreciation_____________________________________");
+		console.log(cost)
+	}
+
 	return cost;
 }
 
 export function tcoFuel(variant, price, years, miles) {
-	console.log("Fuel_____________________________________");
 	const fuel = variant.fuel.value;
 	var cost = (fuel / 10) * price * years * miles;
+	if(debug){
+		console.log("Fuel_____________________________________");
+		console.log(cost)
+	}
 	return cost;
 }
 
 export function tcoInterest(variant, interestRate, payment, years) {
-	console.log("Interest_____________________________________");
+	var total = 0;
 	if (payment === 100 || (interestRate === 0 && payment >= 0) || years === 0) {
-		return 0;
+		return total;
 	} else if (payment >= 0 && payment < 100) {
 		const price = variant.price.value;
-		var total = 0;
 		var amountBorrowed = price * (1 - payment / 100);
 		var months = 12 * years;
 		var interestRateMonthly = interestRate / 100 / 12;
@@ -33,23 +59,37 @@ export function tcoInterest(variant, interestRate, payment, years) {
 			amountBorrowed;
 
 		//console.log(compound);
-		console.log(total);
 		return total;
+	}
+	if(debug){
+		console.log("Interest_____________________________________");
+		console.log(total)
 	}
 }
 
 export function tcoTaxTotal(variant, years) {
-	console.log("Total tax_____________________________________");
 	const type = variant.type.swe;
 	var total = 0;
 	if ((type === "Bensin" || type === "Diesel") && years >= 3) {
-		total = tcoMalus(variant) * 3 + tcoTaxYear(variant) * years;
+		total = tcoMalusYear(variant) * 3 + tcoTaxYear(variant) * years;
+		if(debug){
+			console.log("Tax_____________________________________");
+			console.log(total)
+		}
 		return total;
 	} else if ((type === "Bensin" || type === "Diesel") && years < 3) {
-		total = tcoMalus(variant) * years + tcoTaxYear(variant) * years;
+		total = tcoMalusYear(variant) * years + tcoTaxYear(variant) * years;
+		if(debug){
+			console.log("Tax_____________________________________");
+			console.log(total)
+		}
 		return total;
 	} else {
 		total = tcoTaxYear(variant) * years;
+		if(debug){
+			console.log("Tax_____________________________________");
+			console.log(total)
+		}
 		return total;
 	}
 }
@@ -58,12 +98,24 @@ export function tcoMalusTotal(variant, years){
 	var type = variant.type.swe
 	var total = 0;
 	if ((type === "Bensin" || type === "Diesel") && years >= 3) {
-		total = tcoMalus(variant) * 3;
+		total = tcoMalusYear(variant) * 3;
+		if(debug){
+			console.log("MalusTotal_____________________________________");
+			console.log(total)
+		}
 		return total;
 	} else if ((type === "Bensin" || type === "Diesel") && years < 3) {
-		total = tcoMalus(variant) * years;
+		total = tcoMalusYear(variant) * years;
+		if(debug){
+			console.log("MalusTotal_____________________________________");
+			console.log(total)
+		}
 		return total;
 	} else {
+		if(debug){
+			console.log("MalusTotal_____________________________________");
+			console.log(total)
+		}
 		return total;
 	}
 
@@ -113,8 +165,7 @@ export function tcoTaxYear(variant) {
 	}
 }
 
-export function tcoMalus(variant) {
-	console.log("Malus_____________________________________");
+export function tcoMalusYear(variant) {
 	const emissions = variant.emissions.value;
 	const type = variant.type.swe;
 
@@ -177,45 +228,89 @@ export function tcoMalus(variant) {
 		return malus;
 	}
 }
-
-export function tcoInsurance(variant) {
-	console.log("Insurance_____________________________________");
-	var total = 2000;
+export function tcoInsuranceYear(variant) {
+	var total = 3000;
 	return total;
 }
 
-export function tcoMaintenance(variant) {
-	console.log("Maintenance_____________________________________");
-	var total = 2000;
+export function tcoMaintenanceYear(variant) {
+	var total = 3000;
+	return total;
+}
+
+export function tcoInsuranceTotal(variant, years) {
+	var total = tcoInsuranceYear(variant)*years;
+	if(debug){
+		console.log("Insurance_____________________________________");
+		console.log(total)
+	}
+	return total;
+}
+
+export function tcoMaintenanceTotal(variant, years) {
+	var total = tcoMaintenanceYear(variant)*years;
+	if(debug){
+		console.log("Maintenance_____________________________________");
+		console.log(total)
+	}
 	return total;
 }
 
 export function tcoSubventions(variant) {
-	console.log("Subventions_____________________________________");
 	/* Bonus */
 	const emissions = variant.emissions.value;
 	const price = variant.price.value;
 	const type = variant.type.swe;
 
+	var bonus = 0;
+
 	if (type === "El" || type === "Laddhybrid") {
 		if (emissions === 0) {
 			if (60000 > price * 0.25) {
-				return price * 0.25;
+				bonus = price * 0.25;
+				if(debug){
+					console.log("Subventions_____________________________________");
+					console.log(bonus)
+				}
+				return bonus
 			} else {
-				return 60000;
+				bonus = 60000;
+				if(debug){
+					console.log("Subventions_____________________________________");
+					console.log(bonus)
+				}
+				return bonus;
 			}
 		} else if (emissions <= 70) {
-			var bonus = 60000 - 714 * emissions;
+			bonus = 60000 - 714 * emissions;
 			if (bonus > price * 0.25) {
-				return price * 0.25;
+				bonus = price * 0.25;
+				if(debug){
+					console.log("Subventions_____________________________________");
+					console.log(bonus)
+				}
+				return bonus
 			} else {
+				if(debug){
+					console.log("Subventions_____________________________________");
+					console.log(bonus)
+				}
 				return bonus;
 			}
 		} else {
-			return 0;
+			if(debug){
+				console.log("Subventions_____________________________________");
+				console.log(bonus)
+			}
+			return bonus;
 		}
+		
 	} else {
-		return 0;
+		if(debug){
+			console.log("Subventions_____________________________________");
+			console.log(bonus)
+		}
+		return bonus;
 	}
 }
 

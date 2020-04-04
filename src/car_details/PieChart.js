@@ -7,7 +7,7 @@ import {
 	faGasPump,
 	faBurn
 } from "@fortawesome/free-solid-svg-icons";
-import {numFormatter} from "../data/tco";
+import { numFormatter } from "../data/tco";
 
 /* Apex charts */
 import Chart from "react-apexcharts";
@@ -32,11 +32,12 @@ class PieChart extends Component {
 
 				legend: {
 					show: false
-                },
-                plotOptions: {
-                    pie: {
-                      expandOnClick: false
-                    }},
+				},
+				plotOptions: {
+					pie: {
+						expandOnClick: false
+					}
+				},
 
 				dataLabels: {
 					fontSize: "1rem",
@@ -45,17 +46,26 @@ class PieChart extends Component {
 				},
 				chart: {
 					fontFamily: "Poppins"
-                },
-                
-                tooltip: {
-                    enabled: true,
-                   
-                   y: {
-                    formatter: (value) => { return numFormatter(value) + " kr" },
-                  }
-                },
+				},
 
-				labels: ["Värdeminskning", "Bränsle", "Lånekostnader", "Försäkring", "Underhåll", "Skatt"],
+				tooltip: {
+					enabled: true,
+
+					y: {
+						formatter: value => {
+							return numFormatter(value) + " kr";
+						}
+					}
+				},
+
+				labels: [
+					"Värdeminskning",
+					"Bränsle",
+					"Lånekostnader",
+					"Försäkring",
+					"Underhåll",
+					"Skatt"
+				],
 				name: {
 					show: true,
 					fontSize: "22px",
@@ -73,46 +83,51 @@ class PieChart extends Component {
 							}
 						}
 					}
-				],
-
-			
+				]
 			}
 		};
 	}
 
 	componentDidMount = () => {
-        const {depreciation, fuel, tax, maintenance, interest, insurance} = this.props;
-        /* {"Värdeminskning", "Bränsle", "Lånekostnader", "Försäkring", "Underhåll", "Skatt"]*/
-        var series = [depreciation,fuel,interest,insurance,maintenance,tax]
-        console.log(series)
-        this.setState({series: series})
+		const {
+			depreciation,
+			fuel,
+			tax,
+			maintenance,
+			interest,
+			insurance
+		} = this.props;
+		/* {"Värdeminskning", "Bränsle", "Lånekostnader", "Försäkring", "Underhåll", "Skatt"]*/
+		var series = [depreciation, fuel, interest, insurance, maintenance, tax];
+		console.log(series);
+		this.setState({ series: series });
 	};
 
 	componentDidUpdate(prevProps) {
 		if (this.props !== prevProps) {
-            console.log("hej")
-            const {depreciation, fuel, tax, maintenance, interest, insurance} = this.props;
-            /* {"Värdeminskning", "Bränsle", "Lånekostnader", "Försäkring", "Underhåll", "Skatt"]*/
-            var series = [depreciation,fuel,interest,insurance,maintenance,tax]
-            this.setState({series: series})
+			const {
+				depreciation,
+				fuel,
+				tax,
+				maintenance,
+				interest,
+				insurance
+			} = this.props;
+			/* {"Värdeminskning", "Bränsle", "Lånekostnader", "Försäkring", "Underhåll", "Skatt"]*/
+			var series = [depreciation, fuel, interest, insurance, maintenance, tax];
+			this.setState({ series: series });
 		}
 	}
-
-
 
 	render() {
 		return (
 			<Col xs="12" className="h-100 p-0">
-          
 				<Chart
 					options={this.state.options}
 					series={this.state.series}
-                    type="pie"
-                    className="pie-chart"
-				
-				
+					type="pie"
+					className="pie-chart"
 				/>
-           
 			</Col>
 		);
 	}

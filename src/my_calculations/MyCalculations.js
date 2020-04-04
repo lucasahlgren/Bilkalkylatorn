@@ -16,28 +16,39 @@ class MyCalculations extends Component {
 
 	render() {
 		const { calculationsList } = this.props;
-		var content =
+		var calculations =
 			calculationsList.length > 0
 				? calculationsList.map(calculation => {
 						return (
 							<Calculation key={calculation.name} calculation={calculation} />
 						);
 				  })
-				: null;
+				: <Card className="p-md-4 mt-4 h-100 w-100">
+				<Col md="9" xs="11" className="mx-auto my-calculations-container">
+					<div className="justify-content-center d-flex align-items-center flex-column h-100 w-100">
+						<p className="p-3">Inga sparade kalkyler</p>
+					</div>
+				</Col>
+			</Card>;
+		var excel =
+			calculationsList.length > 0 ? (
+				<div className="p-0 text-center">
+					<Excel calculationsList={this.props.calculationsList} />
+				</div>
+			) : null;
+		 
 		return (
 			<Container className="padding-section">
-				<div className="p-md-4 p-2 h-100 ">
+				<div className="p-md-4 p-2 h-100 w-100">
 					<Row>
 						<Col>
-							<h4 className="text-center p-3 pb-2 title">
+							<h4 className="text-center pt-3 pb-2 mb-0 title">
 								<strong>Mina kalkyler</strong>
-								<div className="pt-3 text-center">
-									<Excel calculationsList={this.props.calculationsList} />
-								</div>
 							</h4>
+							{excel}
 						</Col>
 					</Row>
-					<Row>{content}</Row>
+					<Row>{calculations}</Row>
 				</div>
 			</Container>
 		);

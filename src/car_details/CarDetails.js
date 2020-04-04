@@ -10,13 +10,15 @@ import {
 	tcoSubventions,
 	tcoFuel,
 	tcoFuelCost,
-	tcodepreciation,
+	tcoDepreciation,
 	tcoInterest,
 	tcoTaxYear,
 	tcoTaxTotal,
-	tcoMalus,
-	tcoMaintenance,
-	tcoInsurance,
+	tcoMalusYear,
+	tcoMaintenanceYear,
+	tcoInsuranceYear,
+	tcoMaintenanceTotal,
+	tcoInsuranceTotal,
 	tcoMalusTotal
 } from "../data/tco";
 import Select from "react-select";
@@ -80,7 +82,7 @@ class CarDetails extends Component {
 
 		/* Tax */
 		var taxYear = tcoTaxYear(variant);
-		var malusYear = tcoMalus(variant);
+		var malusYear = tcoMalusYear(variant);
 		var malusTotal = tcoMalusTotal(variant, years);
 		var taxTotal = tcoTaxTotal(variant, years);
 		var taxYearTotal = taxYear * years;
@@ -90,18 +92,18 @@ class CarDetails extends Component {
 		var fuel = tcoFuel(variant, fuelCost, years, miles);
 
 		/* depreciation */
-		var depreciation = tcodepreciation(variant, depreciationRate);
+		var depreciation = tcoDepreciation(variant, depreciationRate);
 
 		/* Interest */
 		var interest = tcoInterest(variant, interestRate, payment, years);
 
 		/* Maintanence */
-		var maintenanceYear = tcoMaintenance(variant);
-		var maintenanceTotal = maintenanceYear * years;
+		var maintenanceTotal = tcoMaintenanceTotal(variant, years);
+		var maintenanceYear = tcoMaintenanceYear(variant);
 
 		/* Insurance */
-		var insuranceYear = tcoInsurance(variant);
-		var insuranceTotal = insuranceYear * years;
+		var insuranceTotal = tcoInsuranceTotal(variant, years);
+		var insuranceYear = tcoInsuranceYear(variant);
 
 		/* TCO total */
 		var tcoTotal =
@@ -119,7 +121,6 @@ class CarDetails extends Component {
 		resetObject.payment = payment;
 		resetObject.interestRate = interestRate;
 		resetObject.depreciationRate = depreciationRate;
-		resetObject.fuelCost = fuelCost;
 		resetObject.maintenanceYear = maintenanceYear;
 		resetObject.insuranceYear = insuranceYear;
 
@@ -154,13 +155,12 @@ class CarDetails extends Component {
 	==================================================*/
 
 	getCar = id => {
-		var car = data.cars.filter(car => {
-			return car.id.toString() === id;
-		});
-		if (car.length > 1) {
-			console.log("Several cars have the same ID!");
-		} else if (car.length == 1) {
-			return car[0];
+		var car = data.cars.find(car => car.id.toString() === id);
+		console.log(car);
+		if (car === undefined) {
+			console.log("The car does not exist!");
+		} else {
+			return car;
 		}
 	};
 
@@ -182,7 +182,6 @@ class CarDetails extends Component {
 			insuranceTotal +
 			interest -
 			subvention;
-		console.log(total);
 		return total;
 	};
 
@@ -218,7 +217,8 @@ class CarDetails extends Component {
 	};
 
 	resetVariabels = () => {
-		const { resetObject } = this.state;
+		const { resetObject, variant } = this.state;
+		var fuelCost = tcoFuelCost(variant.type.swe);
 		this.setState(
 			{
 				years: resetObject.years,
@@ -226,7 +226,7 @@ class CarDetails extends Component {
 				payment: resetObject.payment,
 				interestRate: resetObject.interestRate,
 				depreciationRate: resetObject.depreciationRate,
-				fuelCost: resetObject.fuelCost,
+				fuelCost: fuelCost,
 				maintenanceYear: resetObject.maintenanceYear,
 				insuranceYear: resetObject.insuranceYear
 			},
@@ -388,31 +388,12 @@ class CarDetails extends Component {
 		);
 		console.log(newVariant);
 		var fuelCost = tcoFuelCost(newVariant.type.swe);
-		var maintenanceYear = tcoMaintenance(newVariant);
-		var insuranceYear = tcoInsurance(newVariant);
 
-		var resetObject = {};
-		resetObject.years = this.state.resetObject.years;
-		resetObject.miles = this.state.resetObject.miles;
-		resetObject.payment = this.state.resetObject.payment;
-		resetObject.interestRate = this.state.resetObject.interestRate;
-		resetObject.depreciationRate = this.state.resetObject.depreciationRate;
-		resetObject.fuelCost = fuelCost;
-		resetObject.maintenanceYear = maintenanceYear;
-		resetObject.insuranceYear = insuranceYear;
 		this.setState(
 			{
 				selectedOption: selectedOption,
-				years: this.state.resetObject.years,
-				miles: this.state.resetObject.miles,
-				payment: this.state.resetObject.payment,
-				depreciationRate: this.state.resetObject.depreciationRate,
-				interestRate: this.state.resetObject.interestRate,
 				variant: newVariant,
-				fuelCost: fuelCost,
-				maintenanceYear: maintenanceYear,
-				insuranceYear: insuranceYear,
-				resetObject: resetObject
+				fuelCost: fuelCost
 			},
 			this.updateData
 		);
@@ -434,7 +415,7 @@ class CarDetails extends Component {
 
 		/* Tax */
 		var taxYear = tcoTaxYear(variant);
-		var malusYear = tcoMalus(variant);
+		var malusYear = tcoMalusYear(variant);
 		var malusTotal = tcoMalusTotal(variant, years);
 		var taxTotal = tcoTaxTotal(variant, years);
 		var taxYearTotal = taxYear * years;
@@ -443,7 +424,7 @@ class CarDetails extends Component {
 		var fuel = tcoFuel(variant, fuelCost, years, miles);
 
 		/* depreciation */
-		var depreciation = tcodepreciation(variant, depreciationRate);
+		var depreciation = tcoDepreciation(variant, depreciationRate);
 
 		/* Interest */
 		var interest = tcoInterest(variant, interestRate, payment, years);
@@ -792,215 +773,221 @@ class CarDetails extends Component {
 											</Col>
 											<Col lg="8" className="p-0">
 												<Container className="p-4">
-												<Card className="p-3">
-													<Row>
-														<Col xs="6" md="4" lg="3" className="mx-auto">
-															<Card className="h-100 bg-dark justify-content-center text-center">
-																<span>
-																	<strong className="text-white">
-																		{numFormatter(this.getTCORatio()) + "%"}
-																	</strong>
-																</span>
-															</Card>
-														</Col>
-
-														<Col xs="6" md="4" lg="3" className="mx-auto">
-															<h6>Totalkostnad</h6>
-															<h4 className="m-0 py-1">
-																<strong>
-																	{numFormatter(this.state.tcoTotal) + " kr"}
-																</strong>
-															</h4>
-														</Col>
-
-														<Col xs="6" md="4" lg="3">
-															<h6>Månadskostnad</h6>
-															<p className="m-0 py-1">
-																{numFormatter(this.getMonthlyCost())}{" "}
-																{"kr/månad"}
-															</p>
-														</Col>
-														<Col xs="6" md="4" lg="3">
-															<h6>Milkostnad</h6>
-															<p className="m-0 py-1">
-																{numFormatter(this.getMileCost())} {"kr/mil"}
-															</p>
-														</Col>
-													</Row>
-												</Card>
-
-												<Row className="mt-3">
-													<Col xs="12" className="p-2 pb-md-3 pb-0 text-center">
-														<h4>Kostnadsfördelning</h4>
-													</Col>
-													<Col md="6" lg="6" className="p-md-0 pb-4">
-														<PieChart
-															depreciation={this.state.depreciation}
-															fuel={this.state.fuel}
-															maintenance={this.state.maintenanceTotal}
-															interest={this.state.interest}
-															insurance={this.state.insuranceTotal}
-															tax={this.state.taxTotal}
-														/>
-													</Col>
-													<Col md="6" lg="6">
+													<Card className="p-3">
 														<Row>
-															<Col xs="6">
-																<Row className="pl-md-1 pl-4">
-																	<Col xs="1" className="p-0 m-0">
-																		<FontAwesomeIcon
-																			icon={faSquare}
-																			color="#0074D9"
-																		/>
-																	</Col>
-																	<Col xs="11" className="pl-2">
-																		<h6>Värdeminskning</h6>
-																		<p className="car-details-cost">
-																			{numFormatter(this.state.depreciation)}{" "}
-																			{"kr"}
-																		</p>
-																	</Col>
-																</Row>
+															<Col xs="6" md="4" lg="3" className="mx-auto">
+																<Card className="h-100 bg-dark justify-content-center text-center">
+																	<span>
+																		<strong className="text-white">
+																			{numFormatter(this.getTCORatio()) + "%"}
+																		</strong>
+																	</span>
+																</Card>
 															</Col>
-															<Col xs="6">
-																<Row className="pl-md-1 pl-4">
-																	<Col xs="1" className="p-0 m-0">
-																		<FontAwesomeIcon
-																			icon={faSquare}
-																			color="#111111"
-																		/>
-																	</Col>
-																	<Col xs="11" className="pl-2">
-																		<h6>Bränsle</h6>
-																		<p className="car-details-cost">
-																			{numFormatter(this.state.fuel)} {"kr"}
-																		</p>
-																	</Col>
-																</Row>
+
+															<Col xs="6" md="4" lg="3" className="mx-auto">
+																<h6>Totalkostnad</h6>
+																<h4 className="m-0 py-1">
+																	<strong>
+																		{numFormatter(this.state.tcoTotal) + " kr"}
+																	</strong>
+																</h4>
 															</Col>
-															<Col xs="6">
-																<Row className="pl-md-1 pl-4">
-																	<Col xs="1" className="p-0 m-0">
-																		<FontAwesomeIcon
-																			icon={faSquare}
-																			color="#85144b"
-																		/>
-																	</Col>
-																	<Col xs="11" className="pl-2">
-																		<h6>Lånekostnader</h6>
-																		<p className="car-details-cost">
-																			{numFormatter(this.state.interest)} {"kr"}
-																		</p>
-																	</Col>
-																</Row>
+
+															<Col xs="6" md="4" lg="3">
+																<h6>Månadskostnad</h6>
+																<p className="m-0 py-1">
+																	{numFormatter(this.getMonthlyCost())}{" "}
+																	{"kr/månad"}
+																</p>
 															</Col>
-															<Col xs="6">
-																<Row className="pl-md-1 pl-4">
-																	<Col xs="1" className="p-0 m-0">
-																		<FontAwesomeIcon
-																			icon={faSquare}
-																			color="#2ECC40"
-																		/>
-																	</Col>
-																	<Col xs="11" className="pl-2">
-																		<h6>Försäkring</h6>
-																		<p className="car-details-cost">
-																			{numFormatter(this.state.insuranceTotal)}{" "}
-																			{"kr"}
-																		</p>
-																	</Col>
-																</Row>
-															</Col>
-															<Col xs="6">
-																<Row className="pl-md-1 pl-4">
-																	<Col xs="1" className="p-0 m-0">
-																		<FontAwesomeIcon
-																			icon={faSquare}
-																			color="#FF851B"
-																		/>
-																	</Col>
-																	<Col xs="11" className="pl-2">
-																		<h6>Underhåll</h6>
-																		<p className="car-details-cost">
-																			{numFormatter(
-																				this.state.maintenanceTotal
-																			)}{" "}
-																			{"kr"}
-																		</p>
-																	</Col>
-																</Row>
-															</Col>
-															<Col xs="6">
-																<Row className="pl-md-1 pl-4">
-																	<Col xs="1" className="p-0 ">
-																		<FontAwesomeIcon
-																			icon={faSquare}
-																			color="#FF4136"
-																		/>
-																	</Col>
-																	<Col xs="11" className="pl-2">
-																		<h6>Skatt</h6>
-																		<p className="car-details-cost">
-																			{numFormatter(this.state.taxYearTotal)}{" "}
-																			{"kr"}
-																		</p>
-																	</Col>
-																</Row>
-															</Col>
-															<Col xs="6" className="pt-2 pb-0 pl-md-0">
-																<div className="card p-2 car-details-bonus">
-																	<h6>
-																		Bonus{" "}
-																		<FontAwesomeIcon
-																			icon={faInfoCircle}
-																			color="black"
-																			data-for="bonus"
-																			data-tip="Bonus för miljöanpassade fordon med CO2-utsläpp upp till 70 g/km"
-																		/>
-																	</h6>
-																	<p className="m-0">
-																		{numFormatter(this.state.subvention)} {"kr"}
-																	</p>
-																	<ReactTooltip
-																		id="bonus"
-																		className="tooltip"
-																		textColor="white"
-																		backgroundColor="black"
-																		effect="solid"
-																	/>
-																</div>
-															</Col>
-															<Col xs="6" className="pt-2 pb-0 pl-md-0">
-																<div className="card p-2 car-details-malus">
-																	<h6>
-																		Malus{" "}
-																		<FontAwesomeIcon
-																			icon={faInfoCircle}
-																			color="white"
-																			data-for="malus"
-																			data-tip="Förhöjd fordonsskatt de första tre åren för fordon med CO2-utsläpp över 95 g/km"
-																		/>
-																	</h6>
-																	<p className="m-0">
-																		{numFormatter(this.state.malusTotal)} {"kr"}
-																	</p>
-																	<ReactTooltip
-																		id="malus"
-																		className="tooltip"
-																		textColor="white"
-																		backgroundColor="black"
-																		effect="solid"
-																	/>
-																</div>
+															<Col xs="6" md="4" lg="3">
+																<h6>Milkostnad</h6>
+																<p className="m-0 py-1">
+																	{numFormatter(this.getMileCost())} {"kr/mil"}
+																</p>
 															</Col>
 														</Row>
-													</Col>
-												</Row>
+													</Card>
+
+													<Row className="mt-3">
+														<Col
+															xs="12"
+															className="p-2 pb-md-3 pb-0 text-center"
+														>
+															<h4>Kostnadsfördelning</h4>
+														</Col>
+														<Col md="6" lg="6" className="p-md-0 pb-4">
+															<PieChart
+																depreciation={this.state.depreciation}
+																fuel={this.state.fuel}
+																maintenance={this.state.maintenanceTotal}
+																interest={this.state.interest}
+																insurance={this.state.insuranceTotal}
+																tax={this.state.taxTotal}
+															/>
+														</Col>
+														<Col md="6" lg="6">
+															<Row>
+																<Col xs="6">
+																	<Row className="pl-md-1 pl-4">
+																		<Col xs="1" className="p-0 m-0">
+																			<FontAwesomeIcon
+																				icon={faSquare}
+																				color="#0074D9"
+																			/>
+																		</Col>
+																		<Col xs="11" className="pl-2">
+																			<h6>Värdeminskning</h6>
+																			<p className="car-details-cost">
+																				{numFormatter(this.state.depreciation)}{" "}
+																				{"kr"}
+																			</p>
+																		</Col>
+																	</Row>
+																</Col>
+																<Col xs="6">
+																	<Row className="pl-md-1 pl-4">
+																		<Col xs="1" className="p-0 m-0">
+																			<FontAwesomeIcon
+																				icon={faSquare}
+																				color="#111111"
+																			/>
+																		</Col>
+																		<Col xs="11" className="pl-2">
+																			<h6>Bränsle</h6>
+																			<p className="car-details-cost">
+																				{numFormatter(this.state.fuel)} {"kr"}
+																			</p>
+																		</Col>
+																	</Row>
+																</Col>
+																<Col xs="6">
+																	<Row className="pl-md-1 pl-4">
+																		<Col xs="1" className="p-0 m-0">
+																			<FontAwesomeIcon
+																				icon={faSquare}
+																				color="#85144b"
+																			/>
+																		</Col>
+																		<Col xs="11" className="pl-2">
+																			<h6>Lånekostnader</h6>
+																			<p className="car-details-cost">
+																				{numFormatter(this.state.interest)}{" "}
+																				{"kr"}
+																			</p>
+																		</Col>
+																	</Row>
+																</Col>
+																<Col xs="6">
+																	<Row className="pl-md-1 pl-4">
+																		<Col xs="1" className="p-0 m-0">
+																			<FontAwesomeIcon
+																				icon={faSquare}
+																				color="#2ECC40"
+																			/>
+																		</Col>
+																		<Col xs="11" className="pl-2">
+																			<h6>Försäkring</h6>
+																			<p className="car-details-cost">
+																				{numFormatter(
+																					this.state.insuranceTotal
+																				)}{" "}
+																				{"kr"}
+																			</p>
+																		</Col>
+																	</Row>
+																</Col>
+																<Col xs="6">
+																	<Row className="pl-md-1 pl-4">
+																		<Col xs="1" className="p-0 m-0">
+																			<FontAwesomeIcon
+																				icon={faSquare}
+																				color="#FF851B"
+																			/>
+																		</Col>
+																		<Col xs="11" className="pl-2">
+																			<h6>Underhåll</h6>
+																			<p className="car-details-cost">
+																				{numFormatter(
+																					this.state.maintenanceTotal
+																				)}{" "}
+																				{"kr"}
+																			</p>
+																		</Col>
+																	</Row>
+																</Col>
+																<Col xs="6">
+																	<Row className="pl-md-1 pl-4">
+																		<Col xs="1" className="p-0 ">
+																			<FontAwesomeIcon
+																				icon={faSquare}
+																				color="#FF4136"
+																			/>
+																		</Col>
+																		<Col xs="11" className="pl-2">
+																			<h6>Skatt</h6>
+																			<p className="car-details-cost">
+																				{numFormatter(this.state.taxYearTotal)}{" "}
+																				{"kr"}
+																			</p>
+																		</Col>
+																	</Row>
+																</Col>
+																<Col xs="6" className="pt-2 pb-0 pl-md-0">
+																	<div className="card p-2 car-details-bonus">
+																		<h6>
+																			Bonus{" "}
+																			<FontAwesomeIcon
+																				icon={faInfoCircle}
+																				color="black"
+																				data-for="bonus"
+																				data-tip="Bonus för miljöanpassade fordon med CO2-utsläpp upp till 70 g/km"
+																			/>
+																		</h6>
+																		<p className="m-0">
+																			{numFormatter(this.state.subvention)}{" "}
+																			{"kr"}
+																		</p>
+																		<ReactTooltip
+																			id="bonus"
+																			className="tooltip"
+																			textColor="white"
+																			backgroundColor="black"
+																			effect="solid"
+																		/>
+																	</div>
+																</Col>
+																<Col xs="6" className="pt-2 pb-0 pl-md-0">
+																	<div className="card p-2 car-details-malus">
+																		<h6>
+																			Malus{" "}
+																			<FontAwesomeIcon
+																				icon={faInfoCircle}
+																				color="white"
+																				data-for="malus"
+																				data-tip="Förhöjd fordonsskatt de första tre åren för fordon med CO2-utsläpp över 95 g/km"
+																			/>
+																		</h6>
+																		<p className="m-0">
+																			{numFormatter(this.state.malusTotal)}{" "}
+																			{"kr"}
+																		</p>
+																		<ReactTooltip
+																			id="malus"
+																			className="tooltip"
+																			textColor="white"
+																			backgroundColor="black"
+																			effect="solid"
+																		/>
+																	</div>
+																</Col>
+															</Row>
+														</Col>
+													</Row>
 												</Container>
 											</Col>
-											
 										</Row>
-										
 									</Container>
 								</Card>
 							</Col>

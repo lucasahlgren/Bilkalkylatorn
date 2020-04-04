@@ -117,6 +117,10 @@ body {
 	font-size: 0.9rem;
 }
 
+.my-calculations-container{
+	height: 60vh;
+}
+
 /* CarDetails
 ==================================================*/
 
@@ -576,9 +580,9 @@ section.route-section {
 
 .search-icon {
 	position: absolute;
-	top: 27px;
+	top: 34px;
 	right: 0;
-	width: 47px;
+	width: 50px;
 	z-index: 10;
 }
 
@@ -588,7 +592,7 @@ section.route-section {
 }
 
 .input-select {
-	padding: 5px 0px 5px 0px;
+	margin: 1px;
 }
 
 .filter-option__control {
@@ -652,7 +656,17 @@ section.route-section {
 	.car-header p {
 		font-size: 0.9rem;
 	}
-	
+	.input-brand {
+		width: 40%;
+	}
+
+	.input-fuel {
+		width: 30%;
+	}
+
+	.input-size {
+		width: 30%;
+	}
 }
 
 @media only screen and (max-width: 767px) {
