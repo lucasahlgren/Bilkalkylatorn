@@ -92,6 +92,19 @@ body {
 	}
 }
 
+/* Confirm dialog
+==================================================*/
+
+/* Custom settings */
+.react-confirm-alert-overlay{
+	background: rgba(0, 0, 0, 0.5) !important;
+	animation: react-confirm-alert-fadeIn 0.3s 0.1s forwards !important;
+}
+
+.confirm-dialog-title{
+	font-size: 1.3rem;
+}
+
 /* MyCalculations
 ==================================================*/
 
@@ -118,7 +131,7 @@ body {
 }
 
 .my-calculations-container{
-	height: 60vh;
+	height: 60vh !important;
 }
 
 /* CarDetails
@@ -167,6 +180,10 @@ body {
 .bonus-icon {
 	width: 20%;
 	margin-left: 6px;
+}
+
+.emissions-info{
+	display: inline-block;
 }
 
 .car-details {
@@ -549,11 +566,11 @@ section.route-section {
 .search-header {
 	position: absolute;
 	top: 0;
-	height: 85vh;
+	height: 54vh;
 	width: 100%;
-	background: url(./assets/images/bg.jpg);
+	background: url(./assets/images/tire.jpg);
 	background-repeat: no-repeat;
-	background-position: bottom;
+	background-position: center;
 	background-size: cover;
 }
 
@@ -565,7 +582,7 @@ section.route-section {
 }
 
 .search-section {
-	padding-top: 23vh;
+	padding-top: 20vh;
 }
 
 .search-bar {

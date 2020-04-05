@@ -1,7 +1,14 @@
 var debug = false;
 
-export function tcoTotal(variant, years, miles, payment, interestRate, depreciationRate){
-	var fuelCost = tcoFuelCost(variant.type.swe);
+export function tcoTotal(
+	variant,
+	years,
+	miles,
+	payment,
+	interestRate,
+	depreciationRate
+) {
+	var fuelCost = tcoFuelCost(variant.type);
 
 	var fuel = tcoFuel(variant, fuelCost, years, miles);
 	var interest = tcoInterest(variant, interestRate, payment, years);
@@ -10,20 +17,26 @@ export function tcoTotal(variant, years, miles, payment, interestRate, depreciat
 	var maintenance = tcoMaintenanceTotal(variant, years);
 	var tax = tcoTaxTotal(variant, years);
 	var subventions = tcoSubventions(variant);
-	
-	var tco = fuel + interest + depreciation + insurance + maintenance + tax - subventions;
+
+	var tco =
+		fuel +
+		interest +
+		depreciation +
+		insurance +
+		maintenance +
+		tax -
+		subventions;
 
 	return tco;
-	
 }
 
-export function tcoDepreciation(variant, depreciationRate) {
+export function tcoDepreciation(variant, depreciationRate, years) {
 	const price = variant.price.value;
 	var cost = (price * depreciationRate) / 100;
 
-	if(debug){
+	if (debug) {
 		console.log("Depreciation_____________________________________");
-		console.log(cost)
+		console.log(cost);
 	}
 
 	return cost;
@@ -32,9 +45,9 @@ export function tcoDepreciation(variant, depreciationRate) {
 export function tcoFuel(variant, price, years, miles) {
 	const fuel = variant.fuel.value;
 	var cost = (fuel / 10) * price * years * miles;
-	if(debug){
+	if (debug) {
 		console.log("Fuel_____________________________________");
-		console.log(cost)
+		console.log(cost);
 	}
 	return cost;
 }
@@ -61,9 +74,9 @@ export function tcoInterest(variant, interestRate, payment, years) {
 		//console.log(compound);
 		return total;
 	}
-	if(debug){
+	if (debug) {
 		console.log("Interest_____________________________________");
-		console.log(total)
+		console.log(total);
 	}
 }
 
@@ -72,53 +85,52 @@ export function tcoTaxTotal(variant, years) {
 	var total = 0;
 	if ((type === "Bensin" || type === "Diesel") && years >= 3) {
 		total = tcoMalusYear(variant) * 3 + tcoTaxYear(variant) * years;
-		if(debug){
+		if (debug) {
 			console.log("Tax_____________________________________");
-			console.log(total)
+			console.log(total);
 		}
 		return total;
 	} else if ((type === "Bensin" || type === "Diesel") && years < 3) {
 		total = tcoMalusYear(variant) * years + tcoTaxYear(variant) * years;
-		if(debug){
+		if (debug) {
 			console.log("Tax_____________________________________");
-			console.log(total)
+			console.log(total);
 		}
 		return total;
 	} else {
 		total = tcoTaxYear(variant) * years;
-		if(debug){
+		if (debug) {
 			console.log("Tax_____________________________________");
-			console.log(total)
+			console.log(total);
 		}
 		return total;
 	}
 }
 
-export function tcoMalusTotal(variant, years){
-	var type = variant.type.swe
+export function tcoMalusTotal(variant, years) {
+	var type = variant.type.swe;
 	var total = 0;
 	if ((type === "Bensin" || type === "Diesel") && years >= 3) {
 		total = tcoMalusYear(variant) * 3;
-		if(debug){
+		if (debug) {
 			console.log("MalusTotal_____________________________________");
-			console.log(total)
+			console.log(total);
 		}
 		return total;
 	} else if ((type === "Bensin" || type === "Diesel") && years < 3) {
 		total = tcoMalusYear(variant) * years;
-		if(debug){
+		if (debug) {
 			console.log("MalusTotal_____________________________________");
-			console.log(total)
+			console.log(total);
 		}
 		return total;
 	} else {
-		if(debug){
+		if (debug) {
 			console.log("MalusTotal_____________________________________");
-			console.log(total)
+			console.log(total);
 		}
 		return total;
 	}
-
 }
 
 export function tcoTaxYear(variant) {
@@ -239,19 +251,19 @@ export function tcoMaintenanceYear(variant) {
 }
 
 export function tcoInsuranceTotal(variant, years) {
-	var total = tcoInsuranceYear(variant)*years;
-	if(debug){
+	var total = tcoInsuranceYear(variant) * years;
+	if (debug) {
 		console.log("Insurance_____________________________________");
-		console.log(total)
+		console.log(total);
 	}
 	return total;
 }
 
 export function tcoMaintenanceTotal(variant, years) {
-	var total = tcoMaintenanceYear(variant)*years;
-	if(debug){
+	var total = tcoMaintenanceYear(variant) * years;
+	if (debug) {
 		console.log("Maintenance_____________________________________");
-		console.log(total)
+		console.log(total);
 	}
 	return total;
 }
@@ -268,16 +280,16 @@ export function tcoSubventions(variant) {
 		if (emissions === 0) {
 			if (60000 > price * 0.25) {
 				bonus = price * 0.25;
-				if(debug){
+				if (debug) {
 					console.log("Subventions_____________________________________");
-					console.log(bonus)
+					console.log(bonus);
 				}
-				return bonus
+				return bonus;
 			} else {
 				bonus = 60000;
-				if(debug){
+				if (debug) {
 					console.log("Subventions_____________________________________");
-					console.log(bonus)
+					console.log(bonus);
 				}
 				return bonus;
 			}
@@ -285,30 +297,29 @@ export function tcoSubventions(variant) {
 			bonus = 60000 - 714 * emissions;
 			if (bonus > price * 0.25) {
 				bonus = price * 0.25;
-				if(debug){
+				if (debug) {
 					console.log("Subventions_____________________________________");
-					console.log(bonus)
+					console.log(bonus);
 				}
-				return bonus
+				return bonus;
 			} else {
-				if(debug){
+				if (debug) {
 					console.log("Subventions_____________________________________");
-					console.log(bonus)
+					console.log(bonus);
 				}
 				return bonus;
 			}
 		} else {
-			if(debug){
+			if (debug) {
 				console.log("Subventions_____________________________________");
-				console.log(bonus)
+				console.log(bonus);
 			}
 			return bonus;
 		}
-		
 	} else {
-		if(debug){
+		if (debug) {
 			console.log("Subventions_____________________________________");
-			console.log(bonus)
+			console.log(bonus);
 		}
 		return bonus;
 	}
@@ -322,12 +333,25 @@ export function numFormatter(num) {
 }
 
 export function tcoFuelCost(type) {
-	var fuel = type.toLowerCase();
-	if (fuel === "el") {
-		return 2;
-	} else if (fuel === "bensin") {
-		return 15.7;
-	} else if (fuel === "diesel") {
-		return 15.5;
+	console.log(type);
+	var fuel = type.swe;
+	if (fuel === "Laddhybrid") {
+		var mainType = type.types.swe[0];
+		console.log(mainType);
+		if (mainType === "El") {
+			return 2;
+		} else if (mainType === "Bensin") {
+			return 15.7;
+		} else if (mainType === "Diesel") {
+			return 15.5;
+		}
+	} else {
+		if (fuel === "El") {
+			return 2;
+		} else if (fuel === "Bensin") {
+			return 15.7;
+		} else if (fuel === "Diesel") {
+			return 15.5;
+		}
 	}
 }

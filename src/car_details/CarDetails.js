@@ -53,7 +53,15 @@ class CarDetails extends Component {
 			insuranceTotal: 0,
 			maintenanceTotal: 0,
 			subvention: 0,
-			tcoTotal: 0
+			tcoTotal: 0,
+			depreciationRateInput: 0,
+			paymentInput: 0,
+			fuelCostInput: 0,
+			interestRateInput: 0,
+			insuranceInput: 0,
+			maintenanceInput: 0,
+			yearsInput: 0,
+			milesInput: 0
 		};
 	}
 
@@ -88,7 +96,7 @@ class CarDetails extends Component {
 		var taxYearTotal = taxYear * years;
 
 		/* Fuel */
-		var fuelCost = tcoFuelCost(variant.type.swe);
+		var fuelCost = tcoFuelCost(variant.type);
 		var fuel = tcoFuel(variant, fuelCost, years, miles);
 
 		/* depreciation */
@@ -147,7 +155,15 @@ class CarDetails extends Component {
 			calculationName: name,
 			resetObject: resetObject,
 			tcoTotal: parseInt(tcoTotal),
-			image: image
+			image: image,
+			depreciationRateInput: depreciationRate,
+			paymentInput: payment,
+			fuelCostInput: fuelCost,
+			interestRateInput: interestRate,
+			insuranceInput: insuranceYear,
+			maintenanceInput: maintenanceYear,
+			yearsInput: years,
+			milesInput: miles
 		});
 	};
 
@@ -218,7 +234,7 @@ class CarDetails extends Component {
 
 	resetVariabels = () => {
 		const { resetObject, variant } = this.state;
-		var fuelCost = tcoFuelCost(variant.type.swe);
+		var fuelCost = tcoFuelCost(variant.type);
 		this.setState(
 			{
 				years: resetObject.years,
@@ -228,7 +244,15 @@ class CarDetails extends Component {
 				depreciationRate: resetObject.depreciationRate,
 				fuelCost: fuelCost,
 				maintenanceYear: resetObject.maintenanceYear,
-				insuranceYear: resetObject.insuranceYear
+				insuranceYear: resetObject.insuranceYear,
+				depreciationRateInput: resetObject.depreciationRate,
+				paymentInput: resetObject.payment,
+				fuelCostInput: fuelCost,
+				interestRateInput: resetObject.interestRate,
+				insuranceInput: resetObject.insuranceYear,
+				maintenanceInput: resetObject.maintenanceYear,
+				yearsInput: resetObject.years,
+				milesInput: resetObject.miles
 			},
 			this.updateData
 		);
@@ -300,83 +324,135 @@ class CarDetails extends Component {
 		}
 	};
 
-	changedepreciationInput = e => {
+	changeDepreciationInput = e => {
 		//console.log("Change " + e.target.value);
 		var value = e.target.value;
-		if (value >= 100) {
+		var input = e.target.value;
+		if (value > 100) {
+			input = 100;
 			value = 100;
 		} else if (value < 0) {
+			input = 0;
 			value = 0;
+		} else if (value === "") {
+			value = 0;
+			input = "";
 		}
-		this.setState({ depreciationRate: value }, this.updateData);
+		this.setState(
+			{ depreciationRate: value, depreciationRateInput: input },
+			this.updateData
+		);
 	};
 
 	changeFuelInput = e => {
 		//console.log("Change " + e.target.value);
 		var value = e.target.value;
-		if (value < 0 || value === "") {
+		var input = e.target.value;
+		if (value < 0) {
+			input = 0;
 			value = 0;
+		} else if (value === "") {
+			value = 0;
+			input = "";
 		}
-		this.setState({ fuelCost: value }, this.updateData);
+		this.setState({ fuelCost: value, fuelCostInput: input }, this.updateData);
 	};
 
 	changeYearsInput = e => {
 		//console.log("Change " + e.target.value);
 		var value = e.target.value;
-		if (value <= 0) {
+		var input = e.target.value;
+		if (value <= 0 || value === "") {
+			input = 1;
 			value = 1;
 		}
-		this.setState({ years: value }, this.updateData);
+		this.setState({ years: value, yearsInput: input }, this.updateData);
 	};
 
 	changePaymentInput = e => {
 		console.log("Change " + e.target.value);
 		var value = e.target.value;
+		var input = e.target.value;
 		if (value < 0) {
+			input = 0;
 			value = 0;
 		} else if (value >= 100) {
+			input = 100;
 			value = 100;
 		} else if (value === "") {
+			input = "";
 			value = 0;
 		}
 
-		this.setState({ payment: parseFloat(value) }, this.updateData);
+		this.setState(
+			{ payment: parseFloat(value), paymentInput: input },
+			this.updateData
+		);
 	};
 
 	changeInterestInput = e => {
 		//console.log("Change " + e.target.value);
 		var value = e.target.value;
-		if (value < 0 || value === "") {
+		var input = e.target.value;
+		if (value < 0) {
+			input = 0;
 			value = 0;
+		} else if (value === "") {
+			value = 0;
+			input = "";
 		}
-		this.setState({ interestRate: parseFloat(value) }, this.updateData);
+		this.setState(
+			{ interestRate: parseFloat(value), interestRateInput: input },
+			this.updateData
+		);
 	};
 
 	changeMilesInput = e => {
 		//console.log("Change " + e.target.value);
 		var value = e.target.value;
-		if (value < 0 || value === "") {
+		var input = e.target.value;
+		if (value < 0) {
+			input = 0;
 			value = 0;
+		} else if (value === "") {
+			value = 0;
+			input = "";
 		}
-		this.setState({ miles: value }, this.updateData);
+		this.setState({ miles: value, milesInput: input }, this.updateData);
 	};
 
 	changeInsuranceInput = e => {
 		//console.log("Insurance " + e.target.value);
 		var value = e.target.value;
-		if (value < 0 || value === "") {
+		var input = e.target.value;
+		if (value < 0) {
+			input = 0;
 			value = 0;
+		} else if (value === "") {
+			value = 0;
+			input = "";
 		}
-		this.setState({ insuranceYear: value }, this.updateData);
+		this.setState(
+			{ insuranceYear: value, insuranceInput: input },
+			this.updateData
+		);
 	};
 
 	changeMaintenanceInput = e => {
 		//console.log("Change " + e.target.value);
 		var value = e.target.value;
-		if (value < 0 || value === "") {
+		var input = e.target.value;
+		if (value < 0) {
+			input = 0;
 			value = 0;
+		} else if (value === "") {
+			value = 0;
+			input = "";
 		}
-		this.setState({ maintenanceYear: value }, this.updateData);
+		this.setState(
+			{ maintenanceYear: value, maintenanceInput: input },
+			this.updateData
+		);
 	};
 
 	/* Update functions
@@ -387,13 +463,14 @@ class CarDetails extends Component {
 			variant => variant.variant === selectedOption.value
 		);
 		console.log(newVariant);
-		var fuelCost = tcoFuelCost(newVariant.type.swe);
+		var fuelCost = tcoFuelCost(newVariant.type);
 
 		this.setState(
 			{
 				selectedOption: selectedOption,
 				variant: newVariant,
-				fuelCost: fuelCost
+				fuelCost: fuelCost,
+				fuelCostInput: fuelCost
 			},
 			this.updateData
 		);
@@ -472,18 +549,41 @@ class CarDetails extends Component {
 	render() {
 		const { car, variant, variants } = this.state;
 		var bonus = null;
+		var bonusTooltip = null;
 		if (!this.state.dataLoading) {
 			bonus =
 				variant.emissions.value <= 70 &&
 				(variant.type.swe === "El" || variant.type.swe === "Laddhybrid") ? (
-					<img
-						className="img-fluid bonus-icon"
-						data-for="bonus-icon"
-						data-tip="Miljöbonus"
-						src={bonusIcon}
-						alt="Miljöbil"
+					<span>
+						<img
+							className="img-fluid bonus-icon"
+							data-for="bonus-icon"
+							data-tip="Miljöbonus"
+							src={bonusIcon}
+							alt="Miljöbil"
+						/>
+					</span>
+				) : null;
+			bonusTooltip =
+				variant.emissions.value <= 70 &&
+				(variant.type.swe === "El" || variant.type.swe === "Laddhybrid") ? (
+					<ReactTooltip
+						id="bonus-icon"
+						className="tooltip"
+						textColor="white"
+						backgroundColor="black"
+						effect="solid"
 					/>
 				) : null;
+			var fuelTypeLabel = null;
+			var fuelsLabel = null;
+			if(variant.type.swe === "Laddhybrid"){
+				fuelTypeLabel = variant.type.types.swe[0];
+				fuelsLabel = variant.type.types.swe[0]+"/"+variant.type.types.swe[1];;
+			}else{
+				fuelTypeLabel = variant.type.swe;
+				fuelsLabel = variant.type.swe;
+			}
 		}
 
 		return (
@@ -549,7 +649,7 @@ class CarDetails extends Component {
 																</Col>
 																<Col xs="6" md="4" lg="6">
 																	<h6>Drivmedel</h6>
-																	<p className="p-0 mb-3">{variant.type.swe}</p>
+																	<p className="p-0 mb-3">{fuelsLabel}</p>
 																</Col>
 																<Col xs="6" md="4" lg="6">
 																	<h6>Bränslekonsumtion</h6>
@@ -576,13 +676,7 @@ class CarDetails extends Component {
 																		{variant.emissions.unit}
 																		{bonus}
 																	</p>
-																	<ReactTooltip
-																		id="bonus-icon"
-																		className="tooltip"
-																		textColor="white"
-																		backgroundColor="black"
-																		effect="solid"
-																	/>
+																	{bonusTooltip}
 																</Col>
 															</Row>
 														</Col>
@@ -627,9 +721,7 @@ class CarDetails extends Component {
 														<div>
 															<input
 																type="number"
-																value={this.state.years}
-																min="1"
-																max="100"
+																value={this.state.yearsInput}
 																onChange={this.changeYearsInput}
 																className="form-control"
 															/>
@@ -640,7 +732,7 @@ class CarDetails extends Component {
 														<div>
 															<input
 																type="number"
-																value={this.state.miles}
+																value={this.state.milesInput}
 																onChange={this.changeMilesInput}
 																className="form-control"
 															/>
@@ -654,7 +746,7 @@ class CarDetails extends Component {
 															<input
 																type="number"
 																max="100"
-																value={this.state.payment}
+																value={this.state.paymentInput}
 																onChange={this.changePaymentInput}
 																className="form-control"
 															/>
@@ -667,7 +759,7 @@ class CarDetails extends Component {
 														<div>
 															<input
 																type="number"
-																value={this.state.interestRate}
+																value={this.state.interestRateInput}
 																onChange={this.changeInterestInput}
 																className="form-control"
 															/>
@@ -675,14 +767,14 @@ class CarDetails extends Component {
 													</Col>
 													<Col xs="6" className="calculation-input">
 														<h6>
-															{variant.type.swe}pris{" "}
+															{fuelTypeLabel}pris{" "}
 															<span>{"(kr/" + variant.fuel.unit + ")"}</span>
 														</h6>
 														<div>
 															<input
 																type="number"
 																onChange={this.changeFuelInput}
-																value={this.state.fuelCost}
+																value={this.state.fuelCostInput}
 																className="form-control"
 															/>
 														</div>
@@ -695,10 +787,8 @@ class CarDetails extends Component {
 														<div>
 															<input
 																type="number"
-																min="0"
-																max="100"
-																value={this.state.depreciationRate}
-																onChange={this.changedepreciationInput}
+																value={this.state.depreciationRateInput}
+																onChange={this.changeDepreciationInput}
 																className="form-control"
 															/>
 														</div>
@@ -712,7 +802,7 @@ class CarDetails extends Component {
 															<input
 																type="number"
 																className="form-control"
-																value={this.state.insuranceYear}
+																value={this.state.insuranceInput}
 																onChange={this.changeInsuranceInput}
 															/>
 														</div>
@@ -725,7 +815,7 @@ class CarDetails extends Component {
 															<input
 																type="number"
 																className="form-control"
-																value={this.state.maintenanceYear}
+																value={this.state.maintenanceInput}
 																onChange={this.changeMaintenanceInput}
 															/>
 														</div>

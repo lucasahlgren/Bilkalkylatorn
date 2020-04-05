@@ -183,8 +183,8 @@ class Search extends Component {
 															</CardTitle>
 															<Row className="pt-1">
 																<Col
-																	md="12"
-																	xs="6"
+																
+																	xs="12"
 																	className="px-1 m-0 car-header"
 																>
 																	<span className="m-0">Drivmedel</span>

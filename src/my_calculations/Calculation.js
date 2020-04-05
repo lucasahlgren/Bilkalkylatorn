@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import PieChart from "../car_details/PieChart";
 import { numFormatter } from "../data/tco";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import {
 	Container,
@@ -20,12 +22,44 @@ class Calculation extends Component {
 		super(props);
 	}
 
-	removeCalculation = e => {
-		console.log(e.target);
-		var calculationName = e.currentTarget.getAttribute("data-calculation");
+	removeCalculation = calculationName => {
 		console.log(calculationName);
 		this.props.removeCalculation(calculationName);
 	};
+
+	confirmDelete = e => {
+		console.log(e.target);
+		var calculationName = e.currentTarget.getAttribute("data-calculation");
+		confirmAlert({
+			customUI: ({ onClose }) => {
+			  return (
+				  <Container>
+				<div className='py-4 px-5 card'>
+					<Container>
+						<Row>
+				  <h4 className="text-center confirm-dialog-title"><strong>Vill du radera {calculationName}?</strong></h4>
+				  </Row>
+				  <Row className="d-flex justify-content-around m-0 pt-2">
+					
+				  <Button pill theme="secondary" className="px-5 mt-md-0" onClick={onClose}>Nej</Button>
+				 
+				  <Button pill theme="danger" className="px-5 mt-3 mt-md-0"
+					onClick={() => {
+					 this.removeCalculation(calculationName)
+					  onClose();
+					}}
+				  >
+					Ja
+				  </Button>
+				
+				  </Row>
+				  </Container>
+				</div>
+				</Container>
+			  );
+			}
+		  });
+	}
 
 	render() {
 		const { calculation } = this.props;
@@ -90,7 +124,7 @@ class Calculation extends Component {
 												<Col md="4" xs="6">
 													<h6 className="mb-1">Skatt</h6>
 													<p className="mb-2">
-														{numFormatter(calculation.tax)} {"kr"}
+														{numFormatter(calculation.taxYearTotal)} {"kr"}
 													</p>
 												</Col>
 												<Col xs="12">
@@ -132,7 +166,7 @@ class Calculation extends Component {
 													{calculation.name}
 
 													<FontAwesomeIcon
-														onClick={this.removeCalculation}
+														onClick={this.confirmDelete}
 														data-calculation={calculation.name}
 														icon={faTrashAlt}
 														className="ml-2 p-1 delete-calculation"

@@ -23,12 +23,12 @@ class MyCalculations extends Component {
 							<Calculation key={calculation.name} calculation={calculation} />
 						);
 				  })
-				: <Card className="p-md-4 mt-4 h-100 w-100">
-				<Col md="9" xs="11" className="mx-auto my-calculations-container">
-					<div className="justify-content-center d-flex align-items-center flex-column h-100 w-100">
+				: <Card className="p-md-4 mt-4 my-calculations-container w-100">
+				<div className="justify-content-center d-flex align-items-center flex-column h-100 mx-auto">
+					
 						<p className="p-3">Inga sparade kalkyler</p>
-					</div>
-				</Col>
+					
+				</div>
 			</Card>;
 		var excel =
 			calculationsList.length > 0 ? (

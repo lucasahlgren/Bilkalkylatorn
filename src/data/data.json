@@ -11,7 +11,7 @@
 				{
 					"variant": "1.0 T-GDi Life FWD",
 					"price": { "value": 174900, "unit": "kr" },
-					"type": { "eng": "Gas", "swe": "Bensin" },
+					"type": { "eng": "Petrol", "swe": "Bensin" },
 					"transmission": { "eng": "Manual", "swe": "Manuell" },
 					"engine": { "hk": 120, "kw": 90 },
 					"fuel": { "value": 5.8, "unit": "l" },
@@ -95,7 +95,7 @@
 				{
 					"variant": "B4 AWD",
 					"price": { "value": 431900, "unit": "kr" },
-					"type": { "eng": "Gas", "swe": "Bensin" },
+					"type": { "eng": "Petrol", "swe": "Bensin" },
 					"transmission": { "eng": "Automatic", "swe": "Automat" },
 					"engine": { "hk": 197, "kw": 145 },
 					"fuel": { "value": 8.2, "unit": "l" },
@@ -104,7 +104,7 @@
 				{
 					"variant": "T2",
 					"price": { "value": 341900, "unit": "kr" },
-					"type": { "eng": "Gas", "swe": "Bensin" },
+					"type": { "eng": "Petrol", "swe": "Bensin" },
 					"transmission": { "eng": "Manual", "swe": "Manuell" },
 					"engine": { "hk": 129, "kw": 95 },
 					"fuel": { "value": 7.6, "unit": "l" },
@@ -150,7 +150,7 @@
 				{
 					"variant": "T4 FWD",
 					"price": { "value": 389800, "unit": "kr" },
-					"type": { "eng": "Gas", "swe": "Bensin" },
+					"type": { "eng": "Petrol", "swe": "Bensin" },
 					"transmission": { "eng": "Automatic", "swe": "Automat" },
 					"engine": { "hk": 190, "kw": 140 },
 					"fuel": { "value": 8.5, "unit": "l" },
@@ -170,7 +170,7 @@
 				{
 					"variant": "B4 FWD",
 					"price": { "value": 389000, "unit": "kr" },
-					"type": { "eng": "Gas", "swe": "Bensin" },
+					"type": { "eng": "Petrol", "swe": "Bensin" },
 					"transmission": { "eng": "Automatic", "swe": "Automat" },
 					"engine": { "hk": 197, "kw": 145 },
 					"fuel": { "value": 7.5, "unit": "l" },
@@ -184,7 +184,16 @@
 					"engine": { "hk": 190, "kw": 140 },
 					"fuel": { "value": 6.5, "unit": "l" },
 					"emissions": { "value": 169, "unit": "g/km" }
-				}			
+				},
+				{
+					"variant": "T6 AWD Recharge",
+					"price": { "value": 531000, "unit": "kr" },
+					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 340, "kw": 251 },
+					"fuel": { "value": 2.3, "unit": "l" },
+					"emissions": { "value": 53, "unit": "g/km" }
+				}
 			]
 		}
 	]
