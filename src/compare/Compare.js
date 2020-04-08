@@ -24,7 +24,7 @@ class Compare extends Component {
 					<Row>
 						<BarChart calculationsList={this.props.calculationsList} />
 
-						<Col md="3" className="calculations-list">
+						<Col md="3" className="calculations-list mt-4 mt-md-0">
 							<CalculationsList />
 						</Col>
 					</Row>

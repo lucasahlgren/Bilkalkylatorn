@@ -125,6 +125,30 @@ body {
 	font-weight: 700;
 }
 
+
+.my-calculation h5 {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.my-calculation h4 {
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.my-calculation h3 {
+	font-size: 1.6rem;
+	font-weight: 700;
+}
+
+
+.my-calculation h2 {
+	font-size: 1.4rem;
+	font-weight: 700;
+}
+
+
+
 .my-calculation-bottom-total{
 	border-radius: 0  0 .625rem .625rem;
 }
@@ -634,6 +658,11 @@ section.route-section {
 	z-index: 10;
 }
 
+.car-title {
+	font-size: 1.1rem;
+	font-weight: 800 !important;
+}
+
 .advanced-filter {
 	padding: 10px;
 	width: 100%;
@@ -719,7 +748,8 @@ section.route-section {
 
 @media only screen and (max-width: 767px) {
 	.car-title {
-		font-size: 1.6rem;
+		font-size: 1.5rem;
+		font-weight: 800 !important;
 	}
 	.car-header span {
 		font-size: 0.9rem;

@@ -107,22 +107,17 @@ class Calculation extends Component {
 						</Col>
 		*/}
 						
-						<Col md="6" className=" pt-3 px-4 pl-5">
+						<Col md="6" className="pt-3 px-md-4 pl-md-5">
 							<Container>
 								<Row>
 									<Col md="12" className="pt-md-3 pl-md-0">
-										<Container className="p-2">
+										<Container className="p-md-2 py-2 pb-4 ">
 											<Row>
 												<Col xs="6">
 													<Row className="pl-md-1 pl-4">
-														<Col xs="1" className="p-0 m-0">
-															<FontAwesomeIcon
-																icon={faSquare}
-																color="#0074D9"
-															/>
-														</Col>
-														<Col xs="11" className="pl-2">
-															<h6 className="mb-0">Värdeminskning</h6>
+														
+														<Col xs="12" className="pl-2">
+															<h5 className="mb-0">Värdeminskning</h5>
 															<p className="mb-3">
 																{numFormatter(calculation.depreciation)} {"kr"}
 															</p>
@@ -131,14 +126,9 @@ class Calculation extends Component {
 												</Col>
 												<Col xs="6">
 													<Row className="pl-md-1 pl-4">
-														<Col xs="1" className="p-0 m-0">
-															<FontAwesomeIcon
-																icon={faSquare}
-																color="#FF851B"
-															/>
-														</Col>
-														<Col xs="11" className="pl-2">
-															<h6 className="mb-0">Underhåll</h6>
+														
+														<Col xs="12" className="pl-2">
+															<h5 className="mb-0">Underhåll</h5>
 															<p className="mb-3">
 																{numFormatter(calculation.maintenance)} {"kr"}
 															</p>
@@ -147,14 +137,9 @@ class Calculation extends Component {
 												</Col>
 												<Col xs="6">
 													<Row className="pl-md-1 pl-4 pull-right">
-														<Col xs="1" className="p-0 m-0">
-															<FontAwesomeIcon
-																icon={faSquare}
-																color="#111111"
-															/>
-														</Col>
-														<Col xs="11" className="pl-2">
-															<h6 className="mb-0">Bränsle</h6>
+													
+														<Col xs="12" className="pl-2">
+															<h5 className="mb-0">Bränsle</h5>
 															<p className="mb-3">
 																{numFormatter(calculation.fuel)} {"kr"}
 															</p>
@@ -164,14 +149,9 @@ class Calculation extends Component {
 
 												<Col xs="6">
 													<Row className="pl-md-1 pl-4">
-														<Col xs="1" className="p-0 m-0">
-															<FontAwesomeIcon
-																icon={faSquare}
-																color="#85144b"
-															/>
-														</Col>
-														<Col xs="11" className="pl-2">
-															<h6 className="mb-0">Lånekostnader</h6>
+														
+														<Col xs="12" className="pl-2">
+															<h5 className="mb-0">Lånekostnader</h5>
 															<p className="mb-3">
 																{numFormatter(calculation.interest)} {"kr"}
 															</p>
@@ -180,14 +160,9 @@ class Calculation extends Component {
 												</Col>
 												<Col xs="6">
 													<Row className="pl-md-1 pl-4">
-														<Col xs="1" className="p-0 m-0">
-															<FontAwesomeIcon
-																icon={faSquare}
-																color="#2ECC40"
-															/>
-														</Col>
-														<Col xs="11" className="pl-2">
-															<h6 className="mb-0">Försäkring</h6>
+														
+														<Col xs="12" className="pl-2">
+															<h5 className="mb-0">Försäkring</h5>
 															<p className="mb-3">
 																{numFormatter(calculation.insurance)} {"kr"}
 															</p>
@@ -196,14 +171,9 @@ class Calculation extends Component {
 												</Col>
 												<Col xs="6">
 													<Row className="pl-md-1 pl-4">
-														<Col xs="1" className="p-0 ">
-															<FontAwesomeIcon
-																icon={faSquare}
-																color="#FF4136"
-															/>
-														</Col>
-														<Col xs="11" className="pl-2">
-															<h6 className="mb-0">Skatt</h6>
+														
+														<Col xs="12" className="pl-2">
+															<h5 className="mb-0">Skatt</h5>
 															<p className="mb-3">
 																{numFormatter(calculation.taxYearTotal)} {"kr"}
 															</p>
@@ -243,7 +213,7 @@ class Calculation extends Component {
 							<Row className="d-md-flex justify-content-around d-none">
 								<div>
 									<h6 className="mb-1">Inköpspris</h6>
-									<p className="m-0 mb-2">
+									<p className="m-md-0 mb-2">
 										{numFormatter(calculation.variant.price.value)}{" "}
 										{calculation.variant.price.unit}
 									</p>
@@ -309,10 +279,10 @@ class Calculation extends Component {
 						<Col lg="12" className="px-3 pb-3 pt-0">
 							<Card className="p-3">
 								<Row>
-									<Col lg="4" className="p-md-0 pb-4">
+									<Col lg="4" className="p-md-0 pb-4 align-items-center d-flex flex-column">
 										<Row>
 											<Col>
-												<h5 className="text-center">
+												<h2 className="text-center mb-1">
 													{calculation.name}
 
 													<FontAwesomeIcon
@@ -322,18 +292,20 @@ class Calculation extends Component {
 														className="ml-2 p-1 delete-calculation"
 														color="red"
 													/>
-												</h5>
+												</h2>
 											</Col>
 										</Row>
+										<Row>
 										<Col>
-											<h6 className="m-0 text-center">
+											<h4 className="m-0 text-center">
 												{calculation.car.brand +
 													" " +
 													calculation.car.model +
 													" " +
 													calculation.variant.variant}
-											</h6>
+											</h4>
 										</Col>
+										</Row>
 									</Col>
 									<Col xs="6" md="4" lg="2" className="mx-auto">
 										<Card className="h-100 bg-dark justify-content-center text-center">
@@ -347,20 +319,20 @@ class Calculation extends Component {
 
 									<Col xs="6" md="4" lg="2" className="mx-auto">
 										<h6 className="m-0">Totalkostnad</h6>
-										<h4 className="m-0 py-1">
+										<h3 className="m-0 py-1">
 											<strong>
 												{numFormatter(calculation.tcoTotal) + " kr"}
 											</strong>
-										</h4>
+										</h3>
 									</Col>
 
-									<Col xs="6" md="4" lg="2">
+									<Col xs="6" md="4" lg="2" className="mt-md-0 mt-3">
 										<h6 className="m-0">Månadskostnad</h6>
 										<p className="m-0 py-1">
 											{numFormatter(calculation.tcoMonthly)} {"kr/månad"}
 										</p>
 									</Col>
-									<Col xs="6" md="4" lg="2">
+									<Col xs="6" md="4" lg="2" className="mt-md-0 mt-3">
 										<h6 className="m-0">Milkostnad</h6>
 										<p className="m-0 py-1">
 											{numFormatter(calculation.tcoMile)} {"kr/mil"}

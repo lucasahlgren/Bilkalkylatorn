@@ -212,7 +212,7 @@ class SearchForm extends Component {
 		return (
 			<Container>
 				<Row>
-					<Col md="8" className="mx-auto">
+					<Col md="10" className="mx-auto">
 						<Form className="search-form py-4 pb-5">
 							<Row>
 								<Col md="12" className="mx-auto pt-4">

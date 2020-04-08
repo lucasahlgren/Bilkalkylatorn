@@ -107,12 +107,12 @@ class CarDetails extends Component {
 		var interest = tcoInterest(variant, interestRate, payment, years);
 
 		/* Maintanence */
-		var maintenanceTotal = tcoMaintenanceTotal(variant, years);
 		var maintenanceYear = tcoMaintenanceYear(variant);
+		var maintenanceTotal = tcoMaintenanceTotal(variant, years, maintenanceYear);
 
 		/* Insurance */
-		var insuranceTotal = tcoInsuranceTotal(variant, years);
 		var insuranceYear = tcoInsuranceYear(variant);
+		var insuranceTotal = tcoInsuranceTotal(variant, years, insuranceYear);
 
 		/* TCO total */
 		var tco = tcoTotal(
@@ -121,7 +121,10 @@ class CarDetails extends Component {
 			miles,
 			payment,
 			interestRate,
-			depreciationRate
+			depreciationRate,
+			fuelCost,
+			insuranceYear,
+			maintenanceYear
 		);
 
 		var resetObject = {};
@@ -181,32 +184,9 @@ class CarDetails extends Component {
 		}
 	};
 
-	calculateTCO = () => {
-		const {
-			variant,
-			payment,
-			interestRate,
-			depreciationRate,
-			years,
-			miles
-		} = this.state;
-
-var total = tcoTotal(
-	variant,
-	years,
-	miles,
-	payment,
-	interestRate,
-	depreciationRate
-);
-
-		return total;
-	};
-
 	getMonthlyCost = () => {
-		const { years } = this.state;
-		var total = this.calculateTCO();
-		var monthlyCost = total / (years * 12);
+		const { years, tcoTotal } = this.state;
+		var monthlyCost = tcoTotal / (years * 12);
 		return monthlyCost;
 	};
 
@@ -221,9 +201,8 @@ var total = tcoTotal(
 	};
 
 	getTCORatio = () => {
-		const { variant } = this.state;
-		var total = this.calculateTCO();
-		var ratio = (total / variant.price.value) * 100;
+		const { variant, tcoTotal } = this.state;
+		var ratio = (tcoTotal / variant.price.value) * 100;
 		return ratio;
 	};
 
@@ -510,11 +489,12 @@ var total = tcoTotal(
 
 		/* Maintanence */
 		var maintenanceYear = this.state.maintenanceYear;
-		var maintenanceTotal = maintenanceYear * years;
+		var maintenanceTotal = tcoMaintenanceTotal(variant, years, maintenanceYear);
 
 		/* Insurance */
 		var insuranceYear = this.state.insuranceYear;
-		var insuranceTotal = insuranceYear * years;
+		var insuranceTotal = tcoInsuranceTotal(variant, years, insuranceYear);
+
 
 		/* TCO total */
 		var tco = tcoTotal(
@@ -523,7 +503,10 @@ var total = tcoTotal(
 			miles,
 			payment,
 			interestRate,
-			depreciationRate
+			depreciationRate,
+			fuelCost,
+			insuranceYear,
+			maintenanceYear
 		);
 
 		//console.log(fuel);
@@ -646,7 +629,7 @@ var total = tcoTotal(
 																	<h6>Motoreffekt</h6>
 																	<p className="p-0 mb-3">
 																		{numFormatter(variant.engine.hk)} hk (
-																		{numFormatter(variant.engine.kw)} kw)
+																		{numFormatter(variant.engine.kw)} kW)
 																	</p>
 																</Col>
 																<Col xs="6" md="4" lg="6">

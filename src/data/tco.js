@@ -6,26 +6,28 @@ export function tcoTotal(
 	miles,
 	payment,
 	interestRate,
-	depreciationRate
+	depreciationRate,
+	fuelCost,
+	insuranceYear,
+	maintenanceYear
 ) {
-	var fuelCost = tcoFuelCost(variant.type);
 
 	var fuel = tcoFuel(variant, fuelCost, years, miles);
 	var interest = tcoInterest(variant, interestRate, payment, years);
 	var depreciation = tcoDepreciation(variant, depreciationRate);
-	var insurance = tcoInsuranceTotal(variant, years);
-	var maintenance = tcoMaintenanceTotal(variant, years);
+	var insurance = tcoInsuranceTotal(variant, years, insuranceYear);
+	var maintenance = tcoMaintenanceTotal(variant, years, maintenanceYear);
 	var tax = tcoTaxTotal(variant, years);
 	var subventions = tcoSubventions(variant);
 
 	var tco =
-		fuel +
-		interest +
-		depreciation +
-		insurance +
-		maintenance +
-		tax -
-		subventions;
+		parseInt(fuel.toFixed(0)) +
+		parseInt(interest.toFixed(0)) +
+		parseInt(depreciation.toFixed(0)) +
+		parseInt(insurance.toFixed(0)) +
+		parseInt(maintenance.toFixed(0)) +
+		parseInt(tax.toFixed(0)) -
+		parseInt(subventions.toFixed(0));
 
 	return tco;
 }
@@ -250,8 +252,8 @@ export function tcoMaintenanceYear(variant) {
 	return total;
 }
 
-export function tcoInsuranceTotal(variant, years) {
-	var total = tcoInsuranceYear(variant) * years;
+export function tcoInsuranceTotal(variant, years, insuranceYear) {
+	var total = insuranceYear * years;
 	if (debug) {
 		console.log("Insurance_____________________________________");
 		console.log(total);
@@ -259,8 +261,8 @@ export function tcoInsuranceTotal(variant, years) {
 	return total;
 }
 
-export function tcoMaintenanceTotal(variant, years) {
-	var total = tcoMaintenanceYear(variant) * years;
+export function tcoMaintenanceTotal(variant, years, maintenanceYear) {
+	var total = maintenanceYear * years;
 	if (debug) {
 		console.log("Maintenance_____________________________________");
 		console.log(total);

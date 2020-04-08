@@ -1,5 +1,5 @@
 import data from "../data/data.json";
-import { numFormatter, tcoTotal } from "../data/tco";
+import { numFormatter, tcoTotal, tcoFuelCost, tcoMaintenanceYear, tcoInsuranceYear } from "../data/tco";
 
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardImg, CardTitle } from "shards-react";
@@ -62,21 +62,30 @@ class Search extends Component {
 		var payment = 20;
 		var interestRate = 5;
 		var depreciationRate = 50;
+		var maintenanceYear = tcoMaintenanceYear(variant);
+		var insuranceYear = tcoInsuranceYear(variant);
+		var fuelCost = tcoFuelCost(variant.type);
+
 		return tcoTotal(
 			variant,
 			years,
 			miles,
 			payment,
 			interestRate,
-			depreciationRate
+			depreciationRate,
+			fuelCost,
+			insuranceYear,
+			maintenanceYear
 		);
 	};
 
 	getLowestTCOObj = car => {
 		var newCarObj = { ...car };
-		//console.log(car.brand + " " + car.model);
+		console.log(car.brand + " " + car.model);
 		var tcoCalculations = car.variants.map(variant => {
 			var tco = this.calculateTCO(variant);
+			console.log(variant.variant)
+			console.log(tco)
 			return tco;
 		});
 		//console.log(tcoCalculations);
@@ -157,7 +166,7 @@ class Search extends Component {
 					<div className="search-section px-0">
 						<Container>
 							<motion.div
-								className="row pb-3 justify-content-md-start justify-content-center"
+								className="row pb-3 justify-content-md-start"
 								variants={container}
 								initial="hidden"
 								animate="visible"

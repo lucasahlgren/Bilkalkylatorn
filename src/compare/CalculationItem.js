@@ -89,9 +89,9 @@ class CalculationItem extends Component {
 							<li className="list-group-item px-2 p-1">
 								Värdeminskning: {calculation.depreciationRate} %
 							</li>
-							<li className="list-group-item px-2 p-1">
+							{/*<li className="list-group-item px-2 p-1">
 							{fuelTypeLabel}pris: {calculation.fuelCost}  kr/{calculation.variant.fuel.unit}
-							</li>
+		</li>*/}
 						</ul>
 					</div>
 				</Collapse>
