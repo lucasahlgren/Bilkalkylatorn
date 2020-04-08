@@ -60,7 +60,7 @@ class Search extends Component {
 		var years = 3;
 		var miles = 1500;
 		var payment = 20;
-		var interestRate = 6;
+		var interestRate = 5;
 		var depreciationRate = 50;
 		return tcoTotal(
 			variant,
@@ -74,16 +74,16 @@ class Search extends Component {
 
 	getLowestTCOObj = car => {
 		var newCarObj = { ...car };
-		console.log(car.brand + " " + car.model);
+		//console.log(car.brand + " " + car.model);
 		var tcoCalculations = car.variants.map(variant => {
 			var tco = this.calculateTCO(variant);
 			return tco;
 		});
-		console.log(tcoCalculations);
+		//console.log(tcoCalculations);
 		var sort = tcoCalculations.sort(function(a, b) {
 			return a - b;
 		});
-		console.log(sort);
+		//console.log(sort);
 		newCarObj.tco = sort[0];
 		return newCarObj;
 	};
@@ -128,14 +128,24 @@ class Search extends Component {
 			}
 		};
 
+		var noHit =
+			this.state.list.length === 0 ? (
+				<Col sm="6" className="mx-auto">
+					<Card className="p-5 text-center">
+						<p className="m-0">
+							<strong>Ingen träff</strong>
+						</p>
+					</Card>
+				</Col>
+			) : null;
+
 		return (
 			<Container fluid className="p-0 m-0 search">
 				<div className="search-body p-0 m-0 grey-bg">
-					<div className="search-header" />
-					<div className="search-section px-0">
-						<Container>
-							<Row className="m-0">
-								<Col>
+					<div className="search-header">
+						<Container className="h-100 w-100 d-flex align-items-center justify-content-center">
+							<Row className="m-0 w-100">
+								<Col className="w-100">
 									<h2 className="title text-center">
 										<strong>Bilsök</strong>
 									</h2>
@@ -143,14 +153,17 @@ class Search extends Component {
 								</Col>
 							</Row>
 						</Container>
+					</div>
+					<div className="search-section px-0">
 						<Container>
 							<motion.div
-								className="row py-3 justify-content-md-start justify-content-center"
+								className="row pb-3 justify-content-md-start justify-content-center"
 								variants={container}
 								initial="hidden"
 								animate="visible"
 								exit={{ opacity: 0 }}
 							>
+								{noHit}
 								{this.state.list.map(car => {
 									this.fuelTypes(car.variants);
 									return (
@@ -168,7 +181,7 @@ class Search extends Component {
 														""
 													)}/${car.model.toLowerCase().replace(/\s+/g, "")}`}
 											>
-												<motion.div whileHover={{ scale: 1.03 }}>
+												<motion.div whileHover={{ scale: 1.02 }}>
 													<Card className="m-md-0 my-3">
 														<CardImg
 															top={true}
@@ -176,17 +189,12 @@ class Search extends Component {
 															src={require("../assets/images/cars/" +
 																car.image)}
 														/>
-
 														<Container className="px-4 pb-2 pt-3">
 															<CardTitle className="text-center m-0 p-md-0 p-2 car-title">
 																{car.brand} {car.model}
 															</CardTitle>
 															<Row className="pt-1">
-																<Col
-																
-																	xs="12"
-																	className="px-1 m-0 car-header"
-																>
+																<Col xs="12" className="px-1 m-0 car-header">
 																	<span className="m-0">Drivmedel</span>
 																	<p className="m-0">
 																		{this.fuelTypes(car.variants)}

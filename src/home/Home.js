@@ -29,7 +29,7 @@ class Home extends Component {
 								<Col md="8" lg="7" className="mx-auto px-md-3 py-2">
 									<h5 className="subtitle">
 										I det här verktyget kan du beräkna och jämföra den total
-										ägandekostnaden för nybilar. Sök efter en bil och skapa egna kalkyler utifrån dina förutsättningar.
+										ägandekostnaden för nyproducerade personbilar. Sök efter en bil och skapa egna kostnadskalkyler utifrån dina förutsättningar.
 									</h5>
 								</Col>
 							</Row>

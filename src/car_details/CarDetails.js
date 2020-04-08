@@ -19,7 +19,8 @@ import {
 	tcoInsuranceYear,
 	tcoMaintenanceTotal,
 	tcoInsuranceTotal,
-	tcoMalusTotal
+	tcoMalusTotal,
+	tcoTotal
 } from "../data/tco";
 import Select from "react-select";
 import PieChart from "./PieChart";
@@ -39,7 +40,7 @@ class CarDetails extends Component {
 			miles: 1500,
 			payment: 20,
 			interest: 0,
-			interestRate: 6,
+			interestRate: 5,
 			depreciation: 0,
 			depreciationRate: 50,
 			fuelCost: 0,
@@ -114,14 +115,14 @@ class CarDetails extends Component {
 		var insuranceYear = tcoInsuranceYear(variant);
 
 		/* TCO total */
-		var tcoTotal =
-			taxTotal +
-			depreciation +
-			fuel +
-			maintenanceTotal +
-			insuranceTotal +
-			interest -
-			subvention;
+		var tco = tcoTotal(
+			variant,
+			years,
+			miles,
+			payment,
+			interestRate,
+			depreciationRate
+		);
 
 		var resetObject = {};
 		resetObject.years = years;
@@ -154,7 +155,7 @@ class CarDetails extends Component {
 			maintenanceTotal: parseInt(maintenanceTotal.toFixed(0)),
 			calculationName: name,
 			resetObject: resetObject,
-			tcoTotal: parseInt(tcoTotal),
+			tcoTotal: parseInt(tco),
 			image: image,
 			depreciationRateInput: depreciationRate,
 			paymentInput: payment,
@@ -182,22 +183,23 @@ class CarDetails extends Component {
 
 	calculateTCO = () => {
 		const {
-			taxTotal,
-			depreciation,
-			fuel,
-			subvention,
-			maintenanceTotal,
-			insuranceTotal,
-			interest
+			variant,
+			payment,
+			interestRate,
+			depreciationRate,
+			years,
+			miles
 		} = this.state;
-		var total =
-			taxTotal +
-			depreciation +
-			fuel +
-			maintenanceTotal +
-			insuranceTotal +
-			interest -
-			subvention;
+
+var total = tcoTotal(
+	variant,
+	years,
+	miles,
+	payment,
+	interestRate,
+	depreciationRate
+);
+
 		return total;
 	};
 
@@ -515,14 +517,14 @@ class CarDetails extends Component {
 		var insuranceTotal = insuranceYear * years;
 
 		/* TCO total */
-		var tcoTotal =
-			taxTotal +
-			depreciation +
-			fuel +
-			maintenanceTotal +
-			insuranceTotal +
-			interest -
-			subvention;
+		var tco = tcoTotal(
+			variant,
+			years,
+			miles,
+			payment,
+			interestRate,
+			depreciationRate
+		);
 
 		//console.log(fuel);
 
@@ -542,7 +544,7 @@ class CarDetails extends Component {
 			taxYearTotal: parseInt(taxYearTotal.toFixed(0)),
 			fuelCost: parseFloat(fuelCost),
 			interest: parseInt(interest.toFixed(0)),
-			tcoTotal: parseInt(tcoTotal)
+			tcoTotal: parseInt(tco)
 		});
 	};
 
@@ -717,7 +719,7 @@ class CarDetails extends Component {
 												</Row>
 												<Row>
 													<Col xs="6" className="calculation-input">
-														<h6>År</h6>
+														<h6>Längd (år)</h6>
 														<div>
 															<input
 																type="number"
@@ -728,7 +730,7 @@ class CarDetails extends Component {
 														</div>
 													</Col>
 													<Col xs="6" className="calculation-input">
-														<h6>Mil per år</h6>
+														<h6>Körsträcka (mil/år)</h6>
 														<div>
 															<input
 																type="number"
@@ -908,6 +910,7 @@ class CarDetails extends Component {
 															<h4>Kostnadsfördelning</h4>
 														</Col>
 														<Col md="6" lg="6" className="p-md-0 pb-4">
+														<Col xs="12" className="h-100 p-0">
 															<PieChart
 																depreciation={this.state.depreciation}
 																fuel={this.state.fuel}
@@ -916,6 +919,7 @@ class CarDetails extends Component {
 																insurance={this.state.insuranceTotal}
 																tax={this.state.taxTotal}
 															/>
+															</Col>
 														</Col>
 														<Col md="6" lg="6">
 															<Row>
@@ -1056,7 +1060,7 @@ class CarDetails extends Component {
 																				icon={faInfoCircle}
 																				color="white"
 																				data-for="malus"
-																				data-tip="Förhöjd fordonsskatt de första tre åren för fordon med CO2-utsläpp över 95 g/km"
+																				data-tip="Förhöjd fordonsskatt de första tre åren för bensin- och dieselbilar med CO2-utsläpp över 95 g/km"
 																			/>
 																		</h6>
 																		<p className="m-0">

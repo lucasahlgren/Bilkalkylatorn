@@ -16,6 +16,7 @@ import CarDetails from "./car_details/CarDetails";
 import MyCalculations from "./my_calculations/MyCalculations";
 import Footer from "./footer/Footer";
 import Toast from "./toast/Toast";
+import About from "./about/About";
 
 class App extends Component {
 	constructor(props) {
@@ -29,7 +30,7 @@ class App extends Component {
 				<TransitionGroup className="transition-group">
 					<CSSTransition
 						key={this.props.location.pathname}
-						timeout={{ enter: 300, exit: 350 }}
+						timeout={{ enter: 225, exit: 300 }}
 						classNames="fade"
 					>
 						<section className="route-section">
@@ -43,6 +44,7 @@ class App extends Component {
 								/>
 								<Route exact path="/jamfor" component={Compare} />
 								<Route exact path="/sok" component={Search} />
+								<Route exact path="/omverktyget" component={About} />
 								<Route
 									component={() => {
 										return <Redirect to="/" />;

@@ -333,25 +333,25 @@ export function numFormatter(num) {
 }
 
 export function tcoFuelCost(type) {
-	console.log(type);
+	//console.log(type);
 	var fuel = type.swe;
 	if (fuel === "Laddhybrid") {
 		var mainType = type.types.swe[0];
-		console.log(mainType);
+		//console.log(mainType);
 		if (mainType === "El") {
-			return 2;
+			return 1.8;
 		} else if (mainType === "Bensin") {
-			return 15.7;
+			return 15.6;
 		} else if (mainType === "Diesel") {
-			return 15.5;
+			return 15.9;
 		}
 	} else {
 		if (fuel === "El") {
-			return 2;
+			return 1.8;
 		} else if (fuel === "Bensin") {
-			return 15.7;
+			return 15.6;
 		} else if (fuel === "Diesel") {
-			return 15.5;
+			return 15.9;
 		}
 	}
 }

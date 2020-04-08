@@ -121,14 +121,12 @@ class PieChart extends Component {
 
 	render() {
 		return (
-			<Col xs="12" className="h-100 p-0">
 				<Chart
 					options={this.state.options}
 					series={this.state.series}
 					type="pie"
 					className="pie-chart"
 				/>
-			</Col>
 		);
 	}
 }

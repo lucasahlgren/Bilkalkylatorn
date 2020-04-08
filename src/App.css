@@ -49,16 +49,15 @@ body {
 /* Apex Chart Style
 ==================================================*/
 
-
 .bar-chart .apexcharts-menu-item {
 	text-align: center;
 }
 
-.bar-chart .apexcharts-tooltip-marker{
-	display:none;
+.bar-chart .apexcharts-tooltip-marker {
+	display: none;
 }
 
-.bar-chart .apexcharts-menu-item{
+.bar-chart .apexcharts-menu-item {
 	font-size: 0.7rem;
 }
 
@@ -96,12 +95,12 @@ body {
 ==================================================*/
 
 /* Custom settings */
-.react-confirm-alert-overlay{
+.react-confirm-alert-overlay {
 	background: rgba(0, 0, 0, 0.5) !important;
 	animation: react-confirm-alert-fadeIn 0.3s 0.1s forwards !important;
 }
 
-.confirm-dialog-title{
+.confirm-dialog-title {
 	font-size: 1.3rem;
 }
 
@@ -117,20 +116,24 @@ body {
 	margin: 0;
 }
 
-.delete-calculation{
-	cursor: pointer; 
+.delete-calculation {
+	cursor: pointer;
 }
 
-.my-calculation-costs h6 {
+.my-calculation h6 {
 	font-size: 0.9rem;
 	font-weight: 700;
+}
+
+.my-calculation-bottom-total{
+	border-radius: 0  0 .625rem .625rem;
 }
 
 .my-calculation-costs p {
 	font-size: 0.9rem;
 }
 
-.my-calculations-container{
+.my-calculations-container {
 	height: 60vh !important;
 }
 
@@ -182,7 +185,7 @@ body {
 	margin-left: 6px;
 }
 
-.emissions-info{
+.emissions-info {
 	display: inline-block;
 }
 
@@ -208,6 +211,18 @@ body {
 .calculation-input h6 span {
 	font-size: 0.65rem !important;
 }
+
+@media only screen and (max-width: 991px) {
+	.detail-img {
+		border-top-left-radius: 0.625rem;
+		border-top-right-radius: 0.625rem;
+	}
+
+	.tco-variables {
+		border-bottom-right-radius: 0rem;
+	}
+}
+
 
 /* Toast
 ==================================================*/
@@ -383,10 +398,6 @@ body {
 	-webkit-transition: all 475ms 495ms;
 	transition: all 475ms 495ms;
 }
-.mobile-nav li:nth-child(5) a {
-	-webkit-transition: all 475ms 575ms;
-	transition: all 475ms 575ms;
-}
 
 .mobile-nav ul,
 .mobile-nav li {
@@ -510,20 +521,20 @@ body {
 
 .fade-enter.fade-enter-active {
 	opacity: 1;
-	-webkit-transition: 350ms ease-in;
-	transition: 350ms ease-in;
+	-webkit-transition: 225ms ease-in;
+	transition: 225ms ease-in;
 }
 
 .fade-exit {
 	opacity: 1;
-	-webkit-transition: 300ms ease-in;
-	transition: 300ms ease-in;
+	-webkit-transition: 225ms ease-in;
+	transition: 225ms ease-in;
 }
 
 .fade-exit.fade-exit-active {
 	opacity: 0.01;
-	-webkit-transition: 300ms ease-in;
-	transition: 300ms ease-in;
+	-webkit-transition: 225ms ease-in;
+	transition: 225ms ease-in;
 }
 
 div.transition-group {
@@ -534,13 +545,6 @@ section.route-section {
 	width: 100%;
 	-webkit-transform: translate(0, 0);
 	transform: translate(0, 0);
-}
-
-.main-container {
-	opacity: 0;
-
-	-webkit-animation: fade 1s normal forwards;
-	animation: fade 1s normal forwards;
 }
 
 .link-style {
@@ -560,11 +564,36 @@ section.route-section {
 	height: 80vh;
 }
 
+/* About
+==================================================*/
+
+.about-header {
+	top: 0;
+	height: 37vh;
+	width: 100%;
+	background: url(./assets/images/tire.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	padding-top: 80px;
+}
+
+.about-body {
+	background: rgb(245, 245, 245);
+	position: absolute;
+	width: 100%;
+	min-height: 100vh;
+}
+
+.about-section {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
 /* Search
 ==================================================*/
 
 .search-header {
-	position: absolute;
 	top: 0;
 	height: 54vh;
 	width: 100%;
@@ -572,6 +601,7 @@ section.route-section {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	padding-top: 100px;
 }
 
 .search-body {
@@ -582,7 +612,8 @@ section.route-section {
 }
 
 .search-section {
-	padding-top: 20vh;
+	padding-top: 30px;
+	padding-bottom: 50px;
 }
 
 .search-bar {
@@ -707,41 +738,15 @@ section.route-section {
 	.input-size {
 		width: 100%;
 	}
+	.search-header{
+		height: 80vh;
+	}
 }
 
 /* Animations
 ==================================================*/
 
-@-webkit-keyframes fade {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-@keyframes fade {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
-
-@media (max-width: 991px) {
-	.detail-img {
-		border-top-left-radius: 0.625rem;
-		border-top-right-radius: 0.625rem;
-	}
-
-	.tco-variables {
-		border-bottom-right-radius: 0rem;
-	}
-}
-
-@media (max-width: 767px) {
+@media only screen and (max-width: 767px) {
 	.title {
 		font-size: 2rem;
 	}

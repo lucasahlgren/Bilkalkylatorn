@@ -31,6 +31,14 @@ class CalculationItem extends Component {
 	render() {
 		const { calculation } = this.props;
 		console.log(calculation);
+
+		var fuelTypeLabel = null;
+			if(calculation.variant.type.swe === "Laddhybrid"){
+				fuelTypeLabel = calculation.variant.type.types.swe[0];
+			}else{
+				fuelTypeLabel = calculation.variant.type.swe;
+			}
+
 		return (
 			<Card
 				data-selected={calculation.selected}
@@ -80,6 +88,9 @@ class CalculationItem extends Component {
 							</li>
 							<li className="list-group-item px-2 p-1">
 								Värdeminskning: {calculation.depreciationRate} %
+							</li>
+							<li className="list-group-item px-2 p-1">
+							{fuelTypeLabel}pris: {calculation.fuelCost}  kr/{calculation.variant.fuel.unit}
 							</li>
 						</ul>
 					</div>

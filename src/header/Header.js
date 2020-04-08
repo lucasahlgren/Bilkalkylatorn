@@ -32,8 +32,7 @@ class Header extends Component {
 			{ label: "Sök", link: "/sok" },
 			{ label: "Mina kalkyler", link: "/minakalkyler" },
 			{ label: "Jämför", link: "/jamfor" },
-			{ label: "Vad är TCO?", link: "/" },
-			{ label: "Om verktyget", link: "/" }
+			{ label: "Om verktyget", link: "/omverktyget" },
 		];
 
 		return (

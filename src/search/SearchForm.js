@@ -25,7 +25,8 @@ class SearchForm extends Component {
 		this.state = {
 			selectedBrandOption: [],
 			selectedFuelOption: [],
-			selectedSizeOption: []
+			selectedSizeOption: [],
+			searchField: ""
 		};
 	}
 
@@ -37,10 +38,11 @@ class SearchForm extends Component {
 		const {
 			selectedBrandOption,
 			selectedFuelOption,
-			selectedSizeOption
+			selectedSizeOption,
+			searchField
 		} = this.state;
 		console.log(selectedBrandOption);
-		if (selectedBrandOption.length === 0 && selectedFuelOption.length === 0 && selectedSizeOption.length === 0) {
+		if (selectedBrandOption.length === 0 && selectedFuelOption.length === 0 && selectedSizeOption.length === 0 && searchField === "") {
 			this.props.updateList(data.cars);
 			
 		} else {
@@ -79,6 +81,16 @@ class SearchForm extends Component {
 				console.log(brandTypeBool)
 
 
+				var searchFieldBool = false;
+				var searchString = searchField.trim().toLowerCase();
+				console.log(searchString)
+				var brand = car.brand.toLowerCase();
+				var model = car.model.toLowerCase();
+				var carModelString = brand + " " + model
+				if(brand.search(searchField) != -1 || carModelString.search(searchField) != -1 || model.search(searchField) != -1){
+					searchFieldBool = true;
+				}
+				
 				
 				/* Brands */
 				var sizeTypeBool = false;
@@ -87,7 +99,7 @@ class SearchForm extends Component {
 				console.log(car.size.swe)
 				console.log(sizeTypeBool)
 
-				return brandTypeBool && fuelTypeBool && sizeTypeBool
+				return brandTypeBool && fuelTypeBool && sizeTypeBool && searchFieldBool
 			}
 			);
 			console.log(list);
@@ -131,6 +143,11 @@ class SearchForm extends Component {
 			this.setState({ selectedSizeOption }, this.filterList);
 		}
 	};
+
+	handleSearchFieldChange = e => {
+		var value = e.target.value;
+		this.setState({searchField: value}, this.filterList)
+	}
 
 	getUniqueBrands = () => {
 		var list = data.cars;
@@ -202,8 +219,10 @@ class SearchForm extends Component {
 									<div className="search-bar">
 										<input
 											className="search-field"
+											value={this.state.searchField}
+											onChange={this.handleSearchFieldChange}
 											type="text"
-											placeholder="Sök bilmodell"
+											placeholder="Sök bil eller bilmodell"
 										/>
 										<div className="search-icon">
 											<svg
