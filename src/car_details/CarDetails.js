@@ -598,7 +598,7 @@ class CarDetails extends Component {
 														<Col md="12" className="px-4 pt-4 pb-0">
 															<Row className="mx-auto">
 																<Col md="12" className="text-center pb-2">
-																	<h3>
+																	<h3 className="car-details-title">
 																		{car.brand} {car.model}
 																	</h3>
 																</Col>
@@ -853,9 +853,23 @@ class CarDetails extends Component {
 															<Col xs="6" md="4" lg="3" className="mx-auto">
 																<Card className="h-100 bg-dark justify-content-center text-center">
 																	<span>
-																		<strong className="text-white">
+																		<strong className="text-white car-details-tco-ratio">
 																			{numFormatter(this.getTCORatio()) + "%"}
 																		</strong>
+																		<FontAwesomeIcon
+																icon={faInfoCircle}
+																className="ml-1"
+																color="white"
+																data-for="tcoRatio"
+																data-tip="Totalkostnad i förhållande till inköpspris"
+															/>
+															<ReactTooltip
+																			id="tcoRatio"
+																			className="tooltip"
+																			textColor="white"
+																			backgroundColor="black"
+																			effect="solid"
+																		/>
 																	</span>
 																</Card>
 															</Col>

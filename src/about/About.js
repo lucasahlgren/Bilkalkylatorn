@@ -28,8 +28,10 @@ class About extends Component {
 									</h3>
 									<p>
 										Total Cost of Ownership (TCO) är en metod för att ta reda på
-										en produkts totalkostnad under en begränsad innehavstid. För
-										att beräkna totalkostnad behöver man identifiera relevanta
+										en produkts totalkostnad under en begränsad innehavstid. TCO
+										är en viktig och användbar metod eftersom den anger vad du
+										faktiskt betalar för produkten under innehavstiden. För att
+										beräkna TCO behöver man identifiera relevanta
 										kostnadsfaktorer för varje enskild produkt. I det här
 										verktyget baseras detta på en modell framtagen för
 										nybilsköpare och privatpersoner. Modellen består av sju
@@ -54,10 +56,12 @@ class About extends Component {
 										I det här verktyget kan du skapa egna TCO-kalkyler utifrån
 										dina förutsättningar. Det innebär att du kan anpassa
 										faktorer såsom innehavstid, körsträcka samt kontantinsats
-										och ränta i dina kalkyler. På jämförelsesidan kan du även jämföra
+										och ränta i dina kalkyler. På jämförelsesidan kan du jämföra
 										dina kalkyler med varandra och på så sätt lära dig mer om
-										kostnaderna mellan olika bilmodeller. Du kan även ladda ner
-										dina kalkyler i en Excel-fil för vidare bearbetning senare.
+										kostnaderna mellan olika bilmodeller. Där kan du också
+										filtrera vilka kostnadsfaktorer som ska ingå i jämförelsen.
+										Om du vill spara dina kalkyler kan du dessutom ladda ner dem
+										i en Excel-fil för vidare bearbetning senare.
 									</p>
 								</Col>
 								<Col md="12" className="py-3">
@@ -65,9 +69,10 @@ class About extends Component {
 										<strong>Beräkningar</strong>
 									</h3>
 									<p>
-										Alla grundberäkningar (sökresultatet samt varje bils detaljsida) utgår från schablonvärden som
-										är listade här under. Dessa värden kan finjusteras på varje
-										bils detaljsida där man också kan skapa egna kalkyler.
+										Alla grundberäkningar (sökresultatet samt varje bils
+										detaljsida) utgår från schablonvärden som är listade här
+										under. Dessa värden kan finjusteras på varje bils detaljsida
+										där man också kan skapa egna kalkyler.
 									</p>
 									<ul>
 										<li>Innehavstid: 3 år</li>
@@ -85,7 +90,9 @@ class About extends Component {
 										koldioxidutsläpp baserat på information från
 										Transportstyrelsen. Beräkningarna gäller fordon tagna i
 										trafik under 2020 eller senare och inkluderar fordonsskatt
-										samt bonus-malus. El- samt bränslepriser är hämtade från globalpetrolprices.com. Bilspecifikationerna är hämtade från respektive tillverkares hemsida.
+										samt bonus-malus. El- samt bränslepriser är hämtade från
+										globalpetrolprices.com. Bilspecifikationerna är hämtade från
+										respektive tillverkares webbplats.
 									</p>
 								</Col>
 							</Col>

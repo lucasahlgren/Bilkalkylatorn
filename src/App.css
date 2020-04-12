@@ -111,6 +111,10 @@ body {
 	font-size: 0.9rem;
 }
 
+.calculation-tco-ratio{
+	font-size: 1.1rem;
+}
+
 .calculation-tco {
 	font-size: 1.3rem;
 	margin: 0;
@@ -177,11 +181,20 @@ body {
 	color: darkgreen;
 }
 
+.car-details-title{
+	font-size: 1.7rem;
+	font-weight: 700;
+}
+
 .car-details-bonus h6 {
 	font-weight: 700;
 }
 
 .car-details-cost {
+	font-size: 1.1rem;
+}
+
+.car-details-tco-ratio{
 	font-size: 1.1rem;
 }
 

@@ -310,7 +310,7 @@ class Calculation extends Component {
 									<Col xs="6" md="4" lg="2" className="mx-auto">
 										<Card className="h-100 bg-dark justify-content-center text-center">
 											<span>
-												<strong className="text-white">
+												<strong className="text-white calculation-tco-ratio">
 													{numFormatter(calculation.tcoRatio) + "%"}
 												</strong>
 											</span>

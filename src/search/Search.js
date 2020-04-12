@@ -1,5 +1,11 @@
 import data from "../data/data.json";
-import { numFormatter, tcoTotal, tcoFuelCost, tcoMaintenanceYear, tcoInsuranceYear } from "../data/tco";
+import {
+	numFormatter,
+	tcoTotal,
+	tcoFuelCost,
+	tcoMaintenanceYear,
+	tcoInsuranceYear
+} from "../data/tco";
 
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardImg, CardTitle } from "shards-react";
@@ -84,8 +90,8 @@ class Search extends Component {
 		console.log(car.brand + " " + car.model);
 		var tcoCalculations = car.variants.map(variant => {
 			var tco = this.calculateTCO(variant);
-			console.log(variant.variant)
-			console.log(tco)
+			console.log(variant.variant);
+			console.log(tco);
 			return tco;
 		});
 		//console.log(tcoCalculations);
