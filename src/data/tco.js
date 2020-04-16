@@ -248,7 +248,7 @@ export function tcoInsuranceYear(variant) {
 }
 
 export function tcoMaintenanceYear(variant) {
-	var total = 3000;
+	var total = 1000;
 	return total;
 }
 

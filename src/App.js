@@ -17,6 +17,7 @@ import MyCalculations from "./my_calculations/MyCalculations";
 import Footer from "./footer/Footer";
 import Toast from "./toast/Toast";
 import About from "./about/About";
+import WindowPrompt from "./WindowPrompt"
 
 class App extends Component {
 	constructor(props) {
@@ -25,6 +26,7 @@ class App extends Component {
 	render() {
 		return (
 			<Container fluid className="App p-0 m-0">
+				<WindowPrompt />
 				<Header />
 				<Toast />
 				<TransitionGroup className="transition-group">

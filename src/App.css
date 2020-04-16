@@ -49,8 +49,38 @@ body {
 /* Apex Chart Style
 ==================================================*/
 
+.window-prompt h4{
+	font-size: 1.4rem;
+}
+
+.window-prompt h2{
+	font-size: 2.3rem;
+}
+
+.window-prompt{
+	padding: 50px;
+	height: 100vh;
+	width: 100%;
+	z-index: 1000;
+	position: fixed;
+	background: black;
+	color: white !important;
+}
+
+.window-prompt[data-visible="false"]{
+	display: none !important;
+}
+
+/* Apex Chart Style
+==================================================*/
+
 .bar-chart .apexcharts-menu-item {
 	text-align: center;
+}
+
+
+.bar-stacked .apexcharts-datalabels{
+	display: none;
 }
 
 .bar-chart .apexcharts-tooltip-marker {
@@ -78,6 +108,26 @@ body {
 
 .chart-container {
 	height: 79vh;
+}
+
+.chart-tabs{
+	font-size: 0.7rem !important;
+	font-weight: bold;
+}
+
+.chart-tab[data-active="true"]{
+	background-color: #343a40!important;
+	color: white !important;
+}
+
+.chart-tab{
+	font-size: 0.7rem;
+
+}
+
+.chart-tab:hover{
+	cursor: pointer;
+	
 }
 
 @media (min-width: 992px) {

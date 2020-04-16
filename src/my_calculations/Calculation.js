@@ -72,9 +72,18 @@ class Calculation extends Component {
 		});
 	};
 
-	render() {
+	render()
+	 {
 		const { calculation } = this.props;
 		console.log(calculation);
+
+		var fuelsLabel = null;
+		if(calculation.variant.type.swe === "Laddhybrid"){
+			fuelsLabel = calculation.variant.type.types.swe[0]+"/"+calculation.variant.type.types.swe[1];;
+		}else{
+			fuelsLabel = calculation.variant.type.swe;
+		}
+	
 		return (
 			<Col md="12" className="p-3 mx-auto my-calculation">
 				<Card>
@@ -219,6 +228,12 @@ class Calculation extends Component {
 									</p>
 								</div>
 								<div>
+									<h6 className="mb-1">Drivmedel</h6>
+									<p className="m-md-0 mb-2">
+										{fuelsLabel}
+									</p>
+								</div>
+								<div>
 									<h6 className="mb-1">Längd</h6>
 									<p className="m-md-0 mb-2">{calculation.years} år</p>
 								</div>
@@ -248,6 +263,10 @@ class Calculation extends Component {
 										{numFormatter(calculation.variant.price.value)}{" "}
 										{calculation.variant.price.unit}
 									</p>
+								</Col>
+								<Col xs="6">
+									<h6 className="mb-1">Drivmedel</h6>
+									<p className="m-md-0 mb-2">{fuelsLabel}</p>
 								</Col>
 								<Col xs="6">
 									<h6 className="mb-1">Längd</h6>
@@ -282,7 +301,7 @@ class Calculation extends Component {
 									<Col lg="4" className="p-md-0 pb-4 align-items-center d-flex flex-column">
 										<Row>
 											<Col>
-												<h2 className="text-center mb-1">
+												<h2 className="text-center mb-0">
 													{calculation.name}
 
 													<FontAwesomeIcon
@@ -319,7 +338,7 @@ class Calculation extends Component {
 
 									<Col xs="6" md="4" lg="2" className="mx-auto">
 										<h6 className="m-0">Totalkostnad</h6>
-										<h3 className="m-0 py-1">
+										<h3 className="m-0 py-0">
 											<strong>
 												{numFormatter(calculation.tcoTotal) + " kr"}
 											</strong>
@@ -328,13 +347,13 @@ class Calculation extends Component {
 
 									<Col xs="6" md="4" lg="2" className="mt-md-0 mt-3">
 										<h6 className="m-0">Månadskostnad</h6>
-										<p className="m-0 py-1">
-											{numFormatter(calculation.tcoMonthly)} {"kr/månad"}
+										<p className="m-0 py-0">
+											{numFormatter(calculation.tcoMonthly)} {"kr/mån"}
 										</p>
 									</Col>
 									<Col xs="6" md="4" lg="2" className="mt-md-0 mt-3">
 										<h6 className="m-0">Milkostnad</h6>
-										<p className="m-0 py-1">
+										<p className="m-0 py-0">
 											{numFormatter(calculation.tcoMile)} {"kr/mil"}
 										</p>
 									</Col>

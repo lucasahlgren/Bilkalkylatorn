@@ -876,7 +876,7 @@ class CarDetails extends Component {
 
 															<Col xs="6" md="4" lg="3" className="mx-auto">
 																<h6>Totalkostnad</h6>
-																<h4 className="m-0 py-1">
+																<h4 className="m-0 pb-1">
 																	<strong>
 																		{numFormatter(this.state.tcoTotal) + " kr"}
 																	</strong>
@@ -885,14 +885,14 @@ class CarDetails extends Component {
 
 															<Col xs="6" md="4" lg="3">
 																<h6>Månadskostnad</h6>
-																<p className="m-0 py-1">
+																<p className="m-0 pb-1">
 																	{numFormatter(this.getMonthlyCost())}{" "}
-																	{"kr/månad"}
+																	{"kr/mån"}
 																</p>
 															</Col>
 															<Col xs="6" md="4" lg="3">
 																<h6>Milkostnad</h6>
-																<p className="m-0 py-1">
+																<p className="m-0 pb-1">
 																	{numFormatter(this.getMileCost())} {"kr/mil"}
 																</p>
 															</Col>

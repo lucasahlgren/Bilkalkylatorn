@@ -58,8 +58,7 @@ class About extends Component {
 										faktorer såsom innehavstid, körsträcka samt kontantinsats
 										och ränta i dina kalkyler. På jämförelsesidan kan du jämföra
 										dina kalkyler med varandra och på så sätt lära dig mer om
-										kostnaderna mellan olika bilmodeller. Där kan du också
-										filtrera vilka kostnadsfaktorer som ska ingå i jämförelsen.
+										kostnaderna mellan olika bilmodeller. Du kan bland annat jämföra totalkostnaden, kostnadsfördelning samt enskilda kostnader. 
 										Om du vill spara dina kalkyler kan du dessutom ladda ner dem
 										i en Excel-fil för vidare bearbetning senare.
 									</p>
@@ -79,7 +78,8 @@ class About extends Component {
 										<li>Körsträcka: 1500 mil/år</li>
 										<li>Kontantinsats: 20%</li>
 										<li>Ränta: 5%</li>
-										<li>Underhåll: 3000 kr/år</li>
+										<li>Värdeminskning: 50%</li>
+										<li>Underhåll: 1000 kr/år</li>
 										<li>Försäkring: 3000 kr/år</li>
 										<li>Dieselpris: 15.9 kr/l</li>
 										<li>Bensinpris: 15.6 kr/</li>

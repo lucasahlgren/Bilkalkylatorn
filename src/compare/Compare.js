@@ -4,7 +4,7 @@ import { Container, Row, Col, Card, Button } from "shards-react";
 import { connect } from "react-redux";
 
 /* Components */
-import BarChart from "./BarChart";
+import ChartContainer from "./ChartContainer";
 import CalculationsList from "./CalculationsList";
 
 class Compare extends Component {
@@ -22,8 +22,7 @@ class Compare extends Component {
 			<Container className="compare padding-section">
 				<Card className="p-md-4 p-2">
 					<Row>
-						<BarChart calculationsList={this.props.calculationsList} />
-
+						<ChartContainer calculationsList={this.props.calculationsList} />
 						<Col md="3" className="calculations-list mt-4 mt-md-0">
 							<CalculationsList />
 						</Col>

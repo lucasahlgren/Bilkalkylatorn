@@ -237,7 +237,7 @@ class Search extends Component {
 																	<span className="m-0">Månadskostnad</span>
 																	<p className="m-0">
 																		{"Fr. "}
-																		{numFormatter(this.monthlyCost(car.tco))} kr
+																		{numFormatter(this.monthlyCost(car.tco))} {"kr"}
 																	</p>
 																</Col>
 															</Row>

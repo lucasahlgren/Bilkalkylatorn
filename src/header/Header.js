@@ -29,9 +29,9 @@ class Header extends Component {
 		/* Current state */
 		const open = this.state.menuOpen;
 		const linkList = [
-			{ label: "Sök", link: "/sok" },
-			{ label: "Mina kalkyler", link: "/minakalkyler" },
+			{ label: "Skapa kalkyl", link: "/sok" },
 			{ label: "Jämför", link: "/jamfor" },
+			{ label: "Mina kalkyler", link: "/minakalkyler" },
 			{ label: "Om verktyget", link: "/omverktyget" },
 		];
 
