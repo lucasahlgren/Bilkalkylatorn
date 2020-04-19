@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "./App.css";
-import { Container, Row, Col } from "shards-react";
+import { Container} from "shards-react";
 
-import { Alert } from "shards-react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css";
 
@@ -14,15 +13,12 @@ import Home from "./home/Home";
 import Search from "./search/Search";
 import CarDetails from "./car_details/CarDetails";
 import MyCalculations from "./my_calculations/MyCalculations";
-import Footer from "./footer/Footer";
 import Toast from "./toast/Toast";
 import About from "./about/About";
 import WindowPrompt from "./WindowPrompt"
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-	}
+
 	render() {
 		return (
 			<Container fluid className="App p-0 m-0">

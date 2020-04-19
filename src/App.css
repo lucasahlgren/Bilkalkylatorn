@@ -211,8 +211,12 @@ body {
 	font-size: 0.9rem;
 }
 
-.my-calculations-container {
+.my-calculations {
 	height: 60vh !important;
+}
+
+.my-calculations .no-calculations{
+	font-size: 1.15rem;
 }
 
 /* CarDetails
@@ -257,6 +261,10 @@ body {
 .car-details-malus h6 {
 	font-weight: 700;
 	color: white;
+}
+
+.car-details-cost-distribution{
+	font-weight: 600;
 }
 
 .tco-variables {
@@ -780,21 +788,37 @@ section.route-section {
 .car-header {
 	padding: 0.2rem;
 }
-.car-header span {
+.car-header .card-title {
 	color: black;
-	font-weight: 400;
+	font-weight: 500;
+	font-size: 0.75rem;
 }
-.car-header p {
-	color: rgb(88, 88, 88);
+.car-header .price {
+	color: rgb(66, 66, 66);
 	font-weight: bold;
+	font-size: 0.95rem;
+}
+
+.car-header .fuel-types{
+	color: rgb(66, 66, 66);
+	font-weight: bold;
+	font-size: 0.9rem;
+}
+
+.car-header .price-unit{
+	font-weight: 400;
+	font-size: 0.7rem;
 }
 
 @media only screen and (min-width: 768px) {
 	.car-header span {
 		font-size: 0.7rem;
 	}
-	.car-header p {
-		font-size: 0.9rem;
+	.car-header .price {
+		font-size: 0.95rem;
+	}
+	.car-header .price-unit {
+		font-size: 0.7rem;
 	}
 	.input-brand {
 		width: 40%;

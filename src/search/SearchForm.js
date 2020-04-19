@@ -1,22 +1,6 @@
 import React, { Component } from "react";
 import data from "../data/data.json";
-import {
-	Container,
-	Row,
-	Col,
-	Card,
-	CardBody,
-	CardHeader,
-	CardImg,
-	CardFooter,
-	CardColumns,
-	CardTitle,
-	Button,
-	FormGroup,
-	FormInput,
-	Form,
-	FormSelect
-} from "shards-react";
+import { Container, Row, Col, Form } from "shards-react";
 import Select from "react-select";
 
 class SearchForm extends Component {
@@ -42,82 +26,90 @@ class SearchForm extends Component {
 			searchField
 		} = this.state;
 		console.log(selectedBrandOption);
-		if (selectedBrandOption.length === 0 && selectedFuelOption.length === 0 && selectedSizeOption.length === 0 && searchField === "") {
+		if (
+			selectedBrandOption.length === 0 &&
+			selectedFuelOption.length === 0 &&
+			selectedSizeOption.length === 0 &&
+			searchField === ""
+		) {
 			this.props.updateList(data.cars);
-			
 		} else {
 			var brands = selectedBrandOption.map(option => option.label);
 			var fuels = selectedFuelOption.map(option => option.label);
 			var sizes = selectedSizeOption.map(option => option.label);
-			if(brands.length === 0){
-				brands = this.getUniqueBrands()
+			if (brands.length === 0) {
+				brands = this.getUniqueBrands();
 			}
-			if(fuels.length === 0){
-				fuels = this.getUniqueFuels()
+			if (fuels.length === 0) {
+				fuels = this.getUniqueFuels();
 			}
-			if(sizes.length === 0){
-				sizes = this.getUniqueSizes()
+			if (sizes.length === 0) {
+				sizes = this.getUniqueSizes();
 			}
-	
+
 			var list = data.cars.filter(car => {
 				var variants = car.variants;
 
 				/* Fuel */
-				var fuelsTypes = variants.map((variant) => {return variant.type.swe})
+				var fuelsTypes = variants.map(variant => {
+					return variant.type.swe;
+				});
 				var fuelTypeBool = false;
-				console.log(fuelsTypes)
-				console.log(fuels)
-				fuelsTypes.map((fuel) => {if(fuels.includes(fuel)){
-					fuelTypeBool = true;
-				}
-				})
-				console.log(fuelTypeBool)
+				console.log(fuelsTypes);
+				console.log(fuels);
+				fuelsTypes.forEach(fuel => {
+					if (fuels.includes(fuel)) {
+						fuelTypeBool = true;
+					}
+				});
+
+				console.log(fuelTypeBool);
 
 				/* Brands */
 				var brandTypeBool = false;
-				brandTypeBool = brands.includes(car.brand)
-				console.log(brands)
-				console.log(car.brand)
-				console.log(brandTypeBool)
-
+				brandTypeBool = brands.includes(car.brand);
+				console.log(brands);
+				console.log(car.brand);
+				console.log(brandTypeBool);
 
 				var searchFieldBool = false;
 				var searchString = searchField.trim().toLowerCase();
-				console.log(searchString)
+				console.log(searchString);
 				var brand = car.brand.toLowerCase();
 				var model = car.model.toLowerCase();
-				var carModelString = brand + " " + model
-				if(brand.search(searchField) != -1 || carModelString.search(searchField) != -1 || model.search(searchField) != -1){
+				var carModelString = brand + " " + model;
+				if (
+					brand.search(searchField) !== -1 ||
+					carModelString.search(searchField) !== -1 ||
+					model.search(searchField) !== -1
+				) {
 					searchFieldBool = true;
 				}
-				
-				
+
 				/* Brands */
 				var sizeTypeBool = false;
-				sizeTypeBool = sizes.includes(car.size.swe)
-				console.log(sizes)
-				console.log(car.size.swe)
-				console.log(sizeTypeBool)
+				sizeTypeBool = sizes.includes(car.size.swe);
+				console.log(sizes);
+				console.log(car.size.swe);
+				console.log(sizeTypeBool);
 
-				return brandTypeBool && fuelTypeBool && sizeTypeBool && searchFieldBool
-			}
-			);
+				return brandTypeBool && fuelTypeBool && sizeTypeBool && searchFieldBool;
+			});
 			console.log(list);
 
 			/* Return all variants with the chosen fuel types */
 			var filteredList = list.map(car => {
-				var newCarObj = {...car}
+				var newCarObj = { ...car };
 				var filteredVariants = car.variants.filter(variant => {
-					return fuels.includes(variant.type.swe)
-				})
+					return fuels.includes(variant.type.swe);
+				});
 				newCarObj.variants = filteredVariants;
-				return newCarObj
-			})
+				return newCarObj;
+			});
 
 			this.props.updateList(filteredList);
 		}
 	};
-
 
 	handleBrandChange = selectedBrandOption => {
 		console.log(selectedBrandOption);
@@ -146,8 +138,8 @@ class SearchForm extends Component {
 
 	handleSearchFieldChange = e => {
 		var value = e.target.value;
-		this.setState({searchField: value}, this.filterList)
-	}
+		this.setState({ searchField: value }, this.filterList);
+	};
 
 	getUniqueBrands = () => {
 		var list = data.cars;
@@ -185,8 +177,8 @@ class SearchForm extends Component {
 			return self.indexOf(value) === index;
 		};
 		const fuelValues = [];
-		list.map(car => {
-			car.variants.map(variant => {
+		list.forEach(car => {
+			car.variants.forEach(variant => {
 				fuelValues.push(variant.type.swe);
 			});
 		});
@@ -196,15 +188,14 @@ class SearchForm extends Component {
 		return uniqueFuels;
 	};
 
-	createOptionsObject = (list) => {
+	createOptionsObject = list => {
 		var options = list.map(option => {
 			return { label: option, value: option.toLowerCase() };
 		});
-		return options
-	}
+		return options;
+	};
 
 	render() {
-
 		var uniqueBrands = this.createOptionsObject(this.getUniqueBrands());
 		var uniqueFuels = this.createOptionsObject(this.getUniqueFuels());
 		var uniqueSizes = this.createOptionsObject(this.getUniqueSizes());
@@ -260,7 +251,7 @@ class SearchForm extends Component {
 
 										<div className="input-select input-fuel mb-1 mb-md-0">
 											<Select
-												blurInputOnSelect={true} 
+												blurInputOnSelect={true}
 												isMulti
 												isSearchable={false}
 												placeholder="Drivmedel"

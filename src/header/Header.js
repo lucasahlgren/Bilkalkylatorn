@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 
-import {
-	Navbar,
-	NavbarToggler,
-	NavbarBrand,
-	Nav,
-	NavItem,
-	NavLink,
-  Collapse,
-  Container
-} from "shards-react";
+import { Nav, NavItem, Container } from "shards-react";
 
 import { Link } from "react-router-dom";
 
@@ -29,10 +20,10 @@ class Header extends Component {
 		/* Current state */
 		const open = this.state.menuOpen;
 		const linkList = [
-			{ label: "Skapa kalkyl", link: "/sok" },
+			{ label: "Gör kalkyl", link: "/sok" },
 			{ label: "Jämför", link: "/jamfor" },
 			{ label: "Mina kalkyler", link: "/minakalkyler" },
-			{ label: "Om verktyget", link: "/omverktyget" },
+			{ label: "Om verktyget", link: "/omverktyget" }
 		];
 
 		return (
@@ -45,8 +36,8 @@ class Header extends Component {
 							</Link>
 						</div>
 						<div className="menu-trigger ml-auto" onClick={this.menuOpen}>
-						<span data-isclicked={open} className="menu-icon" />
-					</div>
+							<span data-isclicked={open} className="menu-icon" />
+						</div>
 						<div className="desktop-nav pt-1">
 							<Nav>
 								{linkList.map(link => {

@@ -9,18 +9,16 @@ import {
 	numFormatter,
 	tcoSubventions,
 	tcoFuel,
-	tcoFuelCost,
 	tcoDepreciation,
 	tcoInterest,
 	tcoTaxYear,
 	tcoTaxTotal,
 	tcoMalusYear,
-	tcoMaintenanceYear,
-	tcoInsuranceYear,
 	tcoMaintenanceTotal,
 	tcoInsuranceTotal,
 	tcoMalusTotal,
-	tcoTotal
+	tcoTotal,
+	getTCOvariables
 } from "../data/tco";
 import Select from "react-select";
 import PieChart from "./PieChart";
@@ -36,13 +34,13 @@ class CarDetails extends Component {
 			selectedOption: [],
 			calculationName: "Placeholder",
 			car: null,
-			years: 3,
-			miles: 1500,
-			payment: 20,
+			years: 0,
+			miles: 0,
+			payment: 0,
 			interest: 0,
-			interestRate: 5,
+			interestRate: 0,
 			depreciation: 0,
-			depreciationRate: 50,
+			depreciationRate: 0,
 			fuelCost: 0,
 			fuel: 0,
 			taxYear: 0,
@@ -62,7 +60,10 @@ class CarDetails extends Component {
 			insuranceInput: 0,
 			maintenanceInput: 0,
 			yearsInput: 0,
-			milesInput: 0
+			milesInput: 0,
+			mileCost: 0,
+			monthlyCost: 0,
+			tcoRatio: 0
 		};
 	}
 
@@ -79,12 +80,9 @@ class CarDetails extends Component {
 
 		var image = car.image;
 
-		/* Calculations */
-		var years = this.state.years;
-		var miles = this.state.miles;
-		var payment = this.state.payment;
-		var depreciationRate = this.state.depreciationRate;
-		var interestRate = this.state.interestRate;
+		/* Variables */
+		var variablesObj = getTCOvariables(variant);
+		const {years, miles, payment, interestRate, depreciationRate, insuranceYear, maintenanceYear, fuelCost} = variablesObj;
 
 		/* Subventions */
 		var subvention = tcoSubventions(variant);
@@ -97,7 +95,6 @@ class CarDetails extends Component {
 		var taxYearTotal = taxYear * years;
 
 		/* Fuel */
-		var fuelCost = tcoFuelCost(variant.type);
 		var fuel = tcoFuel(variant, fuelCost, years, miles);
 
 		/* depreciation */
@@ -107,11 +104,9 @@ class CarDetails extends Component {
 		var interest = tcoInterest(variant, interestRate, payment, years);
 
 		/* Maintanence */
-		var maintenanceYear = tcoMaintenanceYear(variant);
 		var maintenanceTotal = tcoMaintenanceTotal(variant, years, maintenanceYear);
 
 		/* Insurance */
-		var insuranceYear = tcoInsuranceYear(variant);
 		var insuranceTotal = tcoInsuranceTotal(variant, years, insuranceYear);
 
 		/* TCO total */
@@ -127,6 +122,10 @@ class CarDetails extends Component {
 			maintenanceYear
 		);
 
+		var mileCost = this.getMileCost(years, miles, tco);
+		var monthlyCost = this.getMonthlyCost(years, tco);
+		var tcoRatio = this.getTCORatio(variant, tco);
+
 		var resetObject = {};
 		resetObject.years = years;
 		resetObject.miles = miles;
@@ -135,6 +134,7 @@ class CarDetails extends Component {
 		resetObject.depreciationRate = depreciationRate;
 		resetObject.maintenanceYear = maintenanceYear;
 		resetObject.insuranceYear = insuranceYear;
+		resetObject.fuelCost = fuelCost;
 
 		this.setState({
 			dataLoading: false,
@@ -142,23 +142,23 @@ class CarDetails extends Component {
 			variant: variant,
 			variants: car.variants,
 			selectedOption: { label: variant.variant, value: variant.variant },
-			subvention: parseInt(subvention.toFixed(0)),
-			fuelCost: parseFloat(fuelCost),
-			interest: parseInt(interest.toFixed(0)),
-			fuel: parseInt(fuel.toFixed(0)),
-			depreciation: parseInt(depreciation.toFixed(0)),
-			taxYear: parseInt(taxYear.toFixed(0)),
-			taxYearTotal: parseInt(taxYearTotal.toFixed(0)),
-			malusYear: parseInt(malusYear.toFixed(0)),
-			malusTotal: parseInt(malusTotal.toFixed(0)),
-			taxTotal: parseInt(taxTotal.toFixed(0)),
-			insuranceYear: parseFloat(insuranceYear),
-			maintenanceYear: parseFloat(maintenanceYear),
-			insuranceTotal: parseInt(insuranceTotal.toFixed(0)),
-			maintenanceTotal: parseInt(maintenanceTotal.toFixed(0)),
+			subvention: subvention,
+			fuelCost: fuelCost,
+			interest: interest,
+			fuel: fuel,
+			depreciation: depreciation,
+			taxYear: taxYear,
+			taxYearTotal: taxYearTotal,
+			malusYear: malusYear,
+			malusTotal: malusTotal,
+			taxTotal: taxTotal,
+			insuranceYear: insuranceYear,
+			maintenanceYear: maintenanceYear,
+			insuranceTotal: insuranceTotal,
+			maintenanceTotal: maintenanceTotal,
 			calculationName: name,
 			resetObject: resetObject,
-			tcoTotal: parseInt(tco),
+			tcoTotal: tco,
 			image: image,
 			depreciationRateInput: depreciationRate,
 			paymentInput: payment,
@@ -167,7 +167,15 @@ class CarDetails extends Component {
 			insuranceInput: insuranceYear,
 			maintenanceInput: maintenanceYear,
 			yearsInput: years,
-			milesInput: miles
+			milesInput: miles,
+			years: years,
+			miles: miles,
+			payment: payment,
+			interestRate: interestRate,
+			depreciationRate: depreciationRate,
+			tcoRatio: tcoRatio,
+			monthlyCost: monthlyCost,
+			mileCost: mileCost
 		});
 	};
 
@@ -184,15 +192,13 @@ class CarDetails extends Component {
 		}
 	};
 
-	getMonthlyCost = () => {
-		const { years, tcoTotal } = this.state;
+	getMonthlyCost = (years, tcoTotal) => {
 		var monthlyCost = tcoTotal / (years * 12);
 		return monthlyCost;
 	};
 
-	getMileCost = () => {
-		const { miles, years, tcoTotal } = this.state;
-		if (miles != 0) {
+	getMileCost = (miles, years, tcoTotal) => {
+		if (miles !== 0) {
 			var mileCost = tcoTotal / (miles * years);
 			return mileCost;
 		} else {
@@ -200,8 +206,7 @@ class CarDetails extends Component {
 		}
 	};
 
-	getTCORatio = () => {
-		const { variant, tcoTotal } = this.state;
+	getTCORatio = (variant, tcoTotal) => {
 		var ratio = (tcoTotal / variant.price.value) * 100;
 		return ratio;
 	};
@@ -214,8 +219,7 @@ class CarDetails extends Component {
 	};
 
 	resetVariabels = () => {
-		const { resetObject, variant } = this.state;
-		var fuelCost = tcoFuelCost(variant.type);
+		const { resetObject } = this.state;
 		this.setState(
 			{
 				years: resetObject.years,
@@ -223,12 +227,12 @@ class CarDetails extends Component {
 				payment: resetObject.payment,
 				interestRate: resetObject.interestRate,
 				depreciationRate: resetObject.depreciationRate,
-				fuelCost: fuelCost,
+				fuelCost: resetObject.fuelCost,
 				maintenanceYear: resetObject.maintenanceYear,
 				insuranceYear: resetObject.insuranceYear,
 				depreciationRateInput: resetObject.depreciationRate,
 				paymentInput: resetObject.payment,
-				fuelCostInput: fuelCost,
+				fuelCostInput: resetObject.fuelCost,
 				interestRateInput: resetObject.interestRate,
 				insuranceInput: resetObject.insuranceYear,
 				maintenanceInput: resetObject.maintenanceYear,
@@ -248,7 +252,6 @@ class CarDetails extends Component {
 			miles,
 			payment,
 			taxTotal,
-			malusYear,
 			malusTotal,
 			insuranceTotal,
 			maintenanceTotal,
@@ -262,12 +265,11 @@ class CarDetails extends Component {
 			taxYear,
 			taxYearTotal,
 			tcoTotal,
-			fuelCost
+			fuelCost,
+			mileCost,
+			monthlyCost,
+			tcoRatio
 		} = this.state;
-
-		var tcoRatio = this.getTCORatio();
-		var tcoMonthly = this.getMonthlyCost();
-		var tcoMile = this.getMileCost();
 
 		var calculation = {};
 		calculation.name = calculationName.trim();
@@ -293,8 +295,8 @@ class CarDetails extends Component {
 		calculation.taxYearTotal = taxYearTotal;
 		calculation.tcoTotal = tcoTotal;
 		calculation.tcoRatio = tcoRatio;
-		calculation.tcoMonthly = tcoMonthly;
-		calculation.tcoMile = tcoMile;
+		calculation.tcoMonthly = monthlyCost;
+		calculation.tcoMile = mileCost;
 		//console.log(calculation);
 		this.props.addCalculation(calculation);
 	};
@@ -444,14 +446,32 @@ class CarDetails extends Component {
 			variant => variant.variant === selectedOption.value
 		);
 		console.log(newVariant);
-		var fuelCost = tcoFuelCost(newVariant.type);
+		var variablesObj = getTCOvariables(newVariant);
+		const {years, miles, payment, interestRate, depreciationRate, insuranceYear, maintenanceYear, fuelCost} = variablesObj;
+
+		var resetObject = {};
+		resetObject.years = years;
+		resetObject.miles = miles;
+		resetObject.payment = payment;
+		resetObject.interestRate = interestRate;
+		resetObject.depreciationRate = depreciationRate;
+		resetObject.maintenanceYear = maintenanceYear;
+		resetObject.insuranceYear = insuranceYear;
+		resetObject.fuelCost = fuelCost;
 
 		this.setState(
 			{
 				selectedOption: selectedOption,
 				variant: newVariant,
 				fuelCost: fuelCost,
-				fuelCostInput: fuelCost
+				fuelCostInput: fuelCost,
+				insuranceYear: insuranceYear,
+				insuranceInput: insuranceYear,
+				maintenanceYear: maintenanceYear,
+				maintenanceInput: maintenanceYear,
+				depreciationRate: depreciationRate,
+				depreciationRateInput: depreciationRate,
+				resetObject: resetObject
 			},
 			this.updateData
 		);
@@ -467,6 +487,14 @@ class CarDetails extends Component {
 		var depreciationRate = this.state.depreciationRate;
 		var interestRate = this.state.interestRate;
 		var fuelCost = this.state.fuelCost;
+
+		console.log("New variables")
+		console.log(years)
+		console.log(miles)
+		console.log(payment)
+		console.log(depreciationRate)
+		console.log(interestRate)
+		console.log(fuelCost)
 
 		/* Subventions */
 		var subvention = tcoSubventions(variant);
@@ -509,25 +537,32 @@ class CarDetails extends Component {
 			maintenanceYear
 		);
 
+		var mileCost = this.getMileCost(years, miles, tco);
+		var monthlyCost = this.getMonthlyCost(years, tco);
+		var tcoRatio = this.getTCORatio(variant, tco);
+
 		//console.log(fuel);
 
 		this.setState({
 			variant: variant,
-			insuranceYear: parseFloat(insuranceYear),
-			maintenanceYear: parseFloat(maintenanceYear),
-			insuranceTotal: parseInt(insuranceTotal.toFixed(0)),
-			maintenanceTotal: parseInt(maintenanceTotal.toFixed(0)),
-			malusYear: parseInt(malusYear.toFixed(0)),
-			malusTotal: parseInt(malusTotal.toFixed(0)),
-			subvention: parseInt(subvention.toFixed(0)),
-			fuel: parseInt(fuel.toFixed(0)),
-			depreciation: parseInt(depreciation.toFixed(0)),
-			taxYear: parseInt(taxYear.toFixed(0)),
-			taxTotal: parseInt(taxTotal.toFixed(0)),
-			taxYearTotal: parseInt(taxYearTotal.toFixed(0)),
-			fuelCost: parseFloat(fuelCost),
-			interest: parseInt(interest.toFixed(0)),
-			tcoTotal: parseInt(tco)
+			insuranceYear:  insuranceYear,
+			maintenanceYear:  maintenanceYear,
+			insuranceTotal: insuranceTotal,
+			maintenanceTotal: maintenanceTotal,
+			malusYear: malusYear,
+			malusTotal: malusTotal,
+			subvention: subvention,
+			fuel: fuel,
+			depreciation: depreciation,
+			taxYear: taxYear,
+			taxTotal: taxTotal,
+			taxYearTotal: taxYearTotal,
+			fuelCost: fuelCost,
+			interest: interest,
+			tcoTotal: tco,
+			tcoRatio: tcoRatio,
+			monthlyCost: monthlyCost,
+			mileCost: mileCost
 		});
 	};
 
@@ -854,7 +889,7 @@ class CarDetails extends Component {
 																<Card className="h-100 bg-dark justify-content-center text-center">
 																	<span>
 																		<strong className="text-white car-details-tco-ratio">
-																			{numFormatter(this.getTCORatio()) + "%"}
+																			{numFormatter(this.state.tcoRatio) + "%"}
 																		</strong>
 																		<FontAwesomeIcon
 																icon={faInfoCircle}
@@ -886,14 +921,14 @@ class CarDetails extends Component {
 															<Col xs="6" md="4" lg="3">
 																<h6>Månadskostnad</h6>
 																<p className="m-0 pb-1">
-																	{numFormatter(this.getMonthlyCost())}{" "}
+																	{numFormatter(this.state.monthlyCost)}{" "}
 																	{"kr/mån"}
 																</p>
 															</Col>
 															<Col xs="6" md="4" lg="3">
 																<h6>Milkostnad</h6>
 																<p className="m-0 pb-1">
-																	{numFormatter(this.getMileCost())} {"kr/mil"}
+																	{numFormatter(this.state.mileCost)} {"kr/mil"}
 																</p>
 															</Col>
 														</Row>
@@ -904,7 +939,7 @@ class CarDetails extends Component {
 															xs="12"
 															className="p-2 pb-md-3 pb-0 text-center"
 														>
-															<h4>Kostnadsfördelning</h4>
+															<h4 className="car-details-cost-distribution">Kostnadsfördelning</h4>
 														</Col>
 														<Col md="6" lg="6" className="p-md-0 pb-4">
 														<Col xs="12" className="h-100 p-0">

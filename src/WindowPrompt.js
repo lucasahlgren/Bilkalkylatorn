@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Card, Button } from "shards-react";
+import {Button } from "shards-react";
 
 export default class WindowPrompt extends Component {
     constructor(props) {

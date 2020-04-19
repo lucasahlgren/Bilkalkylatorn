@@ -5,10 +5,6 @@ import { connect } from "react-redux";
 import SimpleBar from "simplebar-react";
 import "simplebar/dist/simplebar.min.css";
 
-import { motion, AnimatePresence } from "framer-motion";
-
-import { Container, Row, Col, Card, Button } from "shards-react";
-import CSV from "./CSV";
 import Excel from "./Excel";
 import CalculationItem from "./CalculationItem";
 
@@ -44,7 +40,7 @@ class CalculationsList extends Component {
 		);
 
 		const excel =
-			selectedCalculations.length != 0 ? (
+			selectedCalculations.length !== 0 ? (
 				<div className="pt-2 text-center">
 					<div className="p-2">
 						Valda kalkyler:{" "}

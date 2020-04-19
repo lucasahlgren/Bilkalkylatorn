@@ -6,31 +6,29 @@ const initState = {
 // Update state based on action
 const tcoReducer = (state = initState, action) => {
 	var calculationsList = [...state.calculationsList];
+	var toast = null;
 
 	switch (action.type) {
 		case "ADD_COMPARE":
-			console.log(action.payload)
-				calculationsList.map((calculation, i) => {
-					if (calculation.name === action.payload) {
-			
-						calculationsList[i].selected = true
-					}
-				
-				});
-				console.log(calculationsList)
+			console.log(action.payload);
+			calculationsList.forEach((calculation, i) => {
+				if (calculation.name === action.payload) {
+					calculationsList[i].selected = true;
+				}
+			});
+			console.log(calculationsList);
 			return { ...state, calculationsList: calculationsList };
 		case "REMOVE_COMPARE":
-				calculationsList.map((calculation, i) => {
-					if (calculation.name === action.payload) {
-						calculationsList[i].selected = false
-					}
-				
-				});
-				console.log(calculationsList)
+			calculationsList.forEach((calculation, i) => {
+				if (calculation.name === action.payload) {
+					calculationsList[i].selected = false;
+				}
+			});
+			console.log(calculationsList);
 			return { ...state, calculationsList: calculationsList };
 		case "ADD_CALCULATION":
 			var exist = false;
-			calculationsList.map(calculation => {
+			calculationsList.forEach(calculation => {
 				if (
 					calculation.name.toLowerCase() === action.payload.name.toLowerCase()
 				) {
@@ -39,14 +37,14 @@ const tcoReducer = (state = initState, action) => {
 			});
 			console.log(action.payload);
 			if (!exist) {
-				var toast = {
+				toast = {
 					calculationName: action.payload.name,
 					notify: true,
 					successful: true
 				};
 				calculationsList.push(action.payload);
 			} else {
-				var toast = {
+				toast = {
 					calculationName: action.payload.name,
 					notify: true,
 					successful: false
@@ -56,17 +54,16 @@ const tcoReducer = (state = initState, action) => {
 			return { ...state, calculationsList: calculationsList, toast: toast };
 
 		case "REMOVE_CALCULATION":
-			calculationsList.map((calculation, i) => {
+			calculationsList.forEach((calculation, i) => {
 				if (calculation.name === action.payload) {
-					calculationsList.splice(i, 1)
+					calculationsList.splice(i, 1);
 				}
-			
 			});
-			console.log(calculationsList)
-			return {...state, calculationsList: calculationsList}
+			console.log(calculationsList);
+			return { ...state, calculationsList: calculationsList };
 		case "NOTIFIED":
-			console.log("HEJ");
-			var toast = state.toast;
+			console.log("Notified");
+			toast = state.toast;
 			toast.notify = false;
 			console.log(toast);
 			return { ...state, toast: toast };

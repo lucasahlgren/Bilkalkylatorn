@@ -1,17 +1,8 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Button } from "shards-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-	faChargingStation,
-	faBalanceScale,
-	faGasPump,
-	faBurn
-} from "@fortawesome/free-solid-svg-icons";
 import { numFormatter } from "../data/tco";
 
 /* Apex charts */
 import Chart from "react-apexcharts";
-import { noAuto } from "@fortawesome/fontawesome-svg-core";
 
 class PieChart extends Component {
 	constructor(props) {

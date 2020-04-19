@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-import { Container, Row, Col, Card, Button, Collapse } from "shards-react";
+import { Card, Collapse } from "shards-react";
 
 class CalculationItem extends Component {
 	constructor(props) {
@@ -27,17 +27,16 @@ class CalculationItem extends Component {
 		}
 	};
 
-
 	render() {
 		const { calculation } = this.props;
 		console.log(calculation);
 
-		var fuelTypeLabel = null;
-			if(calculation.variant.type.swe === "Laddhybrid"){
-				fuelTypeLabel = calculation.variant.type.types.swe[0];
-			}else{
-				fuelTypeLabel = calculation.variant.type.swe;
-			}
+		/*var fuelTypeLabel = null;
+		if (calculation.variant.type.swe === "Laddhybrid") {
+			fuelTypeLabel = calculation.variant.type.types.swe[0];
+		} else {
+			fuelTypeLabel = calculation.variant.type.swe;
+		}*/
 
 		return (
 			<Card
@@ -61,9 +60,7 @@ class CalculationItem extends Component {
 							size="2x"
 							icon={faCaretDown}
 						/>
-						
 					</div>
-							
 				</div>
 				<Collapse open={this.state.collapse}>
 					<div className="px-2 py-2 rounded">

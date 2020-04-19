@@ -4,9 +4,6 @@ import { connect } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 
 class Toast extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	notifySuccessful = calculationName =>
 		toast.success(calculationName + "-kalkylen sparades", {

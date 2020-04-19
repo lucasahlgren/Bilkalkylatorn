@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Button } from "shards-react";
+import { Container, Row, Col, Button } from "shards-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<Container className="home padding-section">
@@ -26,7 +22,7 @@ class Home extends Component {
 								</Col>
 							</Row>
 							<Row>
-								<Col md="8" lg="7" className="mx-auto px-md-3 py-2">
+								<Col md="8" lg="7" xs="11" className="mx-auto px-md-3 py-2">
 									<h5 className="subtitle">
 										I det här verktyget kan du beräkna och jämföra den total
 										ägandekostnaden för nyproducerade personbilar. Sök efter en

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Card, Button } from "shards-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 import Calculation from "./Calculation";
 import Excel from "../compare/Excel";
 import { Link } from "react-router-dom";
@@ -11,10 +11,6 @@ import { connect } from "react-redux";
 /* Components */
 
 class MyCalculations extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		const { calculationsList } = this.props;
 		var calculations =
@@ -25,9 +21,11 @@ class MyCalculations extends Component {
 					);
 				})
 			) : (
-				<Card className="p-md-4 mt-4 my-calculations-container w-100">
-					<div className="justify-content-center d-flex align-items-center flex-column h-100 mx-auto">
-						<p className="p-3">Inga sparade kalkyler</p>
+				<Card className="p-md-4 mt-4 my-calculations w-100">
+					<div className="justify-content-center d-flex align-items-center flex-column h-100">
+						<FontAwesomeIcon size="3x" icon={faClipboardList} />
+
+						<p className="p-3 no-calculations mb-0">Inga sparade kalkyler</p>
 					</div>
 				</Card>
 			);

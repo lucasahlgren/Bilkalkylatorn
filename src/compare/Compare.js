@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Button } from "shards-react";
+import { Container, Row, Col, Card } from "shards-react";
 
 import { connect } from "react-redux";
 

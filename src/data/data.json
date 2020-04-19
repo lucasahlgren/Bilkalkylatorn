@@ -280,15 +280,6 @@
 			"tco": 0,
 			"variants": [
 				{
-					"variant": "1.6 GDI plug-in hybrid",
-					"price": { "value": 314900, "unit": "kr" },
-					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
-					"transmission": { "eng": "Automatic", "swe": "Automat" },
-					"engine": { "hk": 141, "kw": 105 },
-					"fuel": { "value": 1.1, "unit": "l" },
-					"emissions": { "value": 26, "unit": "g/km" }
-				},
-				{
 					"variant": "Electric 100 kW",
 					"price": { "value": 389900, "unit": "kr" },
 					"type": { "eng": "Electric", "swe": "El" },
@@ -296,6 +287,15 @@
 					"engine": { "hk": 136, "kw": 100 },
 					"fuel": { "value": 13.8, "unit": "kWh" },
 					"emissions": { "value": 0, "unit": "g/km" }
+				},
+				{
+					"variant": "1.6 GDI plug-in hybrid",
+					"price": { "value": 314900, "unit": "kr" },
+					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
+					"transmission": { "eng": "Automatic", "swe": "Automat" },
+					"engine": { "hk": 141, "kw": 105 },
+					"fuel": { "value": 1.1, "unit": "l" },
+					"emissions": { "value": 26, "unit": "g/km" }
 				}
 				
 			]

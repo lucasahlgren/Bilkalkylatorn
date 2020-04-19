@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import PieChart from "../car_details/PieChart";
 import { numFormatter } from "../data/tco";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { faInfoCircle, faSquare } from "@fortawesome/free-solid-svg-icons";
 
 import {
 	Container,
@@ -14,15 +12,10 @@ import {
 	Col,
 	Card,
 	Button,
-	Collapse,
 	CardImg
 } from "shards-react";
 
 class Calculation extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	removeCalculation = calculationName => {
 		console.log(calculationName);
 		this.props.removeCalculation(calculationName);
@@ -38,12 +31,15 @@ class Calculation extends Component {
 						<div className="py-4 px-5 card">
 							<Container>
 								<Row>
+									<Col>
 									<h4 className="text-center confirm-dialog-title">
 										<strong>Vill du radera {calculationName}?</strong>
 									</h4>
+									</Col>
 								</Row>
 								<Row className="d-flex justify-content-around m-0 pt-2">
 									<Button
+									size="md"
 										pill
 										theme="secondary"
 										className="px-5 mt-3 mx-2 mt-md-0"
@@ -54,6 +50,7 @@ class Calculation extends Component {
 
 									<Button
 										pill
+										size="md"
 										theme="danger"
 										className="px-5 mt-3 mx-2 mt-md-0"
 										onClick={() => {

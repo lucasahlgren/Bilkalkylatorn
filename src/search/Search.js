@@ -2,9 +2,7 @@ import data from "../data/data.json";
 import {
 	numFormatter,
 	tcoTotal,
-	tcoFuelCost,
-	tcoMaintenanceYear,
-	tcoInsuranceYear
+	getTCOvariables
 } from "../data/tco";
 
 import React, { Component } from "react";
@@ -63,14 +61,8 @@ class Search extends Component {
 	};
 
 	calculateTCO = variant => {
-		var years = 3;
-		var miles = 1500;
-		var payment = 20;
-		var interestRate = 5;
-		var depreciationRate = 50;
-		var maintenanceYear = tcoMaintenanceYear(variant);
-		var insuranceYear = tcoInsuranceYear(variant);
-		var fuelCost = tcoFuelCost(variant.type);
+		var variablesObj = getTCOvariables(variant);
+		const {years, miles, payment, interestRate, depreciationRate, insuranceYear, maintenanceYear, fuelCost} = variablesObj;
 
 		return tcoTotal(
 			variant,
@@ -162,7 +154,7 @@ class Search extends Component {
 							<Row className="m-0 w-100">
 								<Col className="w-100">
 									<h2 className="title text-center">
-										<strong>Bilsök</strong>
+										<strong>Välj bil</strong>
 									</h2>
 									<SearchForm updateList={this.updateList} />
 								</Col>
@@ -210,8 +202,8 @@ class Search extends Component {
 															</CardTitle>
 															<Row className="pt-1">
 																<Col xs="12" className="px-1 m-0 car-header">
-																	<span className="m-0">Drivmedel</span>
-																	<p className="m-0">
+																	<span className="m-0 card-title">Drivmedel</span>
+																	<p className="m-0 fuel-types">
 																		{this.fuelTypes(car.variants)}
 																	</p>
 																</Col>
@@ -222,11 +214,12 @@ class Search extends Component {
 																	xs="6"
 																	className="px-1 m-0 car-header"
 																>
-																	<span className="m-0">Totalkostnad</span>
+																	<span className="m-0 card-title">Totalkostnad</span>
 																	<p className="m-0">
-																		{"Fr. "}
-																		{numFormatter(car.tco)}
-																		{" kr"}
+																		<span className="price">
+																			{numFormatter(car.tco)}
+																		</span>
+																		<span className="price-unit">{" kr"}</span>
 																	</p>
 																</Col>
 																<Col
@@ -234,10 +227,14 @@ class Search extends Component {
 																	xs="6"
 																	className="px-1 m-0 car-header"
 																>
-																	<span className="m-0">Månadskostnad</span>
+																	<span className="m-0 card-title">Månadskostnad</span>
 																	<p className="m-0">
-																		{"Fr. "}
-																		{numFormatter(this.monthlyCost(car.tco))} {"kr"}
+																		<span className="price">
+																			{numFormatter(this.monthlyCost(car.tco))}
+																		</span>
+																		<span className="price-unit">
+																			{" kr/mån"}
+																		</span>
 																	</p>
 																</Col>
 															</Row>

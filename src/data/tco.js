@@ -186,6 +186,8 @@ export function tcoMalusYear(variant) {
 	/* Förhöjd fordonsskatt */
 	var malus = 0;
 
+	var diff = 0;
+
 	/* Malus */
 	if ((type === "Diesel" || type === "Bensin") && emissions > 95) {
 		/* Grundbelopp för alla bilar */
@@ -214,7 +216,7 @@ export function tcoMalusYear(variant) {
 
 			malus = baseAmount + fuelTax + emissionsTax + enviroTax;
 
-			var diff = malus - tcoTaxYear(variant);
+			diff = malus - tcoTaxYear(variant);
 
 			return diff;
 		} else if (type === "Bensin") {
@@ -234,7 +236,7 @@ export function tcoMalusYear(variant) {
 
 			malus = baseAmount + emissionsTax;
 
-			var diff = malus - tcoTaxYear(variant);
+			diff = malus - tcoTaxYear(variant);
 
 			return diff;
 		}
@@ -332,6 +334,34 @@ export function numFormatter(num) {
 	var parts = fixedNum.toString().split(".");
 	parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 	return parts.join(".");
+}
+
+
+export function getTCOvariables(variant) {
+	const type = variant.type.swe;
+	const fuelCost = tcoFuelCost(variant.type);
+	var variablesObj = {};
+	if(type === "El"){
+		variablesObj.years = 3;
+		variablesObj.miles = 1500;
+		variablesObj.payment = 20;
+		variablesObj.interestRate = 5;
+		variablesObj.depreciationRate = 40;
+		variablesObj.maintenanceYear = 1500;
+		variablesObj.insuranceYear = 3000;
+		variablesObj.fuelCost = fuelCost;
+		return variablesObj
+	} else if (type === "Bensin" || type === "Diesel" || type === "Laddhybrid"){
+		variablesObj.years = 3;
+		variablesObj.miles = 1500;
+		variablesObj.payment = 20;
+		variablesObj.interestRate = 5;
+		variablesObj.depreciationRate = 50;
+		variablesObj.maintenanceYear = 3000;
+		variablesObj.insuranceYear = 3000;
+		variablesObj.fuelCost = fuelCost;
+		return variablesObj
+	}
 }
 
 export function tcoFuelCost(type) {

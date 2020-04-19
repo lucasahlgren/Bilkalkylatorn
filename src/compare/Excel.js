@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button } from "shards-react";
 import ReactExport from "react-export-excel";
 import { numFormatter } from "../data/tco";
 
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 
 function Excel(props) {
 	/* Data from parent */

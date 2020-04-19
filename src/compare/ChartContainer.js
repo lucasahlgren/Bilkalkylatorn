@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import {
-	Container,
-	Row,
 	Col,
-	Card,
-	Button,
 	Nav,
 	NavItem,
 	NavLink
@@ -12,16 +8,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "react-select";
 import {
-	faChargingStation,
 	faBalanceScale,
-	faGasPump,
-	faBurn
 } from "@fortawesome/free-solid-svg-icons";
 import { numFormatter } from "../data/tco";
 
 /* Apex charts */
 import Chart from "react-apexcharts";
-import { noAuto } from "@fortawesome/fontawesome-svg-core";
 
 class ChartContainer extends Component {
 	constructor(props) {
