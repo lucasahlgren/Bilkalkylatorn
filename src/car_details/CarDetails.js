@@ -82,7 +82,16 @@ class CarDetails extends Component {
 
 		/* Variables */
 		var variablesObj = getTCOvariables(variant);
-		const {years, miles, payment, interestRate, depreciationRate, insuranceYear, maintenanceYear, fuelCost} = variablesObj;
+		const {
+			years,
+			miles,
+			payment,
+			interestRate,
+			depreciationRate,
+			insuranceYear,
+			maintenanceYear,
+			fuelCost
+		} = variablesObj;
 
 		/* Subventions */
 		var subvention = tcoSubventions(variant);
@@ -322,7 +331,10 @@ class CarDetails extends Component {
 			input = "";
 		}
 		this.setState(
-			{ depreciationRate: value, depreciationRateInput: input },
+			{
+				depreciationRate: parseFloat(value),
+				depreciationRateInput: parseFloat(input)
+			},
 			this.updateData
 		);
 	};
@@ -338,7 +350,10 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
-		this.setState({ fuelCost: value, fuelCostInput: input }, this.updateData);
+		this.setState(
+			{ fuelCost: parseFloat(value), fuelCostInput: parseFloat(input) },
+			this.updateData
+		);
 	};
 
 	changeYearsInput = e => {
@@ -349,7 +364,10 @@ class CarDetails extends Component {
 			input = 1;
 			value = 1;
 		}
-		this.setState({ years: value, yearsInput: input }, this.updateData);
+		this.setState(
+			{ years: parseFloat(value), yearsInput: parseFloat(input) },
+			this.updateData
+		);
 	};
 
 	changePaymentInput = e => {
@@ -368,7 +386,7 @@ class CarDetails extends Component {
 		}
 
 		this.setState(
-			{ payment: parseFloat(value), paymentInput: input },
+			{ payment: parseFloat(value), paymentInput: parseFloat(input) },
 			this.updateData
 		);
 	};
@@ -385,7 +403,7 @@ class CarDetails extends Component {
 			input = "";
 		}
 		this.setState(
-			{ interestRate: parseFloat(value), interestRateInput: input },
+			{ interestRate: parseFloat(value), interestRateInput: parseFloat(input) },
 			this.updateData
 		);
 	};
@@ -401,7 +419,10 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
-		this.setState({ miles: value, milesInput: input }, this.updateData);
+		this.setState(
+			{ miles: parseFloat(value), milesInput: parseFloat(input) },
+			this.updateData
+		);
 	};
 
 	changeInsuranceInput = e => {
@@ -416,7 +437,7 @@ class CarDetails extends Component {
 			input = "";
 		}
 		this.setState(
-			{ insuranceYear: value, insuranceInput: input },
+			{ insuranceYear: parseFloat(value), insuranceInput: parseFloat(input) },
 			this.updateData
 		);
 	};
@@ -433,7 +454,10 @@ class CarDetails extends Component {
 			input = "";
 		}
 		this.setState(
-			{ maintenanceYear: value, maintenanceInput: input },
+			{
+				maintenanceYear: parseFloat(value),
+				maintenanceInput: parseFloat(input)
+			},
 			this.updateData
 		);
 	};
@@ -447,7 +471,16 @@ class CarDetails extends Component {
 		);
 		console.log(newVariant);
 		var variablesObj = getTCOvariables(newVariant);
-		const {years, miles, payment, interestRate, depreciationRate, insuranceYear, maintenanceYear, fuelCost} = variablesObj;
+		const {
+			years,
+			miles,
+			payment,
+			interestRate,
+			depreciationRate,
+			insuranceYear,
+			maintenanceYear,
+			fuelCost
+		} = variablesObj;
 
 		var resetObject = {};
 		resetObject.years = years;
@@ -488,13 +521,13 @@ class CarDetails extends Component {
 		var interestRate = this.state.interestRate;
 		var fuelCost = this.state.fuelCost;
 
-		console.log("New variables")
-		console.log(years)
-		console.log(miles)
-		console.log(payment)
-		console.log(depreciationRate)
-		console.log(interestRate)
-		console.log(fuelCost)
+		console.log("New variables");
+		console.log(years);
+		console.log(miles);
+		console.log(payment);
+		console.log(depreciationRate);
+		console.log(interestRate);
+		console.log(fuelCost);
 
 		/* Subventions */
 		var subvention = tcoSubventions(variant);
@@ -523,7 +556,6 @@ class CarDetails extends Component {
 		var insuranceYear = this.state.insuranceYear;
 		var insuranceTotal = tcoInsuranceTotal(variant, years, insuranceYear);
 
-
 		/* TCO total */
 		var tco = tcoTotal(
 			variant,
@@ -545,8 +577,8 @@ class CarDetails extends Component {
 
 		this.setState({
 			variant: variant,
-			insuranceYear:  insuranceYear,
-			maintenanceYear:  maintenanceYear,
+			insuranceYear: insuranceYear,
+			maintenanceYear: maintenanceYear,
 			insuranceTotal: insuranceTotal,
 			maintenanceTotal: maintenanceTotal,
 			malusYear: malusYear,
@@ -597,10 +629,11 @@ class CarDetails extends Component {
 				) : null;
 			var fuelTypeLabel = null;
 			var fuelsLabel = null;
-			if(variant.type.swe === "Laddhybrid"){
+			if (variant.type.swe === "Laddhybrid") {
 				fuelTypeLabel = variant.type.types.swe[0];
-				fuelsLabel = variant.type.types.swe[0]+"/"+variant.type.types.swe[1];;
-			}else{
+				fuelsLabel =
+					variant.type.types.swe[0] + "/" + variant.type.types.swe[1];
+			} else {
 				fuelTypeLabel = variant.type.swe;
 				fuelsLabel = variant.type.swe;
 			}
@@ -892,13 +925,13 @@ class CarDetails extends Component {
 																			{numFormatter(this.state.tcoRatio) + "%"}
 																		</strong>
 																		<FontAwesomeIcon
-																icon={faInfoCircle}
-																className="ml-1"
-																color="white"
-																data-for="tcoRatio"
-																data-tip="Totalkostnad i förhållande till inköpspris"
-															/>
-															<ReactTooltip
+																			icon={faInfoCircle}
+																			className="ml-1"
+																			color="white"
+																			data-for="tcoRatio"
+																			data-tip="Totalkostnad i förhållande till inköpspris"
+																		/>
+																		<ReactTooltip
 																			id="tcoRatio"
 																			className="tooltip"
 																			textColor="white"
@@ -911,7 +944,7 @@ class CarDetails extends Component {
 
 															<Col xs="6" md="4" lg="3" className="mx-auto">
 																<h6>Totalkostnad</h6>
-																<h4 className="m-0 pb-1">
+																<h4 className="m-0 pb-1 total-cost">
 																	<strong>
 																		{numFormatter(this.state.tcoTotal) + " kr"}
 																	</strong>
@@ -939,18 +972,20 @@ class CarDetails extends Component {
 															xs="12"
 															className="p-2 pb-md-3 pb-0 text-center"
 														>
-															<h4 className="car-details-cost-distribution">Kostnadsfördelning</h4>
+															<h4 className="car-details-cost-distribution">
+																Kostnadsfördelning
+															</h4>
 														</Col>
 														<Col md="6" lg="6" className="p-md-0 pb-4">
-														<Col xs="12" className="h-100 p-0">
-															<PieChart
-																depreciation={this.state.depreciation}
-																fuel={this.state.fuel}
-																maintenance={this.state.maintenanceTotal}
-																interest={this.state.interest}
-																insurance={this.state.insuranceTotal}
-																tax={this.state.taxTotal}
-															/>
+															<Col xs="12" className="h-100 p-0">
+																<PieChart
+																	depreciation={this.state.depreciation}
+																	fuel={this.state.fuel}
+																	maintenance={this.state.maintenanceTotal}
+																	interest={this.state.interest}
+																	insurance={this.state.insuranceTotal}
+																	tax={this.state.taxTotal}
+																/>
 															</Col>
 														</Col>
 														<Col md="6" lg="6">

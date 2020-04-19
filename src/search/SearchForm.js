@@ -204,9 +204,9 @@ class SearchForm extends Component {
 			<Container>
 				<Row>
 					<Col md="10" className="mx-auto">
-						<Form className="search-form py-4 pb-5">
+						<Form className="search-form pt-0 pb-5">
 							<Row>
-								<Col md="12" className="mx-auto pt-4">
+								<Col md="12" className="mx-auto pt-3">
 									<div className="search-bar">
 										<input
 											className="search-field"

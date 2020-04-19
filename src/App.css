@@ -106,6 +106,17 @@ body {
 /* Compare
 ==================================================*/
 
+.chart-stacked-info{
+	font-size: 0.75rem;
+	color: black;
+	font-weight: 900;
+}
+
+.chart-div{
+	height: inherit;
+	width: inherit;
+}
+
 .chart-container {
 	height: 79vh;
 }
@@ -186,7 +197,7 @@ body {
 }
 
 .my-calculation h4 {
-	font-size: 1rem;
+	font-size: 0.9rem;
 	font-weight: 700;
 }
 
@@ -197,7 +208,7 @@ body {
 
 
 .my-calculation h2 {
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	font-weight: 700;
 }
 
@@ -227,6 +238,10 @@ body {
 	font-weight: 100;
 	padding: 5px 10px 5px 10px !important;
 	max-width: 200px !important;
+}
+
+.total-cost{
+	font-size: 1.5rem !important;
 }
 
 .car-details-bonus {
@@ -264,7 +279,7 @@ body {
 }
 
 .car-details-cost-distribution{
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .tco-variables {
@@ -807,7 +822,12 @@ section.route-section {
 
 .car-header .price-unit{
 	font-weight: 400;
-	font-size: 0.7rem;
+	font-size: 0.75rem;
+}
+
+.car-header .fr{
+	font-weight: 400;
+	font-size: 0.75rem;
 }
 
 @media only screen and (min-width: 768px) {

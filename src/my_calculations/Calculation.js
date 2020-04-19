@@ -28,7 +28,7 @@ class Calculation extends Component {
 			customUI: ({ onClose }) => {
 				return (
 					<Container>
-						<div className="py-4 px-5 card">
+						<div className="py-4 px-4 card">
 							<Container>
 								<Row>
 									<Col>
@@ -38,6 +38,7 @@ class Calculation extends Component {
 									</Col>
 								</Row>
 								<Row className="d-flex justify-content-around m-0 pt-2">
+									<span>
 									<Button
 									size="md"
 										pill
@@ -60,6 +61,7 @@ class Calculation extends Component {
 									>
 										Ja
 									</Button>
+									</span>
 								</Row>
 							</Container>
 						</div>
@@ -335,11 +337,11 @@ class Calculation extends Component {
 
 									<Col xs="6" md="4" lg="2" className="mx-auto">
 										<h6 className="m-0">Totalkostnad</h6>
-										<h3 className="m-0 py-0">
+										<h4 className="m-0 py-0 total-cost">
 											<strong>
 												{numFormatter(calculation.tcoTotal) + " kr"}
 											</strong>
-										</h3>
+										</h4>
 									</Col>
 
 									<Col xs="6" md="4" lg="2" className="mt-md-0 mt-3">

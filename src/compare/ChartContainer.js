@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import {
-	Col,
-	Nav,
-	NavItem,
-	NavLink
-} from "shards-react";
+import { Col, Nav, NavItem, NavLink } from "shards-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "react-select";
-import {
-	faBalanceScale,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBalanceScale } from "@fortawesome/free-solid-svg-icons";
 import { numFormatter } from "../data/tco";
 
 /* Apex charts */
@@ -525,15 +518,13 @@ class ChartContainer extends Component {
 			}
 		};
 
-
 		/* Render variables
 		==================================================*/
 
 		var chartInfo = null;
 		var chartStacked = null;
 		var chartBarTotal = null;
-		var chartBarSingle;
-		var dropdown = null;
+		var chartBarSingle = null;
 
 		var dropDownOptions = [
 			{
@@ -571,7 +562,6 @@ class ChartContainer extends Component {
 				chartInfo = (
 					<div className="justify-content-center d-flex align-items-center flex-column h-100">
 						<FontAwesomeIcon size="3x" icon={faBalanceScale} />
-
 						<p className="p-3">Klicka på kalkylerna du vill jämföra</p>
 					</div>
 				);
@@ -579,22 +569,30 @@ class ChartContainer extends Component {
 				chartStacked = null;
 				chartBarTotal = null;
 				chartBarSingle = null;
-				dropdown = null;
 			} else {
 				if (this.state.tab === "costDistribution") {
 					chartStacked = (
-						<Chart
-							height={"86%"}
-							width={"100%"}
-							options={optionsStacked}
-							series={this.state.series}
-							type="bar"
-							className="bar-chart bar-stacked pt-4"
-						/>
+						<div className="chart-div">
+							<Col className="px-0">
+								<p className="chart-stacked-info text-center p-2 mt-3 mb-0">
+									<span className="bg-light p-2">
+										Klicka på en kostnadsfaktor längst ned för att ta bort/lägga
+										till faktorn i stapeldiagrammet.
+									</span>
+								</p>
+							</Col>
+							<Chart
+								height={"83%"}
+								width={"100%"}
+								options={optionsStacked}
+								series={this.state.series}
+								type="bar"
+								className="bar-chart bar-stacked pt-2"
+							/>
+						</div>
 					);
 					chartBarSingle = null;
 					chartBarTotal = null;
-					dropdown = null;
 				} else if (this.state.tab === "totalCost") {
 					chartBarTotal = (
 						<Chart
@@ -608,33 +606,32 @@ class ChartContainer extends Component {
 					);
 					chartStacked = null;
 					chartBarSingle = null;
-					dropdown = null;
 				} else if (this.state.tab === "singleCosts") {
 					chartBarSingle = (
-						<Chart
-							height={"77%"}
-							width={"100%"}
-							options={optionsBar}
-							series={this.state.series}
-							type="bar"
-							className="bar-chart pt-4"
-						/>
+						<div className="chart-div">
+							<Col md="12" lg="6" className="mx-auto mt-3">
+								<Select
+									blurInputOnSelect={true}
+									isSearchable={false}
+									className="filter-select border"
+									classNamePrefix="filter-option"
+									value={this.state.selectedOption}
+									onChange={this.updateCostFactor}
+									options={dropDownOptions}
+								/>
+							</Col>
+							<Chart
+								height={"78%"}
+								width={"100%"}
+								options={optionsBar}
+								series={this.state.series}
+								type="bar"
+								className="bar-chart pt-4"
+							/>
+						</div>
 					);
 					chartStacked = null;
 					chartBarTotal = null;
-					dropdown = (
-						<Col md="12" lg="6" className="mx-auto mt-3">
-							<Select
-								blurInputOnSelect={true}
-								isSearchable={false}
-								className="filter-select border"
-								classNamePrefix="filter-option"
-								value={this.state.selectedOption}
-								onChange={this.updateCostFactor}
-								options={dropDownOptions}
-							/>
-						</Col>
-					);
 				}
 			}
 		} else {
@@ -642,7 +639,7 @@ class ChartContainer extends Component {
 				<div className="justify-content-center d-flex align-items-center flex-column h-100">
 					<FontAwesomeIcon size="3x" icon={faBalanceScale} />
 
-					<p className="p-3">Skapa kalkyler för att jämföra olika alternativ</p>
+					<p className="p-3">Spara kalkyler för att jämföra olika alternativ</p>
 				</div>
 			);
 		}
@@ -684,10 +681,7 @@ class ChartContainer extends Component {
 						</NavLink>
 					</NavItem>
 				</Nav>
-
 				{chartInfo}
-				{dropdown}
-
 				{chartStacked}
 				{chartBarTotal}
 				{chartBarSingle}

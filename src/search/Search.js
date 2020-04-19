@@ -1,9 +1,5 @@
 import data from "../data/data.json";
-import {
-	numFormatter,
-	tcoTotal,
-	getTCOvariables
-} from "../data/tco";
+import { numFormatter, tcoTotal, getTCOvariables } from "../data/tco";
 
 import React, { Component } from "react";
 import { Container, Row, Col, Card, CardImg, CardTitle } from "shards-react";
@@ -62,7 +58,16 @@ class Search extends Component {
 
 	calculateTCO = variant => {
 		var variablesObj = getTCOvariables(variant);
-		const {years, miles, payment, interestRate, depreciationRate, insuranceYear, maintenanceYear, fuelCost} = variablesObj;
+		const {
+			years,
+			miles,
+			payment,
+			interestRate,
+			depreciationRate,
+			insuranceYear,
+			maintenanceYear,
+			fuelCost
+		} = variablesObj;
 
 		return tcoTotal(
 			variant,
@@ -156,6 +161,7 @@ class Search extends Component {
 									<h2 className="title text-center">
 										<strong>Välj bil</strong>
 									</h2>
+									<p className="text-center text-white mb-0 mt-4">Beräkningarna i sökresultatet är baserat på schablonvärden som du kan läsa mer om under "Om verktyget".</p>
 									<SearchForm updateList={this.updateList} />
 								</Col>
 							</Row>
@@ -176,7 +182,7 @@ class Search extends Component {
 									return (
 										<motion.div
 											key={car.id}
-											className="search-item col-lg-3 col-md-4 col-sm-6 col-11 my-md-3"
+											className="search-item col-lg-3 mx-auto mx-md-0 col-md-4 col-sm-6 col-11 my-md-3"
 											variants={item}
 										>
 											<Link
@@ -202,7 +208,9 @@ class Search extends Component {
 															</CardTitle>
 															<Row className="pt-1">
 																<Col xs="12" className="px-1 m-0 car-header">
-																	<span className="m-0 card-title">Drivmedel</span>
+																	<span className="m-0 card-title">
+																		Drivmedel
+																	</span>
 																	<p className="m-0 fuel-types">
 																		{this.fuelTypes(car.variants)}
 																	</p>
@@ -214,8 +222,11 @@ class Search extends Component {
 																	xs="6"
 																	className="px-1 m-0 car-header"
 																>
-																	<span className="m-0 card-title">Totalkostnad</span>
+																	<span className="m-0 card-title">
+																		Totalkostnad
+																	</span>
 																	<p className="m-0">
+																		<span className="fr">Fr. </span>
 																		<span className="price">
 																			{numFormatter(car.tco)}
 																		</span>
@@ -227,8 +238,11 @@ class Search extends Component {
 																	xs="6"
 																	className="px-1 m-0 car-header"
 																>
-																	<span className="m-0 card-title">Månadskostnad</span>
+																	<span className="m-0 card-title">
+																		Månadskostnad
+																	</span>
 																	<p className="m-0">
+																		<span className="fr">Fr. </span>
 																		<span className="price">
 																			{numFormatter(this.monthlyCost(car.tco))}
 																		</span>

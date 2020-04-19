@@ -38,13 +38,13 @@ class About extends Component {
 										ägandekostnaden:
 									</p>
 									<ul>
-										<li>Värdeminskning</li>
+										<li>Värdeminskning (Inköpspris - andrahandsvärde)</li>
 										<li>Bränsle</li>
-										<li>Lånekostnader</li>
+										<li>Lånekostnader (Ränta)</li>
 										<li>Försäkring</li>
 										<li>Underhåll</li>
-										<li>Skatt</li>
-										<li>Subventioner</li>
+										<li>Skatt (Fordonsskatt)</li>
+										<li>Subventioner (Bonus malus)</li>
 									</ul>
 								</Col>
 								<Col md="12" className="py-3">
@@ -68,10 +68,10 @@ class About extends Component {
 										<strong>Beräkningar</strong>
 									</h3>
 									<p>
-										Alla grundberäkningar (sökresultatet samt den initiella beräkningen på varje bils
+										Alla grundberäkningar (sökresultatet samt beräkningen på varje bils
 										detaljsida) utgår från schablonvärden som är listade här
 										under. Dessa värden kan finjusteras på varje bils detaljsida
-										där man också kan skapa egna kalkyler.
+										där man också kan spara kalkylerna.
 									</p>
 									<Row className="py-2">
 										<Col sm="6">
