@@ -161,8 +161,9 @@ class Search extends Component {
 									<h2 className="title text-center">
 										<strong>Välj bil</strong>
 									</h2>
-									<p className="text-center text-white mb-0 mt-4">Beräkningarna i sökresultatet är baserat på schablonvärden som du kan läsa mer om under "Om verktyget".</p>
+									
 									<SearchForm updateList={this.updateList} />
+									<p className="text-center text-white mb-3 mt-1 search-info">Beräkningarna i sökresultatet gäller för 3 år och är baserade på schablonvärden som du kan läsa mer om under "Om verktyget".</p>
 								</Col>
 							</Row>
 						</Container>

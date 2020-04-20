@@ -27,7 +27,7 @@ function Excel(props) {
 			{ value: numFormatter(calculation.variant.price.value) + " kr" },
 			{ value: calculation.years.toString() + " år" },
 			{ value: numFormatter(calculation.miles) + " mil/år" },
-			{ value: numFormatter(calculation.payment) + "%" },
+			{ value: calculation.payment.toString() + "%" },
 			{ value: calculation.interestRate.toString() + "%" },
 			{ value: calculation.depreciationRate.toString() + "%" },
 			{

@@ -52,15 +52,15 @@ class About extends Component {
 										<strong>Funktioner</strong>
 									</h3>
 									<p>
-										I det här verktyget kan du skapa egna TCO-kalkyler utifrån
+										I det här verktyget kan du skapa/spara egna TCO-kalkyler utifrån
 										dina förutsättningar. Det innebär att du kan anpassa
 										faktorer såsom innehavstid, körsträcka samt kontantinsats
 										och ränta i dina kalkyler. På jämförelsesidan kan du jämföra
 										dina kalkyler med varandra och på så sätt lära dig mer om
 										kostnaderna mellan olika bilmodeller. Du kan bland annat
-										jämföra totalkostnaden, kostnadsfördelning samt enskilda
-										kostnader. Om du vill spara dina kalkyler kan du dessutom
-										ladda ner dem i en Excel-fil för vidare bearbetning senare.
+										jämföra totalkostnad, kostnadsfördelning samt enskilda
+										kostnadsfaktorer. Om du vill spara och bearbeta dina kalkyler senare kan du dessutom
+										ladda ner dem i en Excel-fil.
 									</p>
 								</Col>
 								<Col md="12" className="py-3">
@@ -70,8 +70,7 @@ class About extends Component {
 									<p>
 										Alla grundberäkningar (sökresultatet samt beräkningen på varje bils
 										detaljsida) utgår från schablonvärden som är listade här
-										under. Dessa värden kan finjusteras på varje bils detaljsida
-										där man också kan spara kalkylerna.
+										under. Dessa värden kan finjusteras på varje bils detaljsida.
 									</p>
 									<Row className="py-2">
 										<Col sm="6">

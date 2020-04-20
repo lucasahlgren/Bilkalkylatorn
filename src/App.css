@@ -714,6 +714,10 @@ section.route-section {
 	padding-top: 100px;
 }
 
+.search-info{
+	font-size: 0.9rem;
+}
+
 .search-body {
 	background: rgb(245, 245, 245);
 	position: absolute;
