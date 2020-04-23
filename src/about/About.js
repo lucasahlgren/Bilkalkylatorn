@@ -52,7 +52,7 @@ class About extends Component {
 										<strong>Funktioner</strong>
 									</h3>
 									<p>
-										I det här verktyget kan du skapa/spara egna TCO-kalkyler utifrån
+										I det här verktyget kan du göra samt spara egna TCO-kalkyler utifrån
 										dina förutsättningar. Det innebär att du kan anpassa
 										faktorer såsom innehavstid, körsträcka samt kontantinsats
 										och ränta i dina kalkyler. På jämförelsesidan kan du jämföra
@@ -68,7 +68,7 @@ class About extends Component {
 										<strong>Beräkningar</strong>
 									</h3>
 									<p>
-										Alla grundberäkningar (sökresultatet samt beräkningen på varje bils
+										Alla grundberäkningar (sökresultatet på gör kalkyl-sidan samt beräkningen på varje bils
 										detaljsida) utgår från schablonvärden som är listade här
 										under. Dessa värden kan finjusteras på varje bils detaljsida.
 									</p>

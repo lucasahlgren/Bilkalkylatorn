@@ -163,7 +163,7 @@ class Search extends Component {
 									</h2>
 									
 									<SearchForm updateList={this.updateList} />
-									<p className="text-center text-white mb-3 mt-1 search-info">Beräkningarna i sökresultatet gäller för 3 år och är baserade på schablonvärden som du kan läsa mer om under "Om verktyget".</p>
+									<p className="text-center text-white mb-3 mt-1 search-info">Beräkningarna nedanför gäller för 3 år och är baserade på schablonvärden som du kan läsa mer om under "Om verktyget".</p>
 								</Col>
 							</Row>
 						</Container>

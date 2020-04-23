@@ -150,7 +150,7 @@ class CarDetails extends Component {
 			car: car,
 			variant: variant,
 			variants: car.variants,
-			selectedOption: { label: variant.variant, value: variant.variant },
+			selectedOption: { label: variant.variant + " | " + variant.type.swe, value: variant.variant },
 			subvention: subvention,
 			fuelCost: fuelCost,
 			interest: interest,
@@ -680,7 +680,7 @@ class CarDetails extends Component {
 																		onChange={this.updateVariant}
 																		options={variants.map(variant => {
 																			return {
-																				label: variant.variant,
+																				label: variant.variant + " | " + variant.type.swe,
 																				value: variant.variant
 																			};
 																		})}
@@ -807,7 +807,7 @@ class CarDetails extends Component {
 													</Col>
 													<Col xs="6" className="calculation-input">
 														<h6>
-															Ränta <span>(%)</span>
+															Ränta <span>(%/år)</span>
 														</h6>
 														<div>
 															<input

@@ -46,7 +46,7 @@ body {
 	display: none;
 }
 
-/* Apex Chart Style
+/* Window prompt
 ==================================================*/
 
 .window-prompt h4{
@@ -742,7 +742,7 @@ section.route-section {
 
 .search-icon {
 	position: absolute;
-	top: 34px;
+	top: 27px;
 	right: 0;
 	width: 50px;
 	z-index: 10;
