@@ -72,6 +72,9 @@ class CalculationItem extends Component {
 								{calculation.variant.variant}
 							</li>
 							<li className="list-group-item px-2 p-1">
+								{calculation.variant.type.swe}
+							</li>
+							<li className="list-group-item px-2 p-1">
 								{calculation.years} år
 							</li>
 							<li className="list-group-item px-2 p-1">

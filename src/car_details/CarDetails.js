@@ -131,7 +131,7 @@ class CarDetails extends Component {
 			maintenanceYear
 		);
 
-		var mileCost = this.getMileCost(years, miles, tco);
+		var mileCost = this.getMileCost(miles, years, tco);
 		var monthlyCost = this.getMonthlyCost(years, tco);
 		var tcoRatio = this.getTCORatio(variant, tco);
 
@@ -330,10 +330,14 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
 			{
-				depreciationRate: parseFloat(value),
-				depreciationRateInput: parseFloat(input)
+				depreciationRate: value,
+				depreciationRateInput: input
 			},
 			this.updateData
 		);
@@ -350,8 +354,12 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
-			{ fuelCost: parseFloat(value), fuelCostInput: parseFloat(input) },
+			{ fuelCost: value, fuelCostInput: input },
 			this.updateData
 		);
 	};
@@ -364,8 +372,12 @@ class CarDetails extends Component {
 			input = 1;
 			value = 1;
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
-			{ years: parseFloat(value), yearsInput: parseFloat(input) },
+			{ years: value, yearsInput: input },
 			this.updateData
 		);
 	};
@@ -384,9 +396,13 @@ class CarDetails extends Component {
 			input = "";
 			value = 0;
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 
 		this.setState(
-			{ payment: parseFloat(value), paymentInput: parseFloat(input) },
+			{ payment: value, paymentInput: input },
 			this.updateData
 		);
 	};
@@ -402,8 +418,12 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
-			{ interestRate: parseFloat(value), interestRateInput: parseFloat(input) },
+			{ interestRate: value, interestRateInput: input },
 			this.updateData
 		);
 	};
@@ -419,8 +439,12 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
-			{ miles: parseFloat(value), milesInput: parseFloat(input) },
+			{ miles: value, milesInput: input },
 			this.updateData
 		);
 	};
@@ -436,8 +460,12 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
-			{ insuranceYear: parseFloat(value), insuranceInput: parseFloat(input) },
+			{ insuranceYear: value, insuranceInput: input },
 			this.updateData
 		);
 	};
@@ -453,10 +481,14 @@ class CarDetails extends Component {
 			value = 0;
 			input = "";
 		}
+		else{
+			value = parseFloat(value)
+			input = parseFloat(value)
+		}
 		this.setState(
 			{
-				maintenanceYear: parseFloat(value),
-				maintenanceInput: parseFloat(input)
+				maintenanceYear: value,
+				maintenanceInput: input
 			},
 			this.updateData
 		);
@@ -569,7 +601,9 @@ class CarDetails extends Component {
 			maintenanceYear
 		);
 
-		var mileCost = this.getMileCost(years, miles, tco);
+		console.log(miles)
+
+		var mileCost = this.getMileCost(miles, years, tco);
 		var monthlyCost = this.getMonthlyCost(years, tco);
 		var tcoRatio = this.getTCORatio(variant, tco);
 
@@ -886,7 +920,7 @@ class CarDetails extends Component {
 														<div>
 															<input
 																disabled
-																type="number"
+																type="float"
 																min="0"
 																className="form-control"
 																value={this.state.taxYear}

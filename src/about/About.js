@@ -34,7 +34,7 @@ class About extends Component {
 										kostnadsfaktorer för varje enskild produkt. I det här
 										verktyget baseras detta på en modell framtagen för
 										nybilsköpare och privatpersoner. Modellen består av sju
-										kostnadsfaktorer som tillsammans utför den totala
+										kostnadsfaktorer som tillsammans utgör den totala
 										ägandekostnaden:
 									</p>
 									<ul>
