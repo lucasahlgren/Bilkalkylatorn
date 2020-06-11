@@ -86,7 +86,7 @@ class About extends Component {
 											</ul>
 										</Col>
 										<Col sm="6">
-											<h5>Bensin/Diesel/Laddhybrid</h5>
+											<h5>Bensin/Diesel</h5>
 											<ul>
 												<li>Innehavstid: 3 år</li>
 												<li>Körsträcka: 1500 mil/år</li>

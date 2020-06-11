@@ -155,15 +155,6 @@
 					"engine": { "hk": 150, "kw": 110 },
 					"fuel": { "value": 7.1, "unit": "l" },
 					"emissions": { "value": 185, "unit": "g/km" }
-				},
-				{
-					"variant": "T8 Twin Engine",
-					"price": { "value": 646000, "unit": "kr" },
-					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
-					"transmission": { "eng": "Automatic", "swe": "Automat" },
-					"engine": { "hk": 390, "kw": 300 },
-					"fuel": { "value": 2.5, "unit": "l" },
-					"emissions": { "value": 57, "unit": "g/km" }
 				}
 				
 			]
@@ -184,15 +175,6 @@
 					"engine": { "hk": 197, "kw": 145 },
 					"fuel": { "value": 7.5, "unit": "l" },
 					"emissions": { "value": 170, "unit": "g/km" }
-				},
-				{
-					"variant": "T6 AWD Recharge",
-					"price": { "value": 531000, "unit": "kr" },
-					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
-					"transmission": { "eng": "Automatic", "swe": "Automat" },
-					"engine": { "hk": 340, "kw": 251 },
-					"fuel": { "value": 2.3, "unit": "l" },
-					"emissions": { "value": 53, "unit": "g/km" }
 				},
 				{
 					"variant": "D4 AWD",
@@ -287,17 +269,7 @@
 					"engine": { "hk": 136, "kw": 100 },
 					"fuel": { "value": 13.8, "unit": "kWh" },
 					"emissions": { "value": 0, "unit": "g/km" }
-				},
-				{
-					"variant": "1.6 GDI plug-in hybrid",
-					"price": { "value": 314900, "unit": "kr" },
-					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
-					"transmission": { "eng": "Automatic", "swe": "Automat" },
-					"engine": { "hk": 141, "kw": 105 },
-					"fuel": { "value": 1.1, "unit": "l" },
-					"emissions": { "value": 26, "unit": "g/km" }
 				}
-				
 			]
 		},
 		{
@@ -316,15 +288,6 @@
 					"engine": { "hk": 150, "kw": 110 },
 					"fuel": { "value": 6.5, "unit": "l" },
 					"emissions": { "value": 148, "unit": "g/km" }
-				},
-				{
-					"variant": "1.4 TSI Plug-In-Hybrid",
-					"price": { "value": 464900, "unit": "kr" },
-					"type": { "eng": "Hybrid electric", "swe": "Laddhybrid", "types": {"eng":["Petrol", "Electric"], "swe": ["Bensin", "El"] }},
-					"transmission": { "eng": "Automatic", "swe": "Automat" },
-					"engine": { "hk": 150, "kw": 110 },
-					"fuel": { "value": 1.4, "unit": "l" },
-					"emissions": { "value": 31, "unit": "g/km" }
 				}
 			]
 		}
